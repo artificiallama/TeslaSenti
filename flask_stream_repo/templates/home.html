@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{utc}}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bs.css') }}">
+</head>
+<body>
+
+	
+  
+<div class="main">
+    <div class="container pt-4 mx-5" id="top-bar">
+      <div class="row ">
+      <div class="col-1">
+             <img id='aisc-logo' class="img-fluid" src="{{ url_for('static', filename='images/Tesla-T-logo.jpg') }}  "
+                     alt="tesla-logo">
+        </div>
+        <div class="col-5">
+             <h1 class="gold-font text-center display-5">TeslaSenti</h1>
+        </div>
+	<div class="col-6">
+	  <!---	<button type="submit"  onClick="refreshPage()" style="background-color:green; font-size : 30px; height:60px; width:150px">Update</button>  --->
+<!---	  <a href="{{cc}}"><button>Update</button></a> -->
+	  <a href="{{ url_for('home', ccount=mycc,dtg=dtgtime) }}"><button>Update</button> </a>
+	</div>
+
+      </div>
+    </div>
+</div>
+
+
+<!---
+<div class="container">
+            <button type="submit"  onClick="refreshPage()" style="background-color:green; font-size : 30px; height:100px; width:125px">Refresh</button>
+</div>
+--->
+
+<br>
+<br>
+
+    <div class="container ">
+        <div class="row">
+            <div class="col card blue-bg m-2">
+                <div class="card-body">
+<!---                    <h3 class="card-title text-center">Business</h3>
+                    <ul id='business-ul' class='gold-bg'></ul>  -->
+		    <div class="d-flex justify-content-center">
+		      <p> {{ embed_tweet1|safe }}  </p>
+		    </div>	    
+                </div>
+            </div>
+            <div class="col card blue-bg m-2">
+                <div class="card-body">
+                    <div class="d-flex justify-content-center">
+		      <p> {{ embed_tweet2|safe }} </p>		      
+                    </div>
+		</div>
+            </div>
+	    
+            <div class="w-100"></div>
+	    
+	    <div class="col card blue-bg m-2">
+                <div class="card-body">
+                    <div class="d-flex justify-content-center">
+		      <p> {{ embed_tweet3|safe }} </p>		      
+                    </div>
+		</div>
+            </div>
+	    <div class="col card blue-bg m-2">
+                <div class="card-body">
+                    <div class="d-flex justify-content-center">
+		      <p> {{ embed_tweet4|safe }} </p>		      
+                    </div>
+		</div>
+            </div>
+	                
+<!---
+<script>
+function refreshPage(){
+    window.location.reload();
+} 
+</script>
+--->
+
+
+</body>
+</html>
+
+<!---fatin
+<a href="{{new_link}}">Update</a>
+<a href="#"><button>Text</button></a>
+<a href="{{new_link}}"><button>Update</button></a>
+--->

@@ -1,0 +1,80 @@
+body {
+ /*   background: #0F2027; fallback for old browsers  */
+      background: #272A30 ;  
+/*    background: -webkit-linear-gradient(to bottom, #2C5364, #203A43, #0F2027); Chrome 10-25, Safari 5.1-6 */
+/*    background: linear-gradient(to bottom, #2C5364, #203A43, #0F2027);  W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    height: 100%;
+/*    background-repeat: no-repeat;  */
+/*    background-attachment: fixed;  */
+}
+
+.main {
+    font-family: 'Montserrat', sans-serif;
+    color: black;
+    background: none;
+}
+
+#top-bar {
+    width: 100%;
+}
+
+.container-fluid {
+    background: transparent;
+}
+
+#aisc-logo {
+    height: 50px;
+}
+
+#textbox {
+    width: 80%;
+}
+
+.row {
+    height: 1rem;
+}
+
+.blue-bg {
+    background: #272A30 ;
+}
+
+.gold-bg {
+    background: rgb(219, 191, 119);
+}
+
+.gold-font {
+    color: rgb(219, 191, 119);
+}
+
+
+.b-loc {
+    background-color: deepskyblue;
+}
+
+.b-misc {
+    background-color: limegreen;
+}
+
+.b-org {
+    background-color: #cd7491;
+}
+
+.b-per {
+    background-color: #f05e0a;
+}
+
+.i-loc {
+    background-color: #0091ff;
+}
+
+.i-misc {
+    background-color: #309430;
+}
+
+.i-org {
+    background-color: #cd4a7d;
+}
+
+.i-per {
+    background-color: #f00a0a;
+}
