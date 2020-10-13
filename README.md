@@ -1,5 +1,5 @@
 # TeslaSenti
-Near real-time sentiment analysis of Tesla tweets
+Near real-time sentiment analysis of Tesla tweets.
 
 This is a capstone project for a workshop conducted by AISC. This project was executed by a team of two members (including myself).
 
