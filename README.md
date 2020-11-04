@@ -21,3 +21,7 @@ We trained a Naive Bayes model to identify sentiment of financial headlines. For
 
 Therefore we could not generate a buy/sell signal reliably. Hence we only identify tweets with intense sentiment (either positive or negative) and display them in near-real time.
  
+<p align="left">
+<img width="400" height="300" src="images/freq_topwords_headlines_perc.png">
+<img width="300" height="200" src="images/wordcloud_topwords_5x3.png">
+</p>
