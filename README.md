@@ -26,8 +26,16 @@ Therefore we could not generate a buy/sell signal reliably. Hence we only identi
 <img width="400" height="300" src="images/FiQA_post_sentiment.png">
 </p>
 
+<p align="left">
+<img width="400" height="300" src="images/Financial_headline_sentiment.png">
+</p>
+
+
+
 
 References :
 
 Malo, P., Sinha, A., Korhonen, P., Wallenius, J., & Takala, P. (2014). Good debt or bad debt: Detecting semantic orientations in economic texts. Journal of the Association for Information Science and Technology, 65(4), 782-796.
 https://www.kaggle.com/ankurzing/sentiment-analysis-for-financial-news
+
+https://sites.google.com/view/fiqa
