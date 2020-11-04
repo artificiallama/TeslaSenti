@@ -28,4 +28,6 @@ Therefore we could not generate a buy/sell signal reliably. Hence we only identi
 
 
 References :
+
 Malo, P., Sinha, A., Korhonen, P., Wallenius, J., & Takala, P. (2014). Good debt or bad debt: Detecting semantic orientations in economic texts. Journal of the Association for Information Science and Technology, 65(4), 782-796.
+https://www.kaggle.com/ankurzing/sentiment-analysis-for-financial-news
