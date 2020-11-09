@@ -50,3 +50,5 @@ https://stackabuse.com/accessing-the-twitter-api-with-python/
 http://adilmoujahid.com/posts/2014/07/twitter-analytics/
 
 https://developer.twitter.com/en/docs/twitter-api/v1/data-dictionary/overview/intro-to-tweet-json
+
+https://developer.twitter.com/en/docs/twitter-api/v1/tweets/filter-realtime/api-reference/post-statuses-filter
