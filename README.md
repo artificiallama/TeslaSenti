@@ -12,6 +12,12 @@ Languages/packages used :
 * html
 * css
 
+# Table of contents
+1. [Introduction](#Introduction)
+2. [Conclusion](#Conclusion)
+3. [References](#References)
+
+## Introduction
 
 A multiprocessing approach is employed because fetching the tweets, preprocessing/analysing them and serving the requests has to be done
 simultaneously. Process p1 fetches the tweets and writes them to a csv file. Process p2 cleans the tweets, runs the sentiment predictor and writes only
@@ -38,9 +44,9 @@ Therefore we could not generate a buy/sell signal reliably. Hence we only identi
 </p>
 
 
+## Conclusion
 
-
-References :
+## References :
 
 Malo, P., Sinha, A., Korhonen, P., Wallenius, J., & Takala, P. (2014). Good debt or bad debt: Detecting semantic orientations in economic texts. Journal of the Association for Information Science and Technology, 65(4), 782-796.
 https://www.kaggle.com/ankurzing/sentiment-analysis-for-financial-news
