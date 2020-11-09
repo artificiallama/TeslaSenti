@@ -6,6 +6,13 @@ This is a capstone project for a workshop conducted by AISC. This project was ex
 
 The objective of this project is to fetch tweets about TESLA in real time, analyse them for sentiment and generate a buy/sell signal every hour.
 
+Languages/packages used :
+* Tweepy
+* python
+* html
+* css
+
+
 A multiprocessing approach is employed because fetching the tweets, preprocessing/analysing them and serving the requests has to be done
 simultaneously. Process p1 fetches the tweets and writes them to a csv file. Process p2 cleans the tweets, runs the sentiment predictor and writes only
 the strong sentiment tweets to csv files. Each file contains latest tweets in 30 minutes intervals.  Process p3 serves the incoming requests. Every time the user
@@ -39,3 +46,7 @@ Malo, P., Sinha, A., Korhonen, P., Wallenius, J., & Takala, P. (2014). Good debt
 https://www.kaggle.com/ankurzing/sentiment-analysis-for-financial-news
 
 https://sites.google.com/view/fiqa
+
+https://stackabuse.com/accessing-the-twitter-api-with-python/
+
+http://adilmoujahid.com/posts/2014/07/twitter-analytics/
