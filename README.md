@@ -50,9 +50,7 @@ The following fields from the <code>tweet</code> object are extracted,
 * <code>retweet_count</code>
 * <code>favorite_count</code>
 
-In case the <code>extended_tweet</code> is available the <code>full_text</code> is extracted.
-
-The following fields from the <code>user</code> object are extracted,
+In case the <code>extended_tweet</code> is available the <code>full_text</code> is extracted. The following fields from the <code>user</code> object are extracted,
 
 * <code>name</code>
 * <code>screen_name</code>
@@ -63,6 +61,7 @@ The following fields from the <code>user</code> object are extracted,
 * <code>url</code>
 * <code>source</code>
 
+The <code>retweet_count</code>, <code>favorite_count</code>, <code>followers_count</code> and <code>friends_count</code> is used to magnify the sentiment index by using these as weights. Since the tweets are streaming most probably both <code>retweet_count</code> and <code>favorite_count</code> are zero.
 
 ## Conclusion
 
