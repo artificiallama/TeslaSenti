@@ -43,7 +43,16 @@ The existence of the <code>retweeted_status</code> token in json string indicate
 
 If the tweet contains more than 140 characters, then the <code>text</code>  contains the truncated tweet. For such tweets, the <code>extended_tweet</code> attribute is present. The <code>full_text</code> key contains the whole text of the tweet. 
 
-The following fields from the <code>user</code> attribute are extracted,
+The following fields from the <code>tweet</code> object are extracted,
+
+* <code>text</code>
+* <code>created_at</code>
+* <code>retweet_count</code>
+* <code>favorite_count</code>
+
+In case the <code>extended_tweet</code> is available the <code>full_text</code> is extracted.
+
+The following fields from the <code>user</code> object are extracted,
 
 * <code>name</code>
 * <code>screen_name</code>
@@ -52,6 +61,7 @@ The following fields from the <code>user</code> attribute are extracted,
 * <code>followers_count</code>
 * <code>friends_count</code>
 * <code>url</code>
+* <code>source</code>
 
 
 ## Conclusion
