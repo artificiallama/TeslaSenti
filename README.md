@@ -13,7 +13,7 @@ Languages/packages used :
 
 # Table of contents
 1. [Introduction](#Introduction)
-2. [Anatomy](#Anatomy of a tweet)
+2. [Anatomy of a tweet](#Anatomy of a tweet)
 3. [Conclusion](#Conclusion)
 4. [References](#References)
 
