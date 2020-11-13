@@ -38,6 +38,7 @@ We trained a Naive Bayes model to identify sentiment of financial headlines. For
 
 <p align="left">
 <img width="400" height="300" src="images/tesla_tweets_sentiment.png">
+<img width="400" height="300" src="images/all_tweets_sentiment.png">
 </p>
 
 ## Anatomy of a tweet
