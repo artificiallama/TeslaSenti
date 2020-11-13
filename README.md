@@ -66,7 +66,7 @@ The <code>retweet_count</code>, <code>favorite_count</code>, <code>followers_cou
 ## Tweet cleaning / preprocessing
 
 <p align="left">
-<img width="300" height="200" src="images/too_many_cashtags_crop.png">
+<img width="600" height="200" src="images/too_many_cashtags_crop.png">
 </p>
 
 
