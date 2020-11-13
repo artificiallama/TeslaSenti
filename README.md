@@ -63,6 +63,13 @@ In case the <code>extended_tweet</code> is available the <code>full_text</code> 
 
 The <code>retweet_count</code>, <code>favorite_count</code>, <code>followers_count</code> and <code>friends_count</code> is used to magnify the sentiment index by using these as weights. Since the tweets are streaming most probably both <code>retweet_count</code> and <code>favorite_count</code> are zero.
 
+## Tweet cleaning / preprocessing
+
+<p align="left">
+<img width="300" height="200" src="images/too_many_cashtags_crop.png">
+</p>
+
+
 ## Conclusion
 
 ## References 
