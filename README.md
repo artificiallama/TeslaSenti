@@ -65,8 +65,10 @@ The <code>retweet_count</code>, <code>favorite_count</code>, <code>followers_cou
 
 ## Tweet cleaning / preprocessing
 
+Tweets with too many cashtags are dropped. I noticed that most of such tweets are advertisements. An example of such a tweet is shown below. It has 13 cashtags ($fb, $aapl, $amzn, etc) and is clearly an advertisement.
+
 <p align="left">
-<img width="600" height="200" src="images/too_many_cashtags_crop.png">
+<img width="600" height="100" src="images/too_many_cashtags_crop.png">
 </p>
 
 
