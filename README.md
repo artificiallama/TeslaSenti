@@ -77,6 +77,11 @@ Tweets with too many cashtags are dropped. I noticed that most of such tweets ar
 </p>
 
 
+## Tips
+Command to display csv file on linux/ubuntu command line :
+
+<code>>> cat streaming_tweets_save.csv | column -t -s, | less -S </code>
+
 ## Conclusion
 
 ## References 
