@@ -1,0 +1,2 @@
+Testing creation of subdirectory.
+This subdirectory contains all files related to local deployment of TeslaSenti
