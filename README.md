@@ -82,6 +82,14 @@ Command to display csv file on linux/ubuntu command line :
 
 <code>>> cat streaming_tweets_save.csv | column -t -s, | less -S </code>
 
+Another convenient utility is csvtool. This can be installed in ubuntu with,
+
+<code>>> sudo apt-get install -y csvtool </code>
+
+A few selecetd columns can be displayed with,
+
+<code>>> csvtool col 1,2,7 streaming_tweets_save.csv </code>
+
 ## Conclusion
 
 ## References 
