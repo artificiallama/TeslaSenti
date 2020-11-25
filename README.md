@@ -10,6 +10,8 @@ Languages/packages used :
 * python
 * html
 * css
+* nltk
+* plotly
 
 # Table of contents
 1. [Introduction](#Introduction)
