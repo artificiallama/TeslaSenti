@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="refresh"  content="120; {{url_for('home', ccount=mycc,dtg=dtgtime)}} ">
+  <title>{{utc}}</title> 
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/bs_style.css') }}"> 
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script> 
+</head>
+
+<body>
+
+<div class="wrapper">
+  <div class="one" >
+     <h1>TeslaSenti</h1>
+  </div>
+
+
+    <div class="graph">
+            <div class="chart" id="bargraph">
+	        <script>
+                    var graphs = {{plot | safe}};
+                    Plotly.plot('bargraph',graphs,{});
+                </script>
+            </div>
+    </div>	    
+
+
+    <div class="tweet1">
+      <p> {{ embed_tweet1|safe }}  </p>
+    </div>
+
+    <div class="tweet2">
+      <p> {{ embed_tweet2|safe }}  </p>
+    </div>
+
+    <div class="tweet3">
+      <p> {{ embed_tweet3|safe }}  </p>
+    </div>
+
+    <div class="tweet4">
+      <p> {{ embed_tweet4|safe }}  </p>
+    </div>
+   	    
+</div>
+ 
+  
+</body>
+</html>
+
