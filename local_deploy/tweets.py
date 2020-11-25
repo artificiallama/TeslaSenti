@@ -96,19 +96,19 @@ def sentiment_tweets():
                                         'screen_name','name','verified','followers_count','friends_count',
                                                                        'source','user_url'],skiprows=skiprows)
    shp = dftw.shape
-   #print('\n\tskiprows = ',skiprows)  
+   print('\n\tskiprows = ',skiprows)  
    if shp[0] != 0:
     #print('\n\tdftw.shape = ',shp)
     dftw_senti[['id','date','tweet','screen_name']] =  dftw[['id','date','tweet','screen_name']].copy()
-    dftw_senti['tidy_tweet'] = dftw['tweet'].apply(lambda x : tc.p.clean(x))
+    dftw_senti['tidy_tweet'] = dftw['tweet'].apply(lambda x : tc.clean_emoji_url(x))
     dftw_senti['tidy_tweet'] = dftw_senti['tidy_tweet'].apply(lambda x : tc.remove_hashtag(x))
     dftw_senti['tidy_tweet'] = dftw_senti['tidy_tweet'].apply(lambda x : tc.remove_cashtag(x))
     dftw_senti['tidy_tweet'] = dftw_senti['tidy_tweet'].apply(lambda x : tc.remove_mention(x))
     dftw_senti['tidy_tweet'] = dftw_senti['tidy_tweet'].apply(lambda x : tc.normalize_doc(x))
     for indx,row in dftw_senti.iterrows():     
      senti_index = model.predict(count_vect.transform([row['tidy_tweet']]))
-     #print('\n\ttweet : {} |  senti  = {} '.format(row['tweet'],senti_index))
-     #print('\ttidytweet : {} '.format(row['tidy_tweet']))
+     print('\n\ttweet : {} |  senti  = {} '.format(row['tweet'],senti_index))
+     print('\ttidytweet : {} '.format(row['tidy_tweet']))
      dftw_senti.loc[indx,'senti'] = senti_index
     dftw_senti.to_csv('data_tweets/senti_tweets.csv',mode='a',header=False,index=False)
     
