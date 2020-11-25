@@ -44,7 +44,7 @@ def home():
 
   print('\n----Entered home : request.method = ',request.method)
   params = request.args.to_dict()
-  print('\tparams = ',params)
+  #print('\tparams = ',params)
 
   while True:
    if os.path.exists('data_tweets/senti_tweets.csv'):
@@ -53,7 +53,7 @@ def home():
     print('\t\thome() : Sleeping')   
     time.sleep(5)   
 
-  cols = ['id','date','tweet','senti','screen_name']
+  cols = ['id','date','tweet','senti','screen_name','tidy_tweet']
   
   df_senti = pd.read_csv('data_tweets/senti_tweets.csv',names = cols)
   nrows = df_senti.shape[0]
@@ -74,8 +74,10 @@ def home():
 
 #  for kk in np.arange(cc*4,cc*4+4):
   for kk in np.arange(nrows-4,nrows):  
-   print('\n\tscreenname = ',kk,df_senti.iloc[kk]['screen_name'], df_senti.iloc[kk]['senti'])
-   print('\ttweet = ',df_senti.iloc[kk]['tweet'])   
+   print('\n\tkk = ',kk, df_senti.iloc[kk]['id'])
+   print('\tscreenname = ',df_senti.iloc[kk]['screen_name'])
+   print('\ttweet = ',df_senti.iloc[kk]['tweet'])    
+   print('\tsenti = ',df_senti.iloc[kk]['senti'])   
    htmlcode = get_tweet_embed_html(df_senti.iloc[kk]['screen_name'],str(df_senti.iloc[kk]['id']))
    tweet_embed.append(htmlcode)
   #  if kk > nrows-1 :
@@ -102,18 +104,18 @@ def give_graph(xdates,senti_index):
             mode = 'markers'
         )]
 
-    print('\n\tlen = ',len(xdates))
-    print('\tlen = ',len(senti_index))
+    #print('\n\tlen = ',len(xdates))
+    #print('\tlen = ',len(senti_index))
     
     ymd = xdates[0].strftime('%Y-%b-%d')
-    print('\tymd = ',ymd)
-    print('\tday = ', xdates[0].strftime('%A'))
+    #print('\tymd = ',ymd)
+    #print('\tday = ', xdates[0].strftime('%A'))
     
     layout = go.Layout(xaxis={'type':'date',
                             'tickmode':'linear',
                              'dtick': 5*60*1000,
                             },
-                     yaxis={'range':[-10,10],
+                     yaxis={'range':[-5,5],
                             'title' : { 'text':'Sentiment', 'font' : {'size':30} },
                            } ,
                      title={ 'text' : ymd + ' (Time is in UTC)', 'x': 0.5,'font' : {'size':30}  },
@@ -125,21 +127,8 @@ def give_graph(xdates,senti_index):
 
     return graph
     
-    """
-      data = [go.Scatter(
-                   x = np.arange(nrows),
-                   y = senti_index,
-                  mode = 'markers'
-                   )]
-      
-      layout = go.Layout(yaxis=dict(range=[-10,10]), title='Sentiment' ,margin=dict(l=20, r=20, t=20, b=20),
-                                  paper_bgcolor="LightSteelBlue")
 
-      fig = go.Figure(data=data,layout=layout)
-     """
-
-
-
+   
  
 if __name__=='__main__':
 
