@@ -6,12 +6,9 @@ import numpy as np
 import preprocessor as p
 import json
 import csv
-#import datetime
 import time
-#import time_helper
-#import handle_tweets
 import pickle
-
+import text_clean as tc
 
 
 # Write streaming tweets to csv file
@@ -53,6 +50,12 @@ def live_stream():
 
   #print('\n\taccess_token_secret  = ',access_token_secret)
 
+  if  consumer_key  is None:
+   raise NameError(' consumer_key is not set')
+  if  consumer_secret  is None:
+   raise NameError('consumer_secret is not set')  
+  if access_token is None:
+   raise NameError('access_token is not set')
   if access_token_secret is None:
    raise NameError('access_token_secret is not set')
    
@@ -95,26 +98,19 @@ def sentiment_tweets():
    shp = dftw.shape
    #print('\n\tskiprows = ',skiprows)  
    if shp[0] != 0:
-    print('\n\tdftw.shape = ',shp)
-    #print('\tFirst = ',dftw.iloc[0,2])
-    #print('\tLast = ',dftw.iloc[shp[0]-1,2])
+    #print('\n\tdftw.shape = ',shp)
     dftw_senti[['id','date','tweet','screen_name']] =  dftw[['id','date','tweet','screen_name']].copy()
-    #dftw_senti.loc[:,'senti'] = 0.5
-    #print('\tFirst = ',dftw_senti.iloc[0,2])
-    #print('\tLast = ',dftw_senti.iloc[shp[0]-1,2])
-    #print('\tdftw_senti.shape = ',dftw_senti.shape)
+    dftw_senti['tidy_tweet'] = dftw['tweet'].apply(lambda x : tc.p.clean(x))
+    dftw_senti['tidy_tweet'] = dftw_senti['tidy_tweet'].apply(lambda x : tc.remove_hashtag(x))
+    dftw_senti['tidy_tweet'] = dftw_senti['tidy_tweet'].apply(lambda x : tc.remove_cashtag(x))
+    dftw_senti['tidy_tweet'] = dftw_senti['tidy_tweet'].apply(lambda x : tc.remove_mention(x))
+    dftw_senti['tidy_tweet'] = dftw_senti['tidy_tweet'].apply(lambda x : tc.normalize_doc(x))
     for indx,row in dftw_senti.iterrows():     
-     senti_index = model.predict(count_vect.transform([row['tweet']]))
-     #print('\ttweet : {} |  senti  = {} '.format(row['tweet'],senti_index))
+     senti_index = model.predict(count_vect.transform([row['tidy_tweet']]))
+     #print('\n\ttweet : {} |  senti  = {} '.format(row['tweet'],senti_index))
+     #print('\ttidytweet : {} '.format(row['tidy_tweet']))
      dftw_senti.loc[indx,'senti'] = senti_index
     dftw_senti.to_csv('data_tweets/senti_tweets.csv',mode='a',header=False,index=False)
-    #dftmp = pd.read_csv('data_tweets/senti_tweets.csv')
-    #print('\tid = ',dftmp.iloc[0,0])
-    #print('\tdate = ',dftmp.iloc[0,1])
-    #print('\ttweet = ',dftmp.iloc[0,2])
-    #print('\tsenti = ',dftmp.iloc[0,3])
-    #print('\tsenti = ',dftmp.iloc[0,4])
-   #else:
-    #print('\thsp[0] = ',shp[0])
+    
    skiprows += shp[0]  
    time.sleep(20)
