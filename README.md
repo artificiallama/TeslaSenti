@@ -45,7 +45,10 @@ We trained a Naive Bayes model to identify sentiment of financial headlines. For
 
 <p align="left">
 <img width="400" height="300" src="images/tiingo_news_sentiment_895.png">
+<img width="400" height="300" src="images/all_8741_sentiment.png">
 </p>
+
+
 
 ## Anatomy of a tweet
 The tweet JSON object has a very rich payload. It contains information ranging from username, date and time, location, profile bio, number of friends and followers, whether the tweet is a  retweet, whether the tweet is a reply etc.
