@@ -44,7 +44,7 @@ We trained a Naive Bayes model to identify sentiment of financial headlines. For
 </p>
 
 <p align="left">
-<img width="400" height="300" src="images/tiingo_news_sentiment.png">
+<img width="400" height="300" src="images/tiingo_news_sentiment_895.png">
 </p>
 
 ## Anatomy of a tweet
