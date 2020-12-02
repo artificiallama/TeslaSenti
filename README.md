@@ -15,7 +15,7 @@ Languages/packages used :
 
 # Table of contents
 1. [Introduction](#Introduction)
-2. [Anatomyofatweet](#Anatomyofa-tweet)
+2. [Anatomy of a tweet](#Anatomy-of-a-tweet)
 3. [Conclusion](#Conclusion)
 4. [References](#References)
 
@@ -50,7 +50,7 @@ We trained a Naive Bayes model to identify sentiment of financial headlines. For
 
 
 
-## Anatomyofa tweet
+## Anatomy of a tweet
 The tweet JSON object has a very rich payload. It contains information ranging from username, date and time, location, profile bio, number of friends and followers, whether the tweet is a  retweet, whether the tweet is a reply etc.
 
 The existence of the <code>retweeted_status</code> token in json string indicates that the tweet is a retweet. A reply to a tweet has <code>in_reply_to_status_id</code> value not null. The <code>is_quote_status</code> field is true for tweets which quoted tweets. Retweets, replies and quoted tweets are eliminated at the top level (i.e. they are not written to file). The retweet count is used as a weight for the sentiment index and hence retweets should not be (double) counted. Replies and quoted tweets have context and are hence hard to analyse for sentiment.
@@ -75,11 +75,11 @@ In case the <code>extended_tweet</code> is available the <code>full_text</code> 
 * <code>url</code>
 * <code>source</code>
 
-The <code>retweet_count</code>, <code>favorite_count</code>, <code>followers_count</code> and <code>friends_count</code> is used to magnify the sentiment index by using these as weights. Since the tweets are streaming most probably both <code>retweet_count</code> and <code>favorite_count</code> are zero.
+The <code>retweet_count</code>, <code>favorite_count</code>, <code>followers_count</code> and <code>friends_count</code> is used to amplify the sentiment index by using these as weights. These weights quantify the reach/impact/engagement of the particular tweet. Since the tweets are streaming for most tweets both <code>retweet_count</code> and <code>favorite_count</code> are zero.
 
 ## Tweet cleaning / preprocessing
 
-Tweets with too many cashtags are dropped. I noticed that most of such tweets are advertisements. An example of such a tweet is shown below. It has 13 cashtags ($fb, $aapl, $amzn, etc) and is clearly an advertisement.
+Tweets with too many cashtags are dropped. We noticed that most of such tweets are advertisements. An example of such a tweet is shown below. It has 13 cashtags ($fb, $aapl, $amzn, etc) and is clearly an advertisement.
 
 <p align="left">
 <img width="600" height="100" src="images/too_many_cashtags_crop.png">
@@ -118,3 +118,4 @@ https://developer.twitter.com/en/docs/twitter-api/v1/tweets/filter-realtime/api-
 
 http://docs.tweepy.org/en/latest/extended_tweets.html
 
+https://www.tweetbinder.com/blog/twitter-impressions/
