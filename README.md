@@ -15,7 +15,7 @@ Languages/packages used :
 
 # Table of contents
 1. [Introduction](#Introduction)
-2. [Anatomy_of_a_tweet](#Anatomyofa_tweet)
+2. [Anatomyofatweet](#Anatomyofatweet)
 3. [Conclusion](#Conclusion)
 4. [References](#References)
 
@@ -50,7 +50,7 @@ We trained a Naive Bayes model to identify sentiment of financial headlines. For
 
 
 
-## Anatomy of a tweet
+## Anatomyofatweet
 The tweet JSON object has a very rich payload. It contains information ranging from username, date and time, location, profile bio, number of friends and followers, whether the tweet is a  retweet, whether the tweet is a reply etc.
 
 The existence of the <code>retweeted_status</code> token in json string indicates that the tweet is a retweet. A reply to a tweet has <code>in_reply_to_status_id</code> value not null. The <code>is_quote_status</code> field is true for tweets which quoted tweets. Retweets, replies and quoted tweets are eliminated at the top level (i.e. they are not written to file). The retweet count is used as a weight for the sentiment index and hence retweets should not be (double) counted. Replies and quoted tweets have context and are hence hard to analyse for sentiment.
