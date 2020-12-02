@@ -1,7 +1,7 @@
 # TeslaSenti
 Near real-time sentiment analysis of Tesla tweets.
 
-This is a capstone project for a workshop conducted by AISC. This project was executed by a team of two members (including myself).
+This is a capstone project for a 5-week workshop conducted by AISC. This project was executed by a team of two members (including myself).
 
 The objective of this project is to fetch tweets about TESLA in real time, analyse them for sentiment and generate a buy/sell signal every hour.
 
@@ -104,6 +104,7 @@ PEP8 compliance can be checked with,
 <code>>> flake8 yourcode.py </code>
 
 flake8 can be installed with,
+
 <code>>> sudo apt install flake8</code>
 
 ## Conclusion
