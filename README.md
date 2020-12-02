@@ -99,6 +99,13 @@ A few selecetd columns can be displayed with,
 
 <code>>> csvtool col 1,2,7 streaming_tweets_save.csv </code>
 
+PEP8 compliance can be checked with,
+
+<code>>> flake8 yourcode.py </code>
+
+flake8 can be installed with,
+<code>>> sudo apt install flake8</code>
+
 ## Conclusion
 
 ## References 
