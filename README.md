@@ -1,9 +1,9 @@
 # TeslaSenti
-Near real-time sentiment analysis of Tesla tweets.
+Near real time sentiment analysis of Tesla tweets.
 
-This is a capstone project for a workshop conducted by AISC. This project was executed by a team of two members (including myself).
+This is a capstone project for a 5-week workshop conducted by Aggregate Intellect's workshop in June, 2020. This project was executed by a team of two members (including myself).
 
-The objective of this project is to fetch tweets about TESLA in real time, analyse them for sentiment and generate a buy/sell signal every hour.
+The objective of this project is to fetch tweets about TESLA in real time, analyse them for sentiment and generate a buy/sell signal every hour. This sentiment index is displayed (and refreshed in near real time) on the front end in the form of a graph.
 
 Languages/packages used :
 * Tweepy
@@ -15,8 +15,9 @@ Languages/packages used :
 
 # Table of contents
 1. [Introduction](#Introduction)
-2. [Anatomy of a tweet](#Anatomy-of-a-tweet)
-3. [Conclusion](#Conclusion)
+2. [Data](#Data)
+3. [Anatomy of a tweet](#Anatomy-of-a-tweet)
+3. [Conclusion and future work](#Conclusion-and-future-work)
 4. [References](#References)
 
 ## Introduction
@@ -28,26 +29,36 @@ index graph and refreshes the html page every N (=5) minutes. On refresh the gra
 The user interface is very basic. There is a TESLA logo. The main body of the page shows 4 tweets. These are clickable. The user can click and visit the respective twitter page.
 
 We trained a Naive Bayes model to identify sentiment of financial headlines. For this we used 4845 financial phrase bank Kaggle dataset and 1100 FiQA financial tweets and headlines dataset. These are labelled datasets (Negative, Neutral and Positive). We trained the Naive Bayes model on 80% of the dataset. It performed well on the test dataset (85% accuracy). The model mislabelled many positive tweets as negative and vice versa. The tweets about Tesla were about varied topics like energy, battery, cars and also politics. 
- 
-<p align="left">
-<img width="400" height="300" src="images/FiQA_headline_sentiment.png">
-<img width="400" height="300" src="images/FiQA_post_sentiment.png">
-</p>
+
+## Data
+
+We combined data from various sources to obtain a labelled dataset.
+
+1) Financial news headlines (Please see the Kaggle reference).
+
+2) FiQA headlines : This dataset is a part of an open challenge posed in 2018. The training dataset contains headlines from the finance domain which are annotated by a sentiment score. This labeling is done by domain experts. The sentiment score is a continuous value between -1 and 1. We chose a threshold of 0.15 to discretize this sentiment score. Headlines with sentiment scores between -1 and -0.15 are labeled as negative sentiment, those between -0.15 and 0.15 are labelled as neutral and those between 0.15 and 1.0 are labeled as positive sentiment (Please see fiqa reference).
+
+3) FiQA posts : Same as (2) above except that posts from blogs etc from financial domains are labelled rather than headlines (Please see fiqa reference).
+
+4) Tweets downloaded using the twitter API.
+
+5) Financial headlines downloaded from tiingo.
+
+6) Tweets downloaded using the twitter API.
+
+7) Reviews of google apps : This dataset was constructed by Venelin Valkov (Please see the curiousily.com reference). It can be downloaded by,
+
+<code> !gdown --id 1S6qMioqPJjyBLpLVz4gmRTnJHnjitnuV </code>
+
+<code> !gdown --id 1zdmewp7ayS4js4VtrJEHzAheSW-5NBZv </code>
+
+8) Financial tweets from stocktwits.
+
+The combined dataset is balanced.
 
 <p align="left">
-<img width="400" height="300" src="images/Financial_headline_sentiment.png">
+<img width="400" height="300" src="images/all_17844_sentiment.png">
 </p>
-
-<p align="left">
-<img width="400" height="300" src="images/tesla_tweets_sentiment.png">
-<img width="400" height="300" src="images/all_tweets_sentiment.png">
-</p>
-
-<p align="left">
-<img width="400" height="300" src="images/tiingo_news_sentiment_895.png">
-<img width="400" height="300" src="images/all_8741_sentiment.png">
-</p>
-
 
 
 ## Anatomy of a tweet
@@ -104,9 +115,14 @@ PEP8 compliance can be checked with,
 <code>>> flake8 yourcode.py </code>
 
 flake8 can be installed with,
+
 <code>>> sudo apt install flake8</code>
 
-## Conclusion
+## Conclusion and future work
+
+A MVP has been demonstrated.
+
+A major hurdle to obtaining good quality predicitions on streaming tweets in the amount of labelled data which goes into training the model. Hand labeling tweets/headlines by sentiments is a tedious tasks. The publicly available sentiment labelled data (resturant reviews etc) is not useful because one needs text from the domain of finance/stocks to train the model. A possible approach to circumventing the need for labeling is as follows. The archive of stock price movements of Tesla and the tweets about Tesla can be downloaded. Then a model can be trained with the tweets as inputs and the stock price movement as the target. The labels in this approach are the stock price movements. These can be readily computed by subtracting (or dividing) successive prices at regular interval. The interval could be few minutes to few hours (or even days).
 
 ## References 
 
@@ -115,6 +131,14 @@ Malo, P., Sinha, A., Korhonen, P., Wallenius, J., & Takala, P. (2014). Good debt
 https://www.kaggle.com/ankurzing/sentiment-analysis-for-financial-news
 
 https://sites.google.com/view/fiqa
+
+https://tiingo.com
+
+https://curiousily.com/posts/sentiment-analysis-with-bert-and-hugging-face-using-pytorch-and-python/
+
+https://towardsdatascience.com/create-dataset-for-sentiment-analysis-by-scraping-google-play-app-reviews-using-python-ceaaa0e41c1
+
+https://stocktwits.com
 
 https://stackabuse.com/accessing-the-twitter-api-with-python/
 
@@ -129,3 +153,5 @@ http://docs.tweepy.org/en/latest/extended_tweets.html
 https://www.tweetbinder.com/blog/twitter-impressions/
 
 https://www.python.org/dev/peps/pep-0008/
+
+
