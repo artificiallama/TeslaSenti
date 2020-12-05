@@ -28,26 +28,10 @@ index graph and refreshes the html page every N (=5) minutes. On refresh the gra
 The user interface is very basic. There is a TESLA logo. The main body of the page shows 4 tweets. These are clickable. The user can click and visit the respective twitter page.
 
 We trained a Naive Bayes model to identify sentiment of financial headlines. For this we used 4845 financial phrase bank Kaggle dataset and 1100 FiQA financial tweets and headlines dataset. These are labelled datasets (Negative, Neutral and Positive). We trained the Naive Bayes model on 80% of the dataset. It performed well on the test dataset (85% accuracy). The model mislabelled many positive tweets as negative and vice versa. The tweets about Tesla were about varied topics like energy, battery, cars and also politics. 
- 
-<p align="left">
-<img width="400" height="300" src="images/FiQA_headline_sentiment.png">
-<img width="400" height="300" src="images/FiQA_post_sentiment.png">
-</p>
 
 <p align="left">
-<img width="400" height="300" src="images/Financial_headline_sentiment.png">
+<img width="400" height="300" src="images/all_17844_sentiment.png">
 </p>
-
-<p align="left">
-<img width="400" height="300" src="images/tesla_tweets_sentiment.png">
-<img width="400" height="300" src="images/all_tweets_sentiment.png">
-</p>
-
-<p align="left">
-<img width="400" height="300" src="images/tiingo_news_sentiment_895.png">
-<img width="400" height="300" src="images/all_8741_sentiment.png">
-</p>
-
 
 
 ## Anatomy of a tweet
