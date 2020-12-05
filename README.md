@@ -1,9 +1,9 @@
 # TeslaSenti
-Near real-time sentiment analysis of Tesla tweets.
+Near real time sentiment analysis of Tesla tweets.
 
 This is a capstone project for a 5-week workshop conducted by AISC. This project was executed by a team of two members (including myself).
 
-The objective of this project is to fetch tweets about TESLA in real time, analyse them for sentiment and generate a buy/sell signal every hour. This sentiment index is displayed (and refreshed in real time) on the front end in the form of a graph.
+The objective of this project is to fetch tweets about TESLA in real time, analyse them for sentiment and generate a buy/sell signal every hour. This sentiment index is displayed (and refreshed in near real time) on the front end in the form of a graph.
 
 Languages/packages used :
 * Tweepy
@@ -35,9 +35,9 @@ We combined data from various sources to obtain a labelled dataset.
 
 1) Financial news headlines (Please see the Kaggle reference).
 
-2) FiQA headlines (Please see fiqa reference)
+2) FiQA headlines : This dataset is a part of an open challenge posed in 2018. The training dataset contains headlines from the finance domain which are annotated by a sentiment score. This labeling is done by domain experts. The sentiment score is a continuous value between -1 and 1. We chose a threshold of 0.15 to discretize this sentiment score. Headlines with sentiment scores between -1 and -0.15 are labeled as negative sentiment, those between -0.15 and 0.15 are labelled as neutral and those between 0.15 and 1.0 are labeled as positive sentiment (Please see fiqa reference).
 
-3) FiQA posts (Please see fiqa reference)
+3) FiQA posts : Same as (2) above except that posts from blogs etc from financial domains are labelled rather than headlines (Please see fiqa reference).
 
 4) Tweets downloaded using the twitter API.
 
@@ -133,6 +133,12 @@ https://sites.google.com/view/fiqa
 
 https://tiingo.com
 
+https://curiousily.com/posts/sentiment-analysis-with-bert-and-hugging-face-using-pytorch-and-python/
+
+https://towardsdatascience.com/create-dataset-for-sentiment-analysis-by-scraping-google-play-app-reviews-using-python-ceaaa0e41c1
+
+https://stocktwits.com
+
 https://stackabuse.com/accessing-the-twitter-api-with-python/
 
 http://adilmoujahid.com/posts/2014/07/twitter-analytics/
@@ -147,6 +153,4 @@ https://www.tweetbinder.com/blog/twitter-impressions/
 
 https://www.python.org/dev/peps/pep-0008/
 
-https://curiousily.com/posts/sentiment-analysis-with-bert-and-hugging-face-using-pytorch-and-python/
 
-https://stocktwits.com
