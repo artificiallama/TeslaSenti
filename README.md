@@ -29,6 +29,18 @@ The user interface is very basic. There is a TESLA logo. The main body of the pa
 
 We trained a Naive Bayes model to identify sentiment of financial headlines. For this we used 4845 financial phrase bank Kaggle dataset and 1100 FiQA financial tweets and headlines dataset. These are labelled datasets (Negative, Neutral and Positive). We trained the Naive Bayes model on 80% of the dataset. It performed well on the test dataset (85% accuracy). The model mislabelled many positive tweets as negative and vice versa. The tweets about Tesla were about varied topics like energy, battery, cars and also politics. 
 
+## Data
+
+We combined data from various sources to obtain a labelled dataset.
+
+7) Reviews of google apps : This dataset was constructed by Venelin Valkov (Please see the curiousily.com reference). It can be downloaded by,
+
+<code> !gdown --id 1S6qMioqPJjyBLpLVz4gmRTnJHnjitnuV </code>
+<code> !gdown --id 1zdmewp7ayS4js4VtrJEHzAheSW-5NBZv </code>
+
+
+The combined dataset is balanced.
+
 <p align="left">
 <img width="400" height="300" src="images/all_17844_sentiment.png">
 </p>
@@ -118,3 +130,5 @@ http://docs.tweepy.org/en/latest/extended_tweets.html
 https://www.tweetbinder.com/blog/twitter-impressions/
 
 https://www.python.org/dev/peps/pep-0008/
+
+https://curiousily.com/posts/sentiment-analysis-with-bert-and-hugging-face-using-pytorch-and-python/
