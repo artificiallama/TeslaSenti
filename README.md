@@ -33,11 +33,25 @@ We trained a Naive Bayes model to identify sentiment of financial headlines. For
 
 We combined data from various sources to obtain a labelled dataset.
 
+1) Financial news headlines (Please see the Kaggle reference).
+
+2) FiQA headlines (Please see fiqa reference)
+
+3) FiQA posts (Please see fiqa reference)
+
+4) Tweets downloaded using the twitter API.
+
+5) Financial headlines downloaded from tiingo.
+
+6) Tweets downloaded using the twitter API.
+
 7) Reviews of google apps : This dataset was constructed by Venelin Valkov (Please see the curiousily.com reference). It can be downloaded by,
 
 <code> !gdown --id 1S6qMioqPJjyBLpLVz4gmRTnJHnjitnuV </code>
+
 <code> !gdown --id 1zdmewp7ayS4js4VtrJEHzAheSW-5NBZv </code>
 
+8) Financial tweets from stocktwits.
 
 The combined dataset is balanced.
 
@@ -117,6 +131,8 @@ https://www.kaggle.com/ankurzing/sentiment-analysis-for-financial-news
 
 https://sites.google.com/view/fiqa
 
+https://tiingo.com
+
 https://stackabuse.com/accessing-the-twitter-api-with-python/
 
 http://adilmoujahid.com/posts/2014/07/twitter-analytics/
@@ -132,3 +148,5 @@ https://www.tweetbinder.com/blog/twitter-impressions/
 https://www.python.org/dev/peps/pep-0008/
 
 https://curiousily.com/posts/sentiment-analysis-with-bert-and-hugging-face-using-pytorch-and-python/
+
+https://stocktwits.com
