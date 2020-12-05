@@ -15,7 +15,8 @@ Languages/packages used :
 
 # Table of contents
 1. [Introduction](#Introduction)
-2. [Anatomy of a tweet](#Anatomy-of-a-tweet)
+2. [Data](#Data)
+3. [Anatomy of a tweet](#Anatomy-of-a-tweet)
 3. [Conclusion and future work](#Conclusion-and-future-work)
 4. [References](#References)
 
