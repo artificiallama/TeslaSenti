@@ -22,6 +22,8 @@ remove_words = ['above', 'below', 'up',  'down', 'off',  'over',
 for w in remove_words:
     stop_words.remove(w)
 
+p.set_options(p.OPT.EMOJI, p.OPT.SMILEY,  p.OPT.URL)
+
 
 def normalize_doc(txt):
     txt = re.sub('[^a-zA-Z]', ' ', txt)  # Remove punctuation
@@ -35,9 +37,6 @@ def normalize_doc(txt):
 
 # Important for tweets/posts
 def clean_emoji_url(x):
-    p.set_options(p.OPT.EMOJI)
-    p.set_options(p.OPT.SMILEY)
-    p.set_options(p.OPT.URL)
     return p.clean(x)
 
 
