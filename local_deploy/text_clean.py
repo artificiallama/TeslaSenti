@@ -41,26 +41,12 @@ def clean_emoji_url(x):
 
 
 def remove_mention(input_txt):
-    pattern = "@[\w]*"
-    r = re.findall(pattern, input_txt)
-    for tok in r:
-        input_txt = re.sub(tok, '', input_txt)
-
-    return input_txt
+    return  re.sub("@[\w]*", '', input_txt)
 
 
 def remove_hashtag(input_txt):
-    pattern = "#[\w]*"
-    r = re.findall(pattern, input_txt)
-    for tok in r:
-        input_txt = re.sub(tok, '', input_txt)
-    return input_txt
+    return re.sub("#[\w]*", '', input_txt)
 
 
 def remove_cashtag(input_txt):
-    pattern = "[$][\w]*"
-    r = re.findall(pattern, input_txt)
-    for tok in r:
-        input_txt = input_txt.replace(tok, '')
-
-    return input_txt
+    return re.sub("[$][\w]*", '', input_txt)
