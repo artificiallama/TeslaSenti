@@ -41,7 +41,7 @@ def clean_emoji_url(x):
 
 
 def remove_mention(input_txt):
-    return  re.sub("@[\w]*", '', input_txt)
+    return re.sub("@[\w]*", '', input_txt)
 
 
 def remove_hashtag(input_txt):
@@ -50,3 +50,9 @@ def remove_hashtag(input_txt):
 
 def remove_cashtag(input_txt):
     return re.sub("[$][\w]*", '', input_txt)
+
+
+# Count cashtags which are not ($TSLA, $TSLAQ)
+def count_cashtags(input_txt):
+    ff = re.findall('[$][a-zA-Z]+', input_txt)
+    return len([tk for tk in ff if tk.lower() not in ['$tsla', '$tslaq']])
