@@ -36,6 +36,7 @@ if __name__ == '__main__':
     df['tidy_text'] = df['tidy_text'].apply(lambda x: tc.remove_hashtag(x))
     df['tidy_text'] = df['tidy_text'].apply(lambda x: tc.remove_cashtag(x))
     df['tidy_text'] = df['tidy_text'].apply(lambda x: tc.remove_mention(x))
+    df['tidy_text'] = df['tidy_text'].apply(lambda x: tc.replace_chars(x))
     df['tidy_text'] = df['tidy_text'].apply(lambda x: tc.normalize_doc(x))
 
     # print(df.head())
