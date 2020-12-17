@@ -25,16 +25,6 @@ for w in remove_words:
 p.set_options(p.OPT.EMOJI, p.OPT.SMILEY,  p.OPT.URL)
 
 
-def normalize_doc(txt):
-    txt = re.sub('[^a-zA-Z]', ' ', txt)  # Remove punctuation
-    txt = txt.lower()
-    tok_list = word_tokenize(txt)
-    filtered_tok_list = [token for token in tok_list if token not in
-                         stop_words]
-    filtered_tok_list = [stemmer.stem(w) for w in filtered_tok_list]
-    return ' '.join(filtered_tok_list)
-
-
 # Important for tweets/posts
 def clean_emoji_url(x):
     return p.clean(x)
@@ -56,3 +46,20 @@ def remove_cashtag(input_txt):
 def count_cashtags(input_txt):
     ff = re.findall('[$][a-zA-Z]+', input_txt)
     return len([tk for tk in ff if tk.lower() not in ['$tsla', '$tslaq']])
+
+
+def replace_chars(input_txt):
+    input_txt = input_txt.replace("&amp", " and ")
+# Replace embedded pictures/graphs in tweets
+    input_txt = input_txt.replace('\U0001f4c8', " ")
+    return input_txt
+
+
+def normalize_doc(txt):
+    txt = re.sub('[^a-zA-Z]', ' ', txt)  # Remove everything except text.
+    txt = txt.lower()
+    tok_list = word_tokenize(txt)
+    filtered_tok_list = [token for token in tok_list if token not in
+                         stop_words]
+    filtered_tok_list = [stemmer.stem(w) for w in filtered_tok_list]
+    return ' '.join(filtered_tok_list)
