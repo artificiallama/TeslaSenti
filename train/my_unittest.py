@@ -58,6 +58,21 @@ class Test_clean(unittest.TestCase):
         ntags = tc.count_cashtags('$SEIC going to $14 $ORI $DOV $NUE $ABM $ITW $TSLAQ')
         self.assertEqual(ntags, 6)
 
+    def test_normalize1(self):                
+        checkstr = tc.normalize_doc('The lay-offs will affect 240 people out of the total 320 Okmetic employees in Finland .')
+        outstr = 'lay off affect peopl out total okmet employe in finland'
+        self.assertEqual(checkstr, outstr)
+        
+    def test_normalize2(self):                    
+        checkstr = tc.normalize_doc('Short sale volume(not short interest) for  on 2018-07-11 is 66%.  45%  38%  55%  37%')
+        outstr = 'short sale volum not short interest'
+        self.assertEqual(checkstr, outstr)
+
+    def test_normalize3(self):                    
+        checkstr = tc.normalize_doc('West Oak Capital LLC Lifted Its Stake in Leucadia National Corp  by .64 Billion as Stock Value Declined')
+        outstr = 'west oak capit llc lift stake in leucadia nation corp billion stock valu declin'
+        self.assertEqual(checkstr, outstr)
+
 
 if __name__ == '__main__':
 
