@@ -106,6 +106,11 @@ def sentiment_tweets():
     dftw_senti['tidy_tweet'] = dftw_senti['tidy_tweet'].apply(lambda x : tc.remove_mention(x))
     dftw_senti['tidy_tweet'] = dftw_senti['tidy_tweet'].apply(lambda x : tc.replace_chars(x))
     dftw_senti['tidy_tweet'] = dftw_senti['tidy_tweet'].apply(lambda x : tc.normalize_doc(x))
+	
+	cond = dftw_senti['tidy_tweet'].apply(lambda x : tc.count_toks(x) == 0)
+	print('\n\tcond.value_counts = ',cond.value_counts())
+    dftw.drop(index=dftw[cond].index,inplace=True)
+	
     for indx,row in dftw_senti.iterrows():     
      senti_index = model.predict(count_vect.transform([row['tidy_tweet']]))
      print('\n\ttweet : {} |  senti  = {} '.format(row['tweet'],senti_index))
