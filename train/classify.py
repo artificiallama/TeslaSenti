@@ -27,21 +27,23 @@ if __name__ == '__main__':
     if not df.index.is_unique:
         df.reset_index(drop=True, inplace=True)
 
-    print('\nAre indices unique ? ', df.index.is_unique)
+    # print('\nAre indices unique ? ', df.index.is_unique)
 
-    print(df[df.index.duplicated(keep=False)])
+    # print(df[df.index.duplicated(keep=False)])
 
-    print('\n\tdf.dtypes = ', df.dtypes)
+    #print('\n\tdf.dtypes = ', df.dtypes)
 
     df['senti'] = df['senti'].astype('category')
 
-    print('\n\tdf.dtypes = ', df.dtypes)
-
-    print('\n\t', df['senti'].value_counts())
-    nrows = df.shape[0]
-    print('\n\tnrows = ', nrows)
+    #print('\n\tdf.dtypes = ', df.dtypes)
 
     # Clean text
+    # Delete tweets with more than 10 cashtags
+    cond10 = df['text'].apply(lambda x : tc.count_cashtags(x) > 10)
+    df.drop(index=df[cond10].index,inplace=True)
+    print('\n\tdf.shape = ',df.shape)
+
+	
     df['tidy_text'] = df['text'].apply(lambda x: tc.clean_emoji_url(x))
     df['tidy_text'] = df['tidy_text'].apply(lambda x: tc.remove_hashtag(x))
     df['tidy_text'] = df['tidy_text'].apply(lambda x: tc.remove_cashtag(x))
@@ -63,8 +65,11 @@ if __name__ == '__main__':
 
     df.drop(index=df[cond].index, inplace=True)
 
-    print('\n\tdf.shape = ', df.shape)
+    print('\n\t', df['senti'].value_counts())
+    nrows = df.shape[0]
+    print('\n\tnrows = ', nrows)
 
+	
     print('\n\t----Start training\n')
     x_train, x_test, y_train, y_test = model_selection.train_test_split(
                        df['tidy_text'], df['senti'], test_size=0.33,
@@ -74,8 +79,8 @@ if __name__ == '__main__':
     print('\n\tshape = ', np.shape(x_train), np.shape(x_test))
     print('\tshape = ', np.shape(y_train), np.shape(y_test))
 
-    print('\n\t', x_train.iloc[0], y_train.iloc[0])
-    print('\n\t', x_test.iloc[3], y_test.iloc[3])
+    # print('\n\t', x_train.iloc[0], y_train.iloc[0])
+    # print('\n\t', x_test.iloc[3], y_test.iloc[3])
 
     count_vect = CountVectorizer(analyzer='word', token_pattern=r'\w{1,}')
     count_vect.fit(x_train)
