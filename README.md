@@ -19,6 +19,7 @@ Languages/packages used :
 3. [Anatomy of a tweet](#Anatomy-of-a-tweet)
 3. [Conclusion and future work](#Conclusion-and-future-work)
 4. [References](#References)
+5. [Appendix](#Appendix)
 
 ## Introduction
 
@@ -102,26 +103,6 @@ Tweets with too many cashtags are dropped. We noticed that most of such tweets a
 If emoji's and url's are present these are purged from tweets. Hastags, cashtags, mentions and embedded charts are removed. Punctuations, digits, symbols and stop word are removed and the tokens are stemmed. Finally the empty tweets are removed. It is possible that after the cleaning is done some tweets end up with zero tokens.
 
 
-## Tips
-Command to display csv file on linux/ubuntu command line :
-
-<code>>> cat streaming_tweets_save.csv | column -t -s, | less -S </code>
-
-Another convenient utility is csvtool. This can be installed in ubuntu with,
-
-<code>>> sudo apt-get install -y csvtool </code>
-
-A few selecetd columns can be displayed with,
-
-<code>>> csvtool col 1,2,7 streaming_tweets_save.csv </code>
-
-PEP8 compliance can be checked with,
-
-<code>>> flake8 yourcode.py </code>
-
-flake8 can be installed with,
-
-<code>>> sudo apt install flake8</code>
 
 ## Conclusion and future work
 
@@ -164,4 +145,25 @@ https://www.python.org/dev/peps/pep-0008/
 
 https://towardsdatascience.com/apply-and-lambda-usage-in-pandas-b13a1ea037f7
 
+
+## Appendex
+Command to display csv file on linux/ubuntu command line :
+
+<code>>> cat streaming_tweets_save.csv | column -t -s, | less -S </code>
+
+Another convenient utility is csvtool. This can be installed in ubuntu with,
+
+<code>>> sudo apt-get install -y csvtool </code>
+
+A few selecetd columns can be displayed with,
+
+<code>>> csvtool col 1,2,7 streaming_tweets_save.csv </code>
+
+PEP8 compliance can be checked with,
+
+<code>>> flake8 yourcode.py </code>
+
+flake8 can be installed with,
+
+<code>>> sudo apt install flake8</code>
 
