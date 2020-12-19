@@ -21,6 +21,16 @@ if __name__ == '__main__':
     # print(df.head())
     print('\n\tdf.shape = ', df.shape)
 
+    # non-unique indices messes up the drop indices call below.
+    print('\nAre indices unique ? ', df.index.is_unique)
+
+    if not df.index.is_unique:
+        df.reset_index(drop=True, inplace=True)
+
+    print('\nAre indices unique ? ', df.index.is_unique)
+
+    print(df[df.index.duplicated(keep=False)])
+
     print('\n\tdf.dtypes = ', df.dtypes)
 
     df['senti'] = df['senti'].astype('category')
@@ -40,7 +50,22 @@ if __name__ == '__main__':
     df['tidy_text'] = df['tidy_text'].apply(lambda x: tc.normalize_doc(x))
 
     # print(df.head())
-    print('')
+
+    # Drop rows with empty tidy_text. After cleaning it is possible that all
+    # the tokens in tidy_text get deleted. For example, the following tweet
+    # after cleaning contains zero tokens.
+    # $CUBE $EXR $HOG $KO $LSI $PSA $IRM https://t.co/GFZTPvIifx
+
+    cond = df['tidy_text'].apply(lambda x: tc.count_toks(x) == 0)
+
+    print('\n\tcond.shape = ', cond.shape)
+    print('\n\tcond.value_counts = ', cond.value_counts())
+
+    df.drop(index=df[cond].index, inplace=True)
+
+    print('\n\tdf.shape = ', df.shape)
+
+    print('\n\t----Start training\n')
     x_train, x_test, y_train, y_test = model_selection.train_test_split(
                        df['tidy_text'], df['senti'], test_size=0.33,
                        random_state=123, stratify=df['senti'])
