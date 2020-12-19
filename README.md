@@ -49,9 +49,9 @@ We combined data from various sources to obtain a labelled dataset.
 
 7) Reviews of google apps : This dataset was constructed by Venelin Valkov (Please see the curiousily.com reference). It can be downloaded by,
 
-<code> !gdown --id 1S6qMioqPJjyBLpLVz4gmRTnJHnjitnuV </code>
+&nbsp;&nbsp;&nbsp;&nbsp;<code> !gdown --id 1S6qMioqPJjyBLpLVz4gmRTnJHnjitnuV </code>
 
-<code> !gdown --id 1zdmewp7ayS4js4VtrJEHzAheSW-5NBZv </code>
+&nbsp;&nbsp;&nbsp;&nbsp;<code> !gdown --id 1zdmewp7ayS4js4VtrJEHzAheSW-5NBZv </code>
 
 8) Financial tweets from stocktwits.
 
