@@ -60,7 +60,6 @@ The combined dataset is balanced.
 <img width="400" height="300" src="images/all_17844_sentiment.png">
 </p>
 
-In the following discussion the text fields (headlines, reviews, posts, tweets) will be referred to as *tweets*.
 
 
 ## Anatomy of a tweet
@@ -91,6 +90,8 @@ In case the <code>extended_tweet</code> is available the <code>full_text</code> 
 The <code>retweet_count</code>, <code>favorite_count</code>, <code>followers_count</code> and <code>friends_count</code> is used to amplify the sentiment index by using these as weights. These weights quantify the reach/impact/engagement of the particular tweet. Since the tweets are streaming for most tweets both <code>retweet_count</code> and <code>favorite_count</code> are zero.
 
 ## Tweet cleaning / preprocessing
+
+The same cleaning process is applied to  headlines, reviews, posts and tweets though most of the cleaning operations apply to tweets.
 
 Tweets with too many cashtags are dropped. We noticed that most of such tweets are advertisements. An example of such a tweet is shown below. It has 13 cashtags ($fb, $aapl, $amzn, etc) and is clearly an advertisement.
 
