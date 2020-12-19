@@ -63,3 +63,7 @@ def normalize_doc(txt):
                          stop_words]
     filtered_tok_list = [stemmer.stem(w) for w in filtered_tok_list]
     return ' '.join(filtered_tok_list)
+
+
+def count_toks(txt):
+    return len(word_tokenize(txt))
