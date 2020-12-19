@@ -19,7 +19,7 @@ Languages/packages used :
 3. [Anatomy of a tweet](#Anatomy-of-a-tweet)
 3. [Conclusion and future work](#Conclusion-and-future-work)
 4. [References](#References)
-5. [Appendix](#Appendix)
+5. [Appendex](#Appendex)
 
 ## Introduction
 
