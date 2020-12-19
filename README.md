@@ -60,6 +60,8 @@ The combined dataset is balanced.
 <img width="400" height="300" src="images/all_17844_sentiment.png">
 </p>
 
+In the following discussion the text fields (headlines, reviews, posts, tweets) will be referred to as *tweets*.
+
 
 ## Anatomy of a tweet
 The tweet JSON object has a very rich payload. It contains information ranging from username, date and time, location, profile bio, number of friends and followers, whether the tweet is a  retweet, whether the tweet is a reply etc.
@@ -96,6 +98,8 @@ Tweets with too many cashtags are dropped. We noticed that most of such tweets a
 <img width="600" height="100" src="images/too_many_cashtags_crop.png">
 </p>
 
+If emoji's and url's are present these are purged from tweets. Hastags, cashtags, mentions and embedded charts are removed. Punctuations, digits, symbols and stop word are removed and the tokens are stemmed. Finally the empty tweets are removed. It is possible that after the cleaning is done some tweets end up with zero tokens.
+
 
 ## Tips
 Command to display csv file on linux/ubuntu command line :
@@ -123,6 +127,9 @@ flake8 can be installed with,
 A MVP has been demonstrated.
 
 A major hurdle to obtaining good quality predicitions on streaming tweets in the amount of labelled data which goes into training the model. Hand labeling tweets/headlines by sentiments is a tedious tasks. The publicly available sentiment labelled data (resturant reviews etc) is not useful because one needs text from the domain of finance/stocks to train the model. A possible approach to circumventing the need for labeling is as follows. The archive of stock price movements of Tesla and the tweets about Tesla can be downloaded. Then a model can be trained with the tweets as inputs and the stock price movement as the target. The labels in this approach are the stock price movements. These can be readily computed by subtracting (or dividing) successive prices at regular interval. The interval could be few minutes to few hours (or even days).
+
+(1) The probability is used as a weight. It could be rather used as threshold. For example a negative or positive tweet would pass through this filter only if the probability is > 0.8.
+
 
 ## References 
 
@@ -153,5 +160,7 @@ http://docs.tweepy.org/en/latest/extended_tweets.html
 https://www.tweetbinder.com/blog/twitter-impressions/
 
 https://www.python.org/dev/peps/pep-0008/
+
+https://towardsdatascience.com/apply-and-lambda-usage-in-pandas-b13a1ea037f7
 
 
