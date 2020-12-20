@@ -19,6 +19,7 @@ Languages/packages used :
 3. [Anatomy of a tweet](#Anatomy-of-a-tweet)
 3. [Conclusion and future work](#Conclusion-and-future-work)
 4. [References](#References)
+5. [Appendex](#Appendex)
 
 ## Introduction
 
@@ -48,9 +49,9 @@ We combined data from various sources to obtain a labelled dataset.
 
 7) Reviews of google apps : This dataset was constructed by Venelin Valkov (Please see the curiousily.com reference). It can be downloaded by,
 
-<code> !gdown --id 1S6qMioqPJjyBLpLVz4gmRTnJHnjitnuV </code>
+&nbsp;&nbsp;&nbsp;&nbsp;<code> !gdown --id 1S6qMioqPJjyBLpLVz4gmRTnJHnjitnuV </code>
 
-<code> !gdown --id 1zdmewp7ayS4js4VtrJEHzAheSW-5NBZv </code>
+&nbsp;&nbsp;&nbsp;&nbsp;<code> !gdown --id 1zdmewp7ayS4js4VtrJEHzAheSW-5NBZv </code>
 
 8) Financial tweets from stocktwits.
 
@@ -59,6 +60,7 @@ The combined dataset is balanced.
 <p align="left">
 <img width="400" height="300" src="images/all_17844_sentiment.png">
 </p>
+
 
 
 ## Anatomy of a tweet
@@ -90,39 +92,26 @@ The <code>retweet_count</code>, <code>favorite_count</code>, <code>followers_cou
 
 ## Tweet cleaning / preprocessing
 
+The same cleaning process is applied to  headlines, reviews, posts and tweets though most of the cleaning operations apply to tweets.
+
 Tweets with too many cashtags are dropped. We noticed that most of such tweets are advertisements. An example of such a tweet is shown below. It has 13 cashtags ($fb, $aapl, $amzn, etc) and is clearly an advertisement.
 
 <p align="left">
 <img width="600" height="100" src="images/too_many_cashtags_crop.png">
 </p>
 
+If emoji's and url's are present these are purged from tweets. Hastags, cashtags, mentions and embedded charts are removed. Punctuations, digits, symbols and stop word are removed and the tokens are stemmed. Finally the empty tweets are removed. It is possible that after the cleaning is done some tweets end up with zero tokens.
 
-## Tips
-Command to display csv file on linux/ubuntu command line :
 
-<code>>> cat streaming_tweets_save.csv | column -t -s, | less -S </code>
-
-Another convenient utility is csvtool. This can be installed in ubuntu with,
-
-<code>>> sudo apt-get install -y csvtool </code>
-
-A few selecetd columns can be displayed with,
-
-<code>>> csvtool col 1,2,7 streaming_tweets_save.csv </code>
-
-PEP8 compliance can be checked with,
-
-<code>>> flake8 yourcode.py </code>
-
-flake8 can be installed with,
-
-<code>>> sudo apt install flake8</code>
 
 ## Conclusion and future work
 
 A MVP has been demonstrated.
 
 A major hurdle to obtaining good quality predicitions on streaming tweets in the amount of labelled data which goes into training the model. Hand labeling tweets/headlines by sentiments is a tedious tasks. The publicly available sentiment labelled data (resturant reviews etc) is not useful because one needs text from the domain of finance/stocks to train the model. A possible approach to circumventing the need for labeling is as follows. The archive of stock price movements of Tesla and the tweets about Tesla can be downloaded. Then a model can be trained with the tweets as inputs and the stock price movement as the target. The labels in this approach are the stock price movements. These can be readily computed by subtracting (or dividing) successive prices at regular interval. The interval could be few minutes to few hours (or even days).
+
+(1) The probability is used as a weight. It could be rather used as threshold. For example a negative or positive tweet would pass through this filter only if the probability is > 0.8.
+
 
 ## References 
 
@@ -154,4 +143,27 @@ https://www.tweetbinder.com/blog/twitter-impressions/
 
 https://www.python.org/dev/peps/pep-0008/
 
+https://towardsdatascience.com/apply-and-lambda-usage-in-pandas-b13a1ea037f7
+
+
+## Appendex
+Command to display csv file on linux/ubuntu command line :
+
+<code>>> cat streaming_tweets_save.csv | column -t -s, | less -S </code>
+
+Another convenient utility is csvtool. This can be installed in ubuntu with,
+
+<code>>> sudo apt-get install -y csvtool </code>
+
+A few selecetd columns can be displayed with,
+
+<code>>> csvtool col 1,2,7 streaming_tweets_save.csv </code>
+
+PEP8 compliance can be checked with,
+
+<code>>> flake8 yourcode.py </code>
+
+flake8 can be installed with,
+
+<code>>> sudo apt install flake8</code>
 
