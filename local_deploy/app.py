@@ -10,6 +10,7 @@ import plotly
 import json
 import tweets
 import os
+import cvars
 
 
 app = Flask(__name__)
@@ -51,9 +52,7 @@ def home():
             print('\t\thome() : Sleeping')   
             time.sleep(5)   
 
-    cols = ['id','date','tweet','senti','screen_name','tidy_tweet']
-  
-    df_senti = pd.read_csv('data_tweets/senti_tweets.csv',names = cols)
+    df_senti = pd.read_csv('data_tweets/senti_tweets.csv', names = cvars.cols_display)
     nrows = df_senti.shape[0]
   
     if not params:

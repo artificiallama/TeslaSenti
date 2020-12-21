@@ -8,6 +8,7 @@ import json
 import csv
 import time
 import pickle
+import cvars
 import text_clean as tc
 
 
@@ -88,13 +89,11 @@ def sentiment_tweets():
 
     print('\t\tlatest_tweets() : streaming tweets file exists')
   
-    dftw_senti = pd.DataFrame(columns=['id', 'date', 'tweet', 'senti', 'screen_name'])
+    dftw_senti = pd.DataFrame(columns=cvars.cols_display)
   
     while True:
         dftw_senti.drop(dftw_senti.index,inplace=True)
-        dftw = pd.read_csv('data_tweets/streaming_tweets_save.csv',names = ['id','date','tweet','retweet_count','favorite_count',
-                                        'screen_name','name','verified','followers_count','friends_count',
-                                                                       'source','user_url'],skiprows=skiprows)
+        dftw = pd.read_csv('data_tweets/streaming_tweets_save.csv', names=cvars.all_cols , skiprows=skiprows)
         shp = dftw.shape
         print('\n\tskiprows = ',skiprows)  
         if shp[0] != 0:
@@ -115,7 +114,7 @@ def sentiment_tweets():
                 print('\n\ttweet : {} |  senti  = {} '.format(row['tweet'], senti_index))
                 print('\ttidytweet : {} '.format(row['tidy_tweet']))
                 dftw_senti.loc[indx,'senti'] = senti_index
-                dftw_senti.to_csv('data_tweets/senti_tweets.csv', mode='a', header=False, index=False)
+            dftw_senti.to_csv('data_tweets/senti_tweets.csv', mode='a', header=False, index=False)
     
         skiprows += shp[0]
         time.sleep(20)
