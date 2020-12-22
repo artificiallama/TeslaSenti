@@ -123,7 +123,7 @@ def sentiment_tweets():
             for indx,row in dftw_senti.iterrows():
                 senti_index = model.predict(count_vect.transform([row['tidy_tweet']]))
                 print('\n\ttweet : {} |  senti  = {} '.format(row['tweet'], senti_index))
-                print('\ttidytweet : {} '.format(row['tidy_tweet']))
+                #print('\ttidytweet : {} '.format(row['tidy_tweet']))
                 dftw_senti.loc[indx,'senti'] = senti_index
             dftw_senti.to_csv('data_tweets/senti_tweets.csv', mode='a', header=False, index=False)
     
