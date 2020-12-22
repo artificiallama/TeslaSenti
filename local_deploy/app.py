@@ -71,8 +71,8 @@ def home():
 
 #  for kk in np.arange(cc*4,cc*4+4):
     for kk in np.arange(nrows-4,nrows):  
-        print('\n\t** kk = ',kk, df_senti.iloc[kk]['id'])
-        print('\t** screenname = ',df_senti.iloc[kk]['screen_name'])
+        #print('\n\t** kk = ',kk, df_senti.iloc[kk]['id'])
+        #print('\t** screenname = ',df_senti.iloc[kk]['screen_name'])
         print('\t** tweet = ',df_senti.iloc[kk]['tweet'])    
         print('\t** senti = ',df_senti.iloc[kk]['senti'])   
         htmlcode = get_tweet_embed_html(df_senti.iloc[kk]['screen_name'],str(df_senti.iloc[kk]['id']))
@@ -83,6 +83,16 @@ def home():
     cc += 1   
     fnms='tweets_latest_subset_2020-07-13_17-14-17_to_2020-07-13_17-19-17.csv'
 
+    dt2 = time_helper.current_time()
+    dt1 = time_helper.lag_time(dt2,cvars.time_horizon)
+
+    cond =  df_senti['date'].apply(lambda x : time_helper.time_between(dt1,dt2,time_helper.dstr_obj(x)))
+    print('\n\tcond.value_counts = ',cond.value_counts())
+	# Remove tweets not within last last time_horizon minutes
+    df_senti.drop(index=df_senti[~cond].index,inplace=True)
+
+    print('\n\tdf_senti.shape = ',df_senti.shape)
+	
     dates = []
     for indx,row in df_senti.iterrows():
         dates.append(time_helper.dstr_obj(row['date']))
@@ -131,18 +141,18 @@ if __name__=='__main__':
 
     print('\n\tStarting in app.py main :')
 #  print("\n\tNumber of cpus = ",mp.cpu_count())
-#  app.run(debug=True)
+    app.run(debug=True)
 #  tweets.live_stream()
 
-    p1 = Process(target = tweets.live_stream,args=())  #fetch tweets and write to csv
-    p1.start()
+    # p1 = Process(target = tweets.live_stream,args=())  #fetch tweets and write to csv
+    # p1.start()
 
-    p2 = Process(target = tweets.sentiment_tweets,args=())  #serve requests
-    p2.start()
+    # p2 = Process(target = tweets.sentiment_tweets,args=())  #serve requests
+    # p2.start()
 
-    p3 = Process(target = app.run,args=())  #serve requests
-    p3.start()
+    # p3 = Process(target = app.run,args=())  #serve requests
+    # p3.start()
   
-    p1.join()
-    p2.join()
-    p3.join()
+    # p1.join()
+    # p2.join()
+    # p3.join()
