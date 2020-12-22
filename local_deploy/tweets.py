@@ -92,9 +92,7 @@ def sentiment_tweets():
     dftw_senti = pd.DataFrame(columns=cvars.cols_display)
   
     while True:
-		# Empty out dataframe
-        dftw_senti.drop(dftw_senti.index,inplace=True)
-		
+		# Read in only the latest tweets (Within last nsecs) using skiprows.
         dftw = pd.read_csv('data_tweets/streaming_tweets_save.csv', names=cvars.all_cols , skiprows=skiprows)
 
         shp = dftw.shape
@@ -107,6 +105,9 @@ def sentiment_tweets():
         print('\n\tskiprows = ',skiprows)  
         if dftw.shape[0] != 0:
             # print('\n\tdftw.shape = ',shp)
+			# Empty out dataframe
+            dftw_senti.drop(dftw_senti.index, inplace=True)
+
             dftw_senti[['id', 'date','tweet','screen_name']] =  dftw[['id', 'date', 'tweet', 'screen_name']].copy()
            			
             dftw_senti['tidy_tweet'] = dftw['tweet'].apply(lambda x : tc.clean_emoji_url(x))
@@ -127,4 +128,4 @@ def sentiment_tweets():
             dftw_senti.to_csv('data_tweets/senti_tweets.csv', mode='a', header=False, index=False)
     
         skiprows += shp[0]
-        time.sleep(20)
+        time.sleep(cvars.nsecs)

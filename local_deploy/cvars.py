@@ -7,3 +7,4 @@ cols_display = ['id', 'date', 'tweet', 'senti', 'screen_name', 'tidy_tweet']
 
 # any tweets with more than cash_thresh cashtags are removed.
 cash_thresh = 10
+nsecs=20
