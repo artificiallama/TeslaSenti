@@ -92,13 +92,23 @@ def sentiment_tweets():
     dftw_senti = pd.DataFrame(columns=cvars.cols_display)
   
     while True:
+		# Empty out dataframe
         dftw_senti.drop(dftw_senti.index,inplace=True)
+		
         dftw = pd.read_csv('data_tweets/streaming_tweets_save.csv', names=cvars.all_cols , skiprows=skiprows)
+
         shp = dftw.shape
+		
+        cond_cash =  dftw['tweet'].apply(lambda x : tc.count_cashtags(x) > cvars.cash_thresh)
+        print('\n\tcond_cash.value_counts = ',cond_cash.value_counts())
+        dftw.drop(index=dftw[cond_cash].index,inplace=True)
+	
+		
         print('\n\tskiprows = ',skiprows)  
-        if shp[0] != 0:
+        if dftw.shape[0] != 0:
             # print('\n\tdftw.shape = ',shp)
             dftw_senti[['id', 'date','tweet','screen_name']] =  dftw[['id', 'date', 'tweet', 'screen_name']].copy()
+           			
             dftw_senti['tidy_tweet'] = dftw['tweet'].apply(lambda x : tc.clean_emoji_url(x))
             dftw_senti['tidy_tweet'] = dftw_senti['tidy_tweet'].apply(lambda x : tc.remove_hashtag(x))
             dftw_senti['tidy_tweet'] = dftw_senti['tidy_tweet'].apply(lambda x : tc.remove_cashtag(x))
