@@ -7,6 +7,7 @@ import numpy as np
 import time_helper
 import plotly.graph_objs as go
 import plotly
+from plotly import subplots as sp
 import json
 import tweets
 import os
@@ -69,7 +70,6 @@ def home():
 
     tweet_embed = []
 
-#  for kk in np.arange(cc*4,cc*4+4):
     for kk in np.arange(nrows-4,nrows):  
         #print('\n\t** kk = ',kk, df_senti.iloc[kk]['id'])
         #print('\t** screenname = ',df_senti.iloc[kk]['screen_name'])
@@ -84,56 +84,86 @@ def home():
     fnms='tweets_latest_subset_2020-07-13_17-14-17_to_2020-07-13_17-19-17.csv'
 
     dt2 = time_helper.current_time()
-    dt1 = time_helper.lag_time(dt2,cvars.time_horizon)
+    dt1 = time_helper.lag_time(dt2,cvars.time_horizon1)
 
+    print('\n\tdt2 = ',dt2)
+	
     cond =  df_senti['date'].apply(lambda x : time_helper.time_between(dt1,dt2,time_helper.dstr_obj(x)))
-    print('\n\tcond.value_counts = ',cond.value_counts())
-	# Remove tweets not within last last time_horizon minutes
+    #print('\n\tcond.value_counts = ',cond.value_counts())
+	# Remove tweets not within time_horizon minutes
     df_senti.drop(index=df_senti[~cond].index,inplace=True)
 
     print('\n\tdf_senti.shape = ',df_senti.shape)
-	
-    dates = []
-    for indx,row in df_senti.iterrows():
-        dates.append(time_helper.dstr_obj(row['date']))
 
-    graphJSON =  give_graph(dates, df_senti['senti'].to_numpy())
-   
+    if not df_senti.empty:
+        dates1 = []
+        for indx,row in df_senti.iterrows():
+            dates1.append(time_helper.dstr_obj(row['date']))
+        arr1 =  df_senti['senti'].to_numpy()			
+
+        dt1 = time_helper.lag_time(dt2,cvars.time_horizon2)
+        cond =  df_senti['date'].apply(lambda x : time_helper.time_between(dt1,dt2,time_helper.dstr_obj(x)))
+        df_senti.drop(index=df_senti[~cond].index,inplace=True)
+		
+        dates2 = []
+        for indx,row in df_senti.iterrows():
+            dates2.append(time_helper.dstr_obj(row['date']))
+        arr2 =  df_senti['senti'].to_numpy()
+		
+        graphJSON = give_graph(dates1,arr1,dates2,arr2)
+    else:
+        print('&&&&&Calling')
+        graphJSON = {} 
+
+		
     return render_template('home.html',plot=graphJSON,embed_tweet1 = tweet_embed[0], embed_tweet2 = tweet_embed[1], embed_tweet3 = tweet_embed[2], embed_tweet4 = tweet_embed[3],mycc=cc,dtgtime=fnms[26:45],utc=time_helper.current_time().strftime('%Y-%m-%d %H:%M:%S')+' UTC')
 
 
  
-def give_graph(xdates,senti_index):
+def give_graph(xdates1,senti_index1,xdates2,senti_index2):
 
-    data = [go.Scatter(
-             x = xdates,
-             y = senti_index,
-            mode = 'markers'
-        )]
+    l1 = len(xdates1)
+    l2 = len(xdates2)	
+    print('\n\tlen = ',l1,l2)
+    print('\tlen = ',len(senti_index1),len(senti_index2))
+    
+    ymd = xdates1[0].strftime('%Y-%b-%d')
 
-    #print('\n\tlen = ',len(xdates))
-    #print('\tlen = ',len(senti_index))
-    
-    ymd = xdates[0].strftime('%Y-%b-%d')
-    #print('\tymd = ',ymd)
-    #print('\tday = ', xdates[0].strftime('%A'))
-    
-    layout = go.Layout(xaxis={'type':'date',
+    #for ii in range(43,0,-1):
+    # print('\n^^xdates1 = ',xdates1[l1-ii], senti_index1[l1-ii])
+    # print('  xdates2 = ',xdates2[l2-ii],senti_index2[l2-ii])
+
+    print('')
+	
+    fig = sp.make_subplots(rows=1,cols=2)
+
+    dt1 = go.Scatter(x=xdates1, y=senti_index1, mode='markers', marker=dict(color='Red'))	
+    dt2 = go.Scatter(x=xdates2, y=senti_index2, mode='markers', marker=dict(color='MediumPurple'))
+	
+    fig.add_trace(dt1,row=1,col=1)	
+    fig.add_trace(dt2,row=1,col=2)
+	
+    fig.update_layout(xaxis1={'type':'date',
                             'tickmode':'linear',
-                             'dtick': 5*60*1000,
+                             'dtick': cvars.tick_step1*60*1000,
                             },
-                     yaxis={'range':[-5,5],
+		             xaxis2={'type':'date',
+                            'tickmode':'linear',
+                             'dtick': cvars.tick_step2*60*1000,
+                            },
+                     yaxis1={'range':[-5,5],
                             'title' : { 'text':'Sentiment', 'font' : {'size':30} },
-                           } ,
-                     title={ 'text' : ymd + ' (Time is in UTC)', 'x': 0.5,'font' : {'size':30}  },
+                           },
+                     yaxis2={'range':[-5,5]},					                       					  
                      margin=dict(l=20, r=20, t=20, b=20),
                      paper_bgcolor="LightSteelBlue")
-
-    fig = go.Figure(data=data,layout=layout)
+	
+    fig.update_layout(height=400,width=1000)
+    fig.update(layout_showlegend=False)
+	
     graph = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder) 
 
     return graph
-    
 
    
  
@@ -144,15 +174,15 @@ if __name__=='__main__':
     app.run(debug=True)
 #  tweets.live_stream()
 
-    # p1 = Process(target = tweets.live_stream,args=())  #fetch tweets and write to csv
-    # p1.start()
+    #p1 = Process(target = tweets.live_stream,args=())  #fetch tweets and write to csv
+    #p1.start()
 
-    # p2 = Process(target = tweets.sentiment_tweets,args=())  #serve requests
-    # p2.start()
+    #p2 = Process(target = tweets.sentiment_tweets,args=())  #label and write to csv
+    #p2.start()
 
-    # p3 = Process(target = app.run,args=())  #serve requests
-    # p3.start()
+    #p3 = Process(target = app.run,args=())  #serve requests
+    #p3.start()
   
-    # p1.join()
-    # p2.join()
-    # p3.join()
+    #p1.join()
+    #p2.join()
+    #p3.join()
