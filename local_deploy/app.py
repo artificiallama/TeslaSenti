@@ -98,7 +98,6 @@ def home():
 		
         graphJSON = give_graph(dates1,arr1, df['dtobj'].tolist(),  df['senti'].to_numpy())
     else:
-        print('&&&&&Calling')
         graphJSON = {} 
 
 		
@@ -129,20 +128,17 @@ def give_graph(xdates1,senti_index1,xdates2,senti_index2):
     fig.add_trace(dt1,row=1,col=1)	
     fig.add_trace(dt2,row=1,col=2)
 	
-    fig.update_layout(xaxis1={'type':'date',
-                            'tickmode':'linear',
+    fig.update_layout(xaxis1={'type':'date','tickmode':'linear',
                              'dtick': cvars.tick_step1*60*1000,
                             },
-		             xaxis2={'type':'date',
-                            'tickmode':'linear',
+		             xaxis2={'type':'date','tickmode':'linear',
                              'dtick': cvars.tick_step2*60*1000,
                             },
                      yaxis1={'range':[-5,5],
-                            'title' : { 'text':'Sentiment', 'font' : {'size':30} },
+							 'title' : { 'text':'Sentiment', 'font' : {'size':30} },
                            },
                      yaxis2={'range':[-5,5]},					                       					  
-                     margin=dict(l=20, r=20, t=20, b=20),
-                     paper_bgcolor="LightSteelBlue")
+                     margin=dict(l=20, r=20, t=20, b=20), paper_bgcolor="LightSteelBlue")
 	
     fig.update_layout(height=400,width=1000)
     fig.update(layout_showlegend=False)
@@ -157,18 +153,18 @@ if __name__=='__main__':
 
     print('\n\tStarting in app.py main :')
 #  print("\n\tNumber of cpus = ",mp.cpu_count())
-    app.run(debug=True)
+   # app.run(debug=True)
 #  tweets.live_stream()
 
-#    p1 = Process(target = tweets.live_stream,args=())  #fetch tweets and write to csv
-#    p1.start()
+    p1 = Process(target = tweets.live_stream,args=())  #fetch tweets and write to csv
+    p1.start()
 
-#    p2 = Process(target = tweets.sentiment_tweets,args=())  #label and write to csv
-#    p2.start()
+    p2 = Process(target = tweets.sentiment_tweets,args=())  #label and write to csv
+    p2.start()
 
-#    p3 = Process(target = app.run,args=())  #serve requests
-#    p3.start()
+    p3 = Process(target = app.run,args=())  #serve requests
+    p3.start()
   
-#    p1.join()
-#    p2.join()
-#    p3.join()
+    p1.join()
+    p2.join()
+    p3.join()
