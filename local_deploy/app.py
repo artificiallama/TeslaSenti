@@ -4,7 +4,7 @@ from flask import Flask, render_template, request
 import requests
 import pandas as pd
 import numpy as np
-import time_helper
+import time_helper as tm
 import plotly.graph_objs as go
 import plotly
 from plotly import subplots as sp
@@ -53,8 +53,8 @@ def home():
             print('\t\thome() : Sleeping')   
             time.sleep(5)   
 
-    df_senti = pd.read_csv('data_tweets/senti_tweets.csv', names = cvars.cols_display)
-    nrows = df_senti.shape[0]
+    df = pd.read_csv('data_tweets/senti_tweets.csv', names = cvars.cols_display)
+    nrows = df.shape[0]
   
     if not params:
         cc = 0
@@ -66,46 +66,43 @@ def home():
     tweet_embed = []
 
     for kk in np.arange(nrows-4,nrows):  
-        #print('\n\t** kk = ',kk, df_senti.iloc[kk]['id'])
-        #print('\t** screenname = ',df_senti.iloc[kk]['screen_name'])
-        #print('\t** tweet = ',df_senti.iloc[kk]['tweet'])    
-        #print('\t** senti = ',df_senti.iloc[kk]['senti'])   
-        htmlcode = get_tweet_embed_html(df_senti.iloc[kk]['screen_name'],str(df_senti.iloc[kk]['id']))
+        #print('\n\t** kk = ',kk, df.iloc[kk]['id'])
+        #print('\t** screenname = ',df.iloc[kk]['screen_name'])
+        #print('\t** tweet = ',df.iloc[kk]['tweet'])    
+        #print('\t** senti = ',df.iloc[kk]['senti'])   
+        htmlcode = get_tweet_embed_html(df.iloc[kk]['screen_name'],str(df.iloc[kk]['id']))
         tweet_embed.append(htmlcode)
 
     cc += 1   
     fnms='tweets_latest_subset_2020-07-13_17-14-17_to_2020-07-13_17-19-17.csv'
 
-    dt2 = time_helper.current_time()
-    dt1 = time_helper.lag_time(dt2,cvars.time_horizon1)
+    dt2 = tm.current_time()
+    dt1 = tm.lag_time(dt2,cvars.time_horizon1)
 
     print('\n\tdt2 = ',dt2)
 	
-    cond =  df_senti['date'].apply(lambda x : time_helper.time_between(dt1,dt2,time_helper.dstr_obj(x)))
+    cond =  df['date'].apply(lambda x : tm.time_between(dt1,dt2,tm.dstr_obj(x)))
 
-    df_senti.drop(index=df_senti[~cond].index,inplace=True)
+    df.drop(index=df[~cond].index,inplace=True)
 
-    print('\n\tdf_senti.shape = ',df_senti.shape)
+    print('\n\tdf.shape = ',df.shape)
 
-    if not df_senti.empty:
-        df_senti['dtobj'] = df_senti['date'].apply(lambda x : time_helper.dstr_obj(x))
-        dates1 = df_senti['dtobj'].tolist()
-        arr1   =  df_senti['senti'].to_numpy()			
+    if not df.empty:
+        df['dtobj'] = df['date'].apply(lambda x : tm.dstr_obj(x))
+        dates1 = df['dtobj'].tolist()
+        arr1   =  df['senti'].to_numpy()			
 
-        dt1 = time_helper.lag_time(dt2,cvars.time_horizon2)
-        cond =  df_senti['date'].apply(lambda x : time_helper.time_between(dt1,dt2,time_helper.dstr_obj(x)))
-        df_senti.drop(index=df_senti[~cond].index,inplace=True)
-
-        dates2 = df_senti['dtobj'].tolist()
-        arr2   =  df_senti['senti'].to_numpy()			
+        dt1 = tm.lag_time(dt2,cvars.time_horizon2)
+        cond =  df['date'].apply(lambda x : tm.time_between(dt1,dt2,tm.dstr_obj(x)))
+        df.drop(index=df[~cond].index,inplace=True)		
 		
-        graphJSON = give_graph(dates1,arr1,dates2,arr2)
+        graphJSON = give_graph(dates1,arr1, df['dtobj'].tolist(),  df['senti'].to_numpy())
     else:
         print('&&&&&Calling')
         graphJSON = {} 
 
 		
-    return render_template('home.html',plot=graphJSON,embed_tweet1 = tweet_embed[0], embed_tweet2 = tweet_embed[1], embed_tweet3 = tweet_embed[2], embed_tweet4 = tweet_embed[3],mycc=cc,dtgtime=fnms[26:45],utc=time_helper.current_time().strftime('%Y-%m-%d %H:%M:%S')+' UTC')
+    return render_template('home.html',plot=graphJSON,embed_tweet1 = tweet_embed[0], embed_tweet2 = tweet_embed[1], embed_tweet3 = tweet_embed[2], embed_tweet4 = tweet_embed[3],mycc=cc,dtgtime=fnms[26:45],utc=tm.current_time().strftime('%Y-%m-%d %H:%M:%S')+' UTC')
 
 
  
