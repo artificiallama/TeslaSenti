@@ -16,4 +16,4 @@ time_horizon2=60
 # Tick interval on xaxis of the plotly graph. The unit of tick_step is minutes. The unit expected by plotly
 # is milliseconds.
 tick_step1=60
-tick_step2=1
+tick_step2=5
