@@ -62,23 +62,16 @@ def home():
         cc = int(params['ccount'])
 
     print('\tnrows = ',nrows)
-#  print('\n\tsenti = ',df_senti['senti'])
-#  print('\n\tsenti_array = ',df_senti['senti'].to_numpy())
-  
-  #print('\tTime        = ',datetime.datetime.now())
-  #print('\tTime UTC = ',datetime.datetime.utcnow())
 
     tweet_embed = []
 
     for kk in np.arange(nrows-4,nrows):  
         #print('\n\t** kk = ',kk, df_senti.iloc[kk]['id'])
         #print('\t** screenname = ',df_senti.iloc[kk]['screen_name'])
-        print('\t** tweet = ',df_senti.iloc[kk]['tweet'])    
-        print('\t** senti = ',df_senti.iloc[kk]['senti'])   
+        #print('\t** tweet = ',df_senti.iloc[kk]['tweet'])    
+        #print('\t** senti = ',df_senti.iloc[kk]['senti'])   
         htmlcode = get_tweet_embed_html(df_senti.iloc[kk]['screen_name'],str(df_senti.iloc[kk]['id']))
         tweet_embed.append(htmlcode)
-  #  if kk > nrows-1 :
-  #  break
 
     cc += 1   
     fnms='tweets_latest_subset_2020-07-13_17-14-17_to_2020-07-13_17-19-17.csv'
@@ -89,26 +82,22 @@ def home():
     print('\n\tdt2 = ',dt2)
 	
     cond =  df_senti['date'].apply(lambda x : time_helper.time_between(dt1,dt2,time_helper.dstr_obj(x)))
-    #print('\n\tcond.value_counts = ',cond.value_counts())
-	# Remove tweets not within time_horizon minutes
+
     df_senti.drop(index=df_senti[~cond].index,inplace=True)
 
     print('\n\tdf_senti.shape = ',df_senti.shape)
 
     if not df_senti.empty:
-        dates1 = []
-        for indx,row in df_senti.iterrows():
-            dates1.append(time_helper.dstr_obj(row['date']))
-        arr1 =  df_senti['senti'].to_numpy()			
+        df_senti['dtobj'] = df_senti['date'].apply(lambda x : time_helper.dstr_obj(x))
+        dates1 = df_senti['dtobj'].tolist()
+        arr1   =  df_senti['senti'].to_numpy()			
 
         dt1 = time_helper.lag_time(dt2,cvars.time_horizon2)
         cond =  df_senti['date'].apply(lambda x : time_helper.time_between(dt1,dt2,time_helper.dstr_obj(x)))
         df_senti.drop(index=df_senti[~cond].index,inplace=True)
-		
-        dates2 = []
-        for indx,row in df_senti.iterrows():
-            dates2.append(time_helper.dstr_obj(row['date']))
-        arr2 =  df_senti['senti'].to_numpy()
+
+        dates2 = df_senti['dtobj'].tolist()
+        arr2   =  df_senti['senti'].to_numpy()			
 		
         graphJSON = give_graph(dates1,arr1,dates2,arr2)
     else:
@@ -124,8 +113,8 @@ def give_graph(xdates1,senti_index1,xdates2,senti_index2):
 
     l1 = len(xdates1)
     l2 = len(xdates2)	
-    print('\n\tlen = ',l1,l2)
-    print('\tlen = ',len(senti_index1),len(senti_index2))
+    print('\n\tlen(dates) = ',l1,l2)
+    print('\tlen(dates) = ',len(senti_index1),len(senti_index2))
     
     ymd = xdates1[0].strftime('%Y-%b-%d')
 
@@ -174,15 +163,15 @@ if __name__=='__main__':
     app.run(debug=True)
 #  tweets.live_stream()
 
-    #p1 = Process(target = tweets.live_stream,args=())  #fetch tweets and write to csv
-    #p1.start()
+#    p1 = Process(target = tweets.live_stream,args=())  #fetch tweets and write to csv
+#    p1.start()
 
-    #p2 = Process(target = tweets.sentiment_tweets,args=())  #label and write to csv
-    #p2.start()
+#    p2 = Process(target = tweets.sentiment_tweets,args=())  #label and write to csv
+#    p2.start()
 
-    #p3 = Process(target = app.run,args=())  #serve requests
-    #p3.start()
+#    p3 = Process(target = app.run,args=())  #serve requests
+#    p3.start()
   
-    #p1.join()
-    #p2.join()
-    #p3.join()
+#    p1.join()
+#    p2.join()
+#    p3.join()
