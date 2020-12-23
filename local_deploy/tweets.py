@@ -98,7 +98,7 @@ def sentiment_tweets():
         shp = dftw.shape
 		
         cond_cash =  dftw['tweet'].apply(lambda x : tc.count_cashtags(x) > cvars.cash_thresh)
-        print('\n\tcond_cash.value_counts = ',cond_cash.value_counts())
+        #print('\n\tcond_cash.value_counts = ',cond_cash.value_counts())
         dftw.drop(index=dftw[cond_cash].index,inplace=True)
 	
 		
@@ -117,12 +117,12 @@ def sentiment_tweets():
             dftw_senti['tidy_tweet'] = dftw_senti['tidy_tweet'].apply(lambda x : tc.normalize_doc(x))
 
             cond = dftw_senti['tidy_tweet'].apply(lambda x : tc.count_toks(x) == 0)
-            print('\n\tcond.value_counts = ',cond.value_counts())
+            #print('\n\tcond.value_counts = ',cond.value_counts())
             dftw.drop(index=dftw[cond].index,inplace=True)
 			
             for indx,row in dftw_senti.iterrows():
                 senti_index = model.predict(count_vect.transform([row['tidy_tweet']]))
-                print('\n\ttweet : {} |  senti  = {} '.format(row['tweet'], senti_index))
+                #print('\n\ttweet : {} |  senti  = {} '.format(row['tweet'], senti_index))
                 #print('\ttidytweet : {} '.format(row['tidy_tweet']))
                 dftw_senti.loc[indx,'senti'] = senti_index
             dftw_senti.to_csv('data_tweets/senti_tweets.csv', mode='a', header=False, index=False)
