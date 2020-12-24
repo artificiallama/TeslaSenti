@@ -12,6 +12,7 @@ Languages/packages used :
 * css
 * nltk
 * plotly
+* flask
 
 # Table of contents
 1. [Introduction](#Introduction)
@@ -23,11 +24,13 @@ Languages/packages used :
 
 ## Introduction
 
-A multiprocessing approach is employed because fetching the tweets, preprocessing/analysing them and serving the requests has to be done
-simultaneously. Process p1 fetches the tweets and writes them to a csv file. Process p2 cleans the tweets, runs the sentiment predictor, generates the sentiment
-index graph and refreshes the html page every N (=5) minutes. On refresh the graph along with four latest significant tweets are displayed. The page also displays if the latest signal is buy or sell (or hold) based on the latest value of sentiment index.
+Stock trading can be a lucrative profession if a trader can predict whether a particular stock will increase or decrease in price. Based on this prediction the trader buys or sells the stock of a particular company. Buying and selling is also known as going long and going short respectively. The stock price of any company is influenced by several factors. Modeling and predicting the stock price using all the relevant factors is an active area of research.
 
-The user interface is very basic. There is a TESLA logo. The main body of the page shows 4 tweets. These are clickable. The user can click and visit the respective twitter page.
+One of the important factors is the public sentiment about the particular stock. It has been found that the stock market is heavily influenced by news/social media sentiment on short timescales (hours to days)  [[1]](#1). The news/social media includes blog, twitter [[2]](#1), comments made on news article, opinions expressed in polls, likes/dislikes/number of views of youtube videos etc. Stock traders are increasingly dependent on Machine Learning and AI to get insights into sentiments about the stock in near real time.
+
+In this project we demonstrate a product which generates a buy/sell signal in near real-time for Tesla stock using sentiment analysis of tweets regarding Tesla. We chose Tesla because it is one of the highly discussed companies. This results in a high volume of tweets - of about 10000 per day. This is convenient to demonstrate near real-time functionality. Though Tesla and its CEO Elon Musk has cult following, it has a significant number of critiques. Tesla itself lies at the intersection of car industry, battery technology, renewable energy and auto driving technology (not to mention politics). This makes the discussion and opinions expressed very varied and lively. 
+
+We employ a multiprocessing approach using three processors (p1,p2,p3) which carry out different duties. Multiprocessing is required because fetching the streaming tweets, preprocessing/analysing them for sentiment and serving the requests has to be done simultaneously. Process p1 fetches the tweets and writes them to a csv file. Process p2 cleans the tweets, runs the sentiment predictor and writes the sentiment index to csv file. Process p3 reads in the latest tweets and their sentiment indices, generates a graph and displays it on the the front end. It also displays latest four tweets. These are clickable. The trader/user can click and visit the respective twitter page.
 
 We trained a Naive Bayes model to identify sentiment of financial headlines. For this we used 4845 financial phrase bank Kaggle dataset and 1100 FiQA financial tweets and headlines dataset. These are labelled datasets (Negative, Neutral and Positive). We trained the Naive Bayes model on 80% of the dataset. It performed well on the test dataset (85% accuracy). The model mislabelled many positive tweets as negative and vice versa. The tweets about Tesla were about varied topics like energy, battery, cars and also politics. 
 
@@ -35,7 +38,7 @@ We trained a Naive Bayes model to identify sentiment of financial headlines. For
 
 We combined labelled data from various sources to obtain a dataset.
 
-1) Financial news headlines (Please see the Kaggle reference)  [[1]](#1).
+1) Financial news headlines (Please see the Kaggle reference)  [[5]](#1).
 
 2) FiQA headlines : This dataset is a part of an open challenge posed in 2018. The training dataset contains headlines from the finance domain which are annotated by a sentiment score. This labeling is done by domain experts. The sentiment score is a continuous value between -1 and 1. We chose a threshold of 0.15 to discretize this sentiment score. Headlines with sentiment scores between -1 and -0.15 are labeled as negative sentiment, those between -0.15 and 0.15 are labelled as neutral and those between 0.15 and 1.0 are labeled as positive sentiment (Please see fiqa reference).
 
@@ -108,14 +111,22 @@ If emoji's and url's are present these are purged from tweets. Hastags, cashtags
 
 A MVP has been demonstrated.
 
-A major hurdle to obtaining good quality predicitions on streaming tweets in the amount of labelled data which goes into training the model. Hand labeling tweets/headlines by sentiments is a tedious tasks. The publicly available sentiment labelled data (resturant reviews etc) is not useful because one needs text from the domain of finance/stocks to train the model. A possible approach to circumventing the need for labeling is as follows. The archive of stock price movements of Tesla and the tweets about Tesla can be downloaded. Then a model can be trained with the tweets as inputs and the stock price movement as the target. The labels in this approach are the stock price movements. These can be readily computed by subtracting (or dividing) successive prices at regular interval. The interval could be few minutes to few hours (or even days).
+(1) A major hurdle to obtaining good quality predicitions on streaming tweets in the amount of labelled data which goes into training the model. Hand labeling tweets/headlines by sentiments is a tedious tasks. The publicly available sentiment labelled data (resturant reviews etc) is not useful because one needs text from the domain of finance/stocks to train the model. A possible approach to circumventing the need for labeling is as follows. The archive of stock price movements of Tesla and the tweets about Tesla can be downloaded. Then a model can be trained with the tweets as inputs and the stock price movement as the target. The labels in this approach are the stock price movements. These can be readily computed by subtracting (or dividing) successive prices at regular interval. The interval could be few minutes to few hours (or even days).
 
-(1) The probability is used as a weight. It could be rather used as threshold. For example a negative or positive tweet would pass through this filter only if the probability is > 0.8.
+(2) The probability is used as a weight. It could be rather used as threshold. For example a negative or positive tweet would pass through this filter only if the probability is > 0.8.
+
+(3) The frontend interface is very basic. There is scope to make it more attractive for a better user experience.
 
 
 ## References 
 
 <a id="1">[1]</a>
+Bartov, E., Faurel, L., & Mohanram, P. S. (2018). Can twitter help predict firm-level earnings and stock returns? Accounting Review, 93(3), 25-57. https://doi.org/10.2308/accr-51865
+
+<a id="1">[2]</a>
+Ranco G, Aleksovski D, Caldarelli G, Grčar M, Mozetič I (2015) The Effects of Twitter Sentiment on Stock Price Returns. PLoS ONE 10(9): e0138441. https://doi.org/10.1371/journal.pone.0138441
+
+<a id="5">[5]</a>
 Malo, P., Sinha, A., Korhonen, P., Wallenius, J., & Takala, P. (2014). Good debt or bad debt: Detecting semantic orientations in economic texts. Journal of the Association for Information Science and Technology, 65(4), 782-796.
 
 https://www.kaggle.com/ankurzing/sentiment-analysis-for-financial-news
