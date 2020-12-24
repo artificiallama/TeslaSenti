@@ -1,5 +1,5 @@
 # TeslaSenti
-Near real time sentiment analysis of Tesla tweets.
+Near real time sentiment analysis of Tesla tweets with application to stock trading.
 
 This is a capstone project for a 5-week workshop conducted by Aggregate Intellect's workshop in June, 2020. This project was executed by a team of two members (including myself).
 
