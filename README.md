@@ -33,9 +33,9 @@ We trained a Naive Bayes model to identify sentiment of financial headlines. For
 
 ## Data
 
-We combined data from various sources to obtain a labelled dataset.
+We combined labelled data from various sources to obtain a dataset.
 
-1) Financial news headlines (Please see the Kaggle reference).
+1) Financial news headlines (Please see the Kaggle reference)  [[1]](#1).
 
 2) FiQA headlines : This dataset is a part of an open challenge posed in 2018. The training dataset contains headlines from the finance domain which are annotated by a sentiment score. This labeling is done by domain experts. The sentiment score is a continuous value between -1 and 1. We chose a threshold of 0.15 to discretize this sentiment score. Headlines with sentiment scores between -1 and -0.15 are labeled as negative sentiment, those between -0.15 and 0.15 are labelled as neutral and those between 0.15 and 1.0 are labeled as positive sentiment (Please see fiqa reference).
 
@@ -115,6 +115,7 @@ A major hurdle to obtaining good quality predicitions on streaming tweets in the
 
 ## References 
 
+<a id="1">[1]</a>
 Malo, P., Sinha, A., Korhonen, P., Wallenius, J., & Takala, P. (2014). Good debt or bad debt: Detecting semantic orientations in economic texts. Journal of the Association for Information Science and Technology, 65(4), 782-796.
 
 https://www.kaggle.com/ankurzing/sentiment-analysis-for-financial-news
