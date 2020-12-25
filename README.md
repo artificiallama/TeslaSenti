@@ -95,7 +95,7 @@ The <code>retweet_count</code>, <code>favorite_count</code>, <code>followers_cou
 
 ## Tweet cleaning / preprocessing
 
-The same cleaning process is applied to  headlines, reviews, posts and tweets though most of the cleaning operations apply to tweets.
+The same cleaning process is applied to  headlines, reviews, posts and tweets though most of the cleaning operations apply to tweets. The streaming tweets with either of tokens *tesla*, *tsla*, *elon* and *musk*.
 
 Tweets with too many cashtags are dropped. We noticed that most of such tweets are advertisements. An example of such a tweet is shown below. It has 13 cashtags ($fb, $aapl, $amzn, etc) and is clearly an advertisement.
 
@@ -106,7 +106,7 @@ Tweets with too many cashtags are dropped. We noticed that most of such tweets a
 If emoji's and url's are present these are purged from tweets. Hastags, cashtags, mentions and embedded charts are removed. Punctuations, digits, symbols and stop word are removed and the tokens are stemmed. Finally the empty tweets are removed. It is possible that after the cleaning is done some tweets end up with zero tokens.
 
 
-One of the issues is that some irrelevant tweets are included. This is because *musk* is one of the tokens used in the criterion to filter streaming tweets. Since *musk* has a dictionary meaning apart from being Elon's last name some tweets not relevant to Tesla are included in the sentiment analysis. An example of such a tweet is shown below. A possible solution to this problem is to delete the token *musk* from the filter criterion. Another issue is the inclusion of tweets which are not directly relevant to Tesla. A substantial portion of such tweets are of personal nature directed at Elon Musk. An example of such a tweet is shown below.
+One of the issues is that some irrelevant tweets are included. This is because *musk* is one of the tokens used in the criterion to filter streaming tweets. Since *musk* has a dictionary meaning apart from being Elon's last name some tweets not relevant to Tesla are included in the sentiment analysis. An example of such a tweet is shown below. A possible solution to this problem is to delete the token *musk* from the filter criterion. Another issue is the inclusion of tweets which are not directly relevant to Tesla. A substantial portion of such tweets are of personal nature directed at Elon Musk. An example of such a tweet is shown below. We decided to drop tokens *elon* and  *musk* from the filter criteria of the streaming tweets. This eliminates frivolous tweets but at the same time also eliminates some bonafide tweets which are closely related to Tesla.
 
 <p align="left">
 <img width="400" height="500" src="images//musk_misleading.PNG">
