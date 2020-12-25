@@ -52,9 +52,9 @@ We combined labelled data from various sources to obtain a dataset.
 
 7) Reviews of google apps : This dataset was constructed by Venelin Valkov (Please see the curiousily.com reference). It can be downloaded by,
 
-&nbsp;&nbsp;&nbsp;&nbsp;<code> !gdown --id 1S6qMioqPJjyBLpLVz4gmRTnJHnjitnuV </code>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code> !gdown --id 1S6qMioqPJjyBLpLVz4gmRTnJHnjitnuV </code>
 
-&nbsp;&nbsp;&nbsp;&nbsp;<code> !gdown --id 1zdmewp7ayS4js4VtrJEHzAheSW-5NBZv </code>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code> !gdown --id 1zdmewp7ayS4js4VtrJEHzAheSW-5NBZv </code>
 
 8) Financial tweets from stocktwits.
 
@@ -101,8 +101,8 @@ Tweets with too many cashtags are dropped. We noticed that most of such tweets a
 
 <p align="left">
 <img width="600" height="100" src="images/too_many_cashtags_crop.png">
-  
-<img width="150" height="300" src="images/musk_misleading.PNG">
+&nbsp;&nbsp;&nbsp;&nbsp;
+<img width="300" height="300" src="images/musk_misleading.PNG">
 </p>
 
 One of the issues is that some irrelevant tweets are included. This is because *musk* is one of the tokens used in the criterion to filter streaming tweets. Since *musk* has a dictionary meaning apart from being Elon's last name some tweets not relevant to Tesla are included in the sentiment analysis. An example of such a tweet is shown above. A possible solution to this problem is to delete the token *musk* from the filter criterion.
