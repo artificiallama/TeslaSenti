@@ -16,7 +16,7 @@ Languages/packages used :
 1. [Introduction](#Introduction)
 2. [Data](#Data)
 3. [Anatomy of a tweet](#Anatomy-of-a-tweet)
-4. [Tweet cleaning / preprocessing](#Tweet-cleaning-/-preprocessing)
+4. [Preprocessing of data](#Preprocessing-of-data)
 5. [App](#App)
 6. [Conclusion and future work](#Conclusion-and-future-work)
 7. [References](#References)
@@ -93,7 +93,7 @@ In case the <code>extended_tweet</code> is available the <code>full_text</code> 
 
 The <code>retweet_count</code>, <code>favorite_count</code>, <code>followers_count</code> and <code>friends_count</code> is used to amplify the sentiment index by using these as weights. These weights quantify the reach/impact/engagement of the particular tweet. Since the tweets are streaming for most tweets both <code>retweet_count</code> and <code>favorite_count</code> are zero.
 
-## Tweet cleaning / preprocessing
+## Preprocessing of data
 
 The same cleaning process is applied to  headlines, reviews, posts and tweets though most of the cleaning operations apply to tweets. The streaming tweets with either of tokens *tesla*, *tsla*, *elon* and *musk*.
 
