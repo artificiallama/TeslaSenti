@@ -110,7 +110,7 @@ One of the issues is that some irrelevant tweets are included. This is because *
 
 <p align="left">
 <img width="400" height="500" src="images//musk_misleading.PNG">
-&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <img width="400" height="500" src="images/irrelevant_cat.PNG">
 </p>
 
