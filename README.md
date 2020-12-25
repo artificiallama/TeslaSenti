@@ -1,9 +1,7 @@
 # TeslaSenti
 Near real time sentiment analysis of Tesla tweets with application to stock trading.
 
-This is a capstone project for a 5-week workshop conducted by Aggregate Intellect's workshop in June, 2020. This project was executed by a team of two members (including myself).
-
-The objective of this project is to fetch tweets about TESLA in real time, analyse them for sentiment and generate a buy/sell signal in near real-time. This sentiment index is displayed (and refreshed in near real time) on the front end in the form of a graph.
+This is a capstone project for a 5-week workshop conducted by Aggregate Intellect's workshop in June, 2020. This project was executed by a team of two members (including myself). The objective of this project is to fetch tweets about TESLA in real time, analyse them for sentiment and generate a buy/sell signal in near real-time. This sentiment index is displayed (and refreshed in near real time) on the front end in the form of a graph.
 
 Languages/packages used :
 * Tweepy
@@ -18,9 +16,11 @@ Languages/packages used :
 1. [Introduction](#Introduction)
 2. [Data](#Data)
 3. [Anatomy of a tweet](#Anatomy-of-a-tweet)
-3. [Conclusion and future work](#Conclusion-and-future-work)
-4. [References](#References)
-5. [Appendex](#Appendex)
+4. [Tweet cleaning / preprocessing](#Tweet-cleaning-/-preprocessing)
+5. [App](#App)
+6. [Conclusion and future work](#Conclusion-and-future-work)
+7. [References](#References)
+8. [Appendex](#Appendex)
 
 ## Introduction
 
@@ -115,8 +115,9 @@ One of the issues is that some irrelevant tweets are included. This is because *
 </p>
 
 
+## App
 
-
+The refresh rate of the front end is controlled by using meta refresh. The HTML meta element is used with <code>http-equiv</code> parameter set to *refresh* and a <code>content</code> parameter equal to 120 seconds which is refresh time frequency.
 
 ## Conclusion and future work
 
