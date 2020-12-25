@@ -95,7 +95,7 @@ The <code>retweet_count</code>, <code>favorite_count</code>, <code>followers_cou
 
 ## Preprocessing of data
 
-The same cleaning process is applied to  headlines, reviews, posts and tweets though most of the cleaning operations apply to tweets. The streaming tweets with either of tokens *tesla*, *tsla*, *elon* and *musk*.
+The streaming tweets with either of tokens *tesla*, *tsla*, *elon* and *musk* are collected. The same cleaning process is applied to  headlines, reviews, posts and tweets though most of the cleaning operations apply to tweets. Also it is important to ensure that the same preprocessing is applied to the data during training of the model and the streaming tweets in the live app. 
 
 Tweets with too many cashtags are dropped. We noticed that most of such tweets are advertisements. An example of such a tweet is shown below. It has 13 cashtags ($fb, $aapl, $amzn, etc) and is clearly an advertisement.
 
