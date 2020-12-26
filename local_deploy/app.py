@@ -76,12 +76,10 @@ def home():
     cc += 1   
     fnms='tweets_latest_subset_2020-07-13_17-14-17_to_2020-07-13_17-19-17.csv'
 
-    dt2 = tm.current_time()
-    dt1 = tm.lag_time(dt2,cvars.time_horizon1)
+    timenow = tm.current_time()
+    tminus = tm.lag_time(timenow,cvars.time_horizon1)
 
-    print('\n\tdt2 = ',dt2)
-	
-    cond =  df['date'].apply(lambda x : tm.time_between(dt1,dt2,tm.dstr_obj(x)))
+    cond =  df['date'].apply(lambda x : tm.time_between(tminus,timenow,tm.dstr_obj(x)))
 
     df.drop(index=df[~cond].index,inplace=True)
 
@@ -89,14 +87,7 @@ def home():
 
     if not df.empty:
         df['dtobj'] = df['date'].apply(lambda x : tm.dstr_obj(x))
-        dates1 = df['dtobj'].tolist()
-        arr1   =  df['senti'].to_numpy()			
-
-        dt1 = tm.lag_time(dt2,cvars.time_horizon2)
-        cond =  df['date'].apply(lambda x : tm.time_between(dt1,dt2,tm.dstr_obj(x)))
-        df.drop(index=df[~cond].index,inplace=True)		
-		
-        graphJSON = give_graph(dates1,arr1, df['dtobj'].tolist(),  df['senti'].to_numpy())
+        graphJSON = give_graph(df,timenow)
     else:
         graphJSON = {} 
 
@@ -105,28 +96,34 @@ def home():
 
 
  
-def give_graph(xdates1,senti_index1,xdates2,senti_index2):
-
-    l1 = len(xdates1)
-    l2 = len(xdates2)	
-    print('\n\tlen(dates) = ',l1,l2)
-    print('\tlen(dates) = ',len(senti_index1),len(senti_index2))
-    
-    ymd = xdates1[0].strftime('%Y-%b-%d')
-
-    #for ii in range(43,0,-1):
-    # print('\n^^xdates1 = ',xdates1[l1-ii], senti_index1[l1-ii])
-    # print('  xdates2 = ',xdates2[l2-ii],senti_index2[l2-ii])
-
+# Return graph of sentiment index against time. The left subplot goes back for a longer time (24 hours) and the
+# right subplot goes back for a shorter time (1 hour).
+def give_graph(dfin,tnow):
+	 
     print('')
 	
     fig = sp.make_subplots(rows=1,cols=2)
 
-    dt1 = go.Scatter(x=xdates1, y=senti_index1, mode='markers', marker=dict(color='Red'))	
-    dt2 = go.Scatter(x=xdates2, y=senti_index2, mode='markers', marker=dict(color='MediumPurple'))
+    # Use a 60 min bucket to average sentiment index. If data is not available mean for that particular hour is NaN.
+    dfavg1 = dfin.resample("60min",kind='timestamp',on='dtobj').mean()
 	
-    fig.add_trace(dt1,row=1,col=1)	
-    fig.add_trace(dt2,row=1,col=2)
+    longser    = go.Scatter(x=dfin['dtobj'].tolist(), y=dfin['senti'].to_numpy(), mode='markers', marker=dict(color='Blue'))
+    longseravg = go.Scatter(x=dfavg1.index.tolist(), y=dfavg1['senti'].to_numpy(), mode='lines+markers', marker=dict(color='Red'))
+  
+    tminus = tm.lag_time(tnow,cvars.time_horizon2)
+    cond =  dfin['dtobj'].apply(lambda x : tm.time_between(tminus,tnow,x))
+    dfin.drop(index=dfin[~cond].index,inplace=True)	
+
+    # Use a 5 min bucket to average sentiment index.
+    dfavg2 = dfin.resample("5min",kind='timestamp',on='dtobj').mean()
+	
+    shortser = go.Scatter(x=dfin['dtobj'].tolist(), y=dfin['senti'].to_numpy(), mode='markers', marker=dict(color='MediumPurple'))
+    shortseravg = go.Scatter(x=dfavg2.index.tolist(), y=dfavg2['senti'].to_numpy(), mode='lines+markers', marker=dict(color='Red'))
+	
+    fig.add_trace(longser,row=1,col=1)
+    fig.add_trace(longseravg,row=1,col=1)
+    fig.add_trace(shortser,row=1,col=2)
+    fig.add_trace(shortseravg,row=1,col=2)
 	
     fig.update_layout(xaxis1={'type':'date','tickmode':'linear',
                              'dtick': cvars.tick_step1*60*1000,
@@ -134,10 +131,10 @@ def give_graph(xdates1,senti_index1,xdates2,senti_index2):
 		             xaxis2={'type':'date','tickmode':'linear',
                              'dtick': cvars.tick_step2*60*1000,
                             },
-                     yaxis1={'range':[-5,5],
+                     yaxis1={'range':[-2,2],
 							 'title' : { 'text':'Sentiment', 'font' : {'size':30} },
                            },
-                     yaxis2={'range':[-5,5]},					                       					  
+                     yaxis2={'range':[-2,2]},					                       					  
                      margin=dict(l=20, r=20, t=20, b=20), paper_bgcolor="LightSteelBlue")
 	
     fig.update_layout(height=400,width=1000)
@@ -151,20 +148,21 @@ def give_graph(xdates1,senti_index1,xdates2,senti_index2):
  
 if __name__=='__main__':
 
+	
     print('\n\tStarting in app.py main :')
 #  print("\n\tNumber of cpus = ",mp.cpu_count())
-   # app.run(debug=True)
+    app.run(debug=True)
 #  tweets.live_stream()
 
-    p1 = Process(target = tweets.live_stream,args=())  #fetch tweets and write to csv
-    p1.start()
+#    p1 = Process(target = tweets.live_stream,args=())  #fetch tweets and write to csv
+#    p1.start()
 
-    p2 = Process(target = tweets.sentiment_tweets,args=())  #label and write to csv
-    p2.start()
+#    p2 = Process(target = tweets.sentiment_tweets,args=())  #label and write to csv
+#    p2.start()
 
-    p3 = Process(target = app.run,args=())  #serve requests
-    p3.start()
+#    p3 = Process(target = app.run,args=())  #serve requests
+#    p3.start()
   
-    p1.join()
-    p2.join()
-    p3.join()
+#    p1.join()
+#    p2.join()
+#    p3.join()
