@@ -67,7 +67,7 @@ def live_stream():
     l = StdOutListener()
     stream = tw.Stream(auth, l)
     print('\n\tCalled stream.filter')
-    stream.filter(track=['tesla', 'tsla', 'elon', 'musk'], languages=['en'])
+    stream.filter(track=['tesla', 'tsla'], languages=['en'])
 
 
 # Clean the tweets
