@@ -172,6 +172,8 @@ https://www.python.org/dev/peps/pep-0008/
 
 https://towardsdatascience.com/apply-and-lambda-usage-in-pandas-b13a1ea037f7
 
+https://medium.com/@vibhuti.siddhpura/machine-learning-algorithms-introduction-fb86623c5218
+
 
 ## Appendex
 Command to display csv file on linux/ubuntu command line :
