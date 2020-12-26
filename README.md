@@ -18,7 +18,7 @@ Languages/packages used :
 3. [Anatomy of a tweet](#Anatomy-of-a-tweet)
 4. [Preprocessing of data](#Preprocessing-of-data)
 5. [App](#App)
-6. [Conclusion and future work](#Conclusion-and-future-work)
+6. [Future work](#Future-work)
 7. [References](#References)
 8. [Appendex](#Appendex)
 
@@ -117,9 +117,9 @@ One of the issues is that some irrelevant tweets are included. This is because *
 
 ## App
 
-The refresh rate of the front end is controlled by using meta refresh. The HTML meta element is used with <code>http-equiv</code> parameter set to *refresh* and a <code>content</code> parameter equal to 120 seconds which is refresh time frequency.
+The refresh rate of the front end is controlled by using meta refresh. The HTML meta element is used with <code>http-equiv</code> parameter set to *refresh* and the <code>content</code> parameter equal to 120 seconds. This is the refresh time frequency.
 
-## Conclusion and future work
+## Future work
 
 A MVP has been demonstrated.
 
@@ -132,6 +132,8 @@ A MVP has been demonstrated.
 (4) The latest four tweets are shown on the front end. It would be more informative to the trader if only impactful tweets are shown. This can be done by displaying only positive and negative tweets by users with many friends/followers. The number of retweets can also be used as in indication of impactful tweets. However, in real time the number of retweets tends to be zero. The <code>verified</code> flag can be used to identify impactful/bonafide tweets. Another approach is to make a list of most influencial users among the tesla tweeterati. This can be done offline by using the archive of tesla tweets and stock prices. The users whose tweets  on an average correlated well with the movement of tesla stock price can be short listed. The tweets from these users can be given higher weightage in the real time application. Also tweets from these users can be highlighted. This way the trader can immediately know that this tweet is from a tesla influencer.
 
 (5) Some news about tesla is tweeted independently by media houses and individual users. These are not retweets. Such tweets with a common theme, say over a period of one day, can be collapsed into one summary tweet by choosing a representative tweet. This tweet can the be displayed in a corner of the frontend as the *tweet of the day*. This way the trader would know the trending topic of the day. Also this would ensure that  repeatative tweets about the same topic are not displayed on the frontend. Such near duplicate tweets could lead to reader fatigue.
+
+(6) The data preprocessing should include removal of tweets with expletives / profane language. It should also filter out tweets with obscene images.
 
 ## References 
 
