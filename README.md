@@ -93,7 +93,7 @@ In case the <code>extended_tweet</code> is available the <code>full_text</code> 
 
 The <code>retweet_count</code>, <code>favorite_count</code>, <code>followers_count</code> and <code>friends_count</code> is used to amplify the sentiment index by using these as weights. These weights quantify the reach/impact/engagement of the particular tweet. Since the tweets are streaming for most tweets both <code>retweet_count</code> and <code>favorite_count</code> are zero.
 
-## Preprocessing of data
+## Preprocessing of data and training
 
 The streaming tweets with either of tokens *tesla*, *tsla*, *elon* and *musk* are collected. The same cleaning process is applied to  headlines, reviews, posts and tweets though most of the cleaning operations apply to tweets. Also it is important to ensure that the same preprocessing is applied to the data during training of the model and to the streaming tweets in the live app (model inference). 
 
