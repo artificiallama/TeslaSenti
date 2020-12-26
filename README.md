@@ -11,6 +11,7 @@ Languages/packages used :
 * nltk
 * plotly
 * flask
+* unittest
 
 # Table of contents
 1. [Introduction](#Introduction)
