@@ -136,6 +136,8 @@ A MVP has been demonstrated.
 
 (6) The data preprocessing should include removal of tweets with expletives / profane language. It should also filter out tweets with obscene images.
 
+(7) Use SQL database rather than csv files.
+
 ## References 
 
 <a id="1">[1]</a>
