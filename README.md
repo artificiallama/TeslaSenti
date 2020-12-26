@@ -16,7 +16,7 @@ Languages/packages used :
 1. [Introduction](#Introduction)
 2. [Data](#Data)
 3. [Anatomy of a tweet](#Anatomy-of-a-tweet)
-4. [Preprocessing of data](#Preprocessing-of-data)
+4. [Preprocessing of data and training](#Preprocessing-of-data-and-training)
 5. [App](#App)
 6. [Future work](#Future-work)
 7. [References](#References)
