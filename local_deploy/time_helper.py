@@ -17,7 +17,7 @@ def lag_time(timenow,x):
  return timenow-datetime.timedelta(minutes=x)
 
 #True if x is dt1<= x <dt2
-def time_between(dt1,dt2,x):
+def isin_window(dt1,dt2,x):
 
  if x>=dt1 and x<dt2:
   flg=True

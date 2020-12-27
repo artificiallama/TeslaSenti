@@ -79,8 +79,7 @@ def home():
     timenow = tm.current_time()
     tminus = tm.lag_time(timenow,cvars.time_horizon1)
 
-    cond =  df['date'].apply(lambda x : tm.time_between(tminus,timenow,tm.dstr_obj(x)))
-
+    cond =  df['date'].apply(lambda x : tm.isin_window(tminus,timenow,tm.dstr_obj(x)))
     df.drop(index=df[~cond].index,inplace=True)
 
     print('\n\tdf.shape = ',df.shape)
@@ -111,7 +110,7 @@ def give_graph(dfin,tnow):
     longseravg = go.Scatter(x=dfavg1.index.tolist(), y=dfavg1['senti'].to_numpy(), mode='lines+markers', marker=dict(color='Red'))
   
     tminus = tm.lag_time(tnow,cvars.time_horizon2)
-    cond =  dfin['dtobj'].apply(lambda x : tm.time_between(tminus,tnow,x))
+    cond =  dfin['dtobj'].apply(lambda x : tm.isin_window(tminus,tnow,x))
     dfin.drop(index=dfin[~cond].index,inplace=True)	
 
     # Use a 5 min bucket to average sentiment index.
