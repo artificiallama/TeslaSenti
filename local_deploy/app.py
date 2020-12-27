@@ -108,21 +108,23 @@ def give_graph(dfin,tnow):
 	
     longser    = go.Scatter(x=dfin['dtobj'].tolist(), y=dfin['senti'].to_numpy(), mode='markers', marker=dict(color='Blue'))
     longseravg = go.Scatter(x=dfavg1.index.tolist(), y=dfavg1['senti'].to_numpy(), mode='lines+markers', marker=dict(color='Red'))
-  
+
+    fig.add_trace(longser,row=1,col=1)
+    fig.add_trace(longseravg,row=1,col=1)
+	
     tminus = tm.lag_time(tnow,cvars.time_horizon2)
     cond =  dfin['dtobj'].apply(lambda x : tm.isin_window(tminus,tnow,x))
     dfin.drop(index=dfin[~cond].index,inplace=True)	
 
+    if not dfin.empty:
     # Use a 5 min bucket to average sentiment index.
-    dfavg2 = dfin.resample("5min",kind='timestamp',on='dtobj').mean()
+        dfavg2 = dfin.resample("5min",kind='timestamp',on='dtobj').mean()
 	
-    shortser = go.Scatter(x=dfin['dtobj'].tolist(), y=dfin['senti'].to_numpy(), mode='markers', marker=dict(color='MediumPurple'))
-    shortseravg = go.Scatter(x=dfavg2.index.tolist(), y=dfavg2['senti'].to_numpy(), mode='lines+markers', marker=dict(color='Red'))
+        shortser = go.Scatter(x=dfin['dtobj'].tolist(), y=dfin['senti'].to_numpy(), mode='markers', marker=dict(color='MediumPurple'))
+        shortseravg = go.Scatter(x=dfavg2.index.tolist(), y=dfavg2['senti'].to_numpy(), mode='lines+markers', marker=dict(color='Red'))
 	
-    fig.add_trace(longser,row=1,col=1)
-    fig.add_trace(longseravg,row=1,col=1)
-    fig.add_trace(shortser,row=1,col=2)
-    fig.add_trace(shortseravg,row=1,col=2)
+        fig.add_trace(shortser,row=1,col=2)
+        fig.add_trace(shortseravg,row=1,col=2)
 	
     fig.update_layout(xaxis1={'type':'date','tickmode':'linear',
                              'dtick': cvars.tick_step1*60*1000,
@@ -139,8 +141,9 @@ def give_graph(dfin,tnow):
     fig.update_layout(height=400,width=1000)
     fig.update(layout_showlegend=False)
 	
-    graph = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder) 
+    graph = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
 
+	
     return graph
 
    
