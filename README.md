@@ -12,6 +12,7 @@ Languages/packages used :
 * plotly
 * flask
 * unittest
+* flake8
 
 # Table of contents
 1. [Introduction](#Introduction)
@@ -134,9 +135,13 @@ A MVP has been demonstrated.
 
 (5) Some news about tesla is tweeted independently by media houses and individual users. These are not retweets. Such tweets with a common theme, say over a period of one day, can be collapsed into one summary tweet by choosing a representative tweet. This tweet can the be displayed in a corner of the frontend as the *tweet of the day*. This way the trader would know the trending topic of the day. Also this would ensure that  repetitive tweets about the same topic are not displayed on the frontend. Such near duplicate tweets could lead to reader fatigue. An example is *'Musk says its impossible to take Tesla private, mulls new IPO'*. This news was tweeted by several users.
 
-(6) The data preprocessing should include removal of tweets with expletives / profane language. It should also filter out tweets with obscene images.
+(6) A more engaging graph could be presented by allowing the respective tweet to be shown if the user hovers over a particular point on the graph.
 
-(7) Use SQL database rather than csv files.
+(7) The data preprocessing should include removal of tweets with expletives / profane language. It should also filter out tweets with obscene images.
+
+(8) Use SQL database rather than csv files.
+
+(9) Deplay app on cloud (AWS / Azure / Heroku).
 
 ## References 
 
