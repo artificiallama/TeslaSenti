@@ -19,9 +19,5 @@ def lag_time(timenow,x):
 #True if x is dt1<= x <dt2
 def isin_window(dt1,dt2,x):
 
- if x>=dt1 and x<dt2:
-  flg=True
- else:
-  flg=False
+ return True if (x>=dt1 and x<dt2) else False
 
- return flg 
