@@ -141,7 +141,7 @@ A MVP has been demonstrated.
 
 (8) Use SQL database rather than csv files.
 
-(9) Deplay app on cloud (AWS / Azure / Heroku).
+(9) Deploy app on cloud (AWS / Azure / Heroku).
 
 ## References 
 
