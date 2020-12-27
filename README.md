@@ -119,6 +119,8 @@ One of the issues is that some irrelevant tweets are included. This is because *
 
 ## App
 
+<p align="justify">
+
 The refresh rate of the front end is controlled by using meta refresh. The HTML meta element is used with <code>http-equiv</code> parameter set to *refresh* and the <code>content</code> parameter equal to 120 seconds. This is the refresh time frequency.
 
 ## Future work
@@ -142,6 +144,8 @@ A MVP has been demonstrated.
 (8) Use SQL database rather than csv files.
 
 (9) Deploy app on cloud (AWS / Azure / Heroku).
+
+</p>
 
 ## References 
 
