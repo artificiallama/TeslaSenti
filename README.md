@@ -119,6 +119,7 @@ One of the issues is that some irrelevant tweets are included. This is because *
 
 ## App
 
+We use Flask for the backend. Flask is a micro-framework. For example, it does not have database abstraction layer. This and many other features can be added as an addon using libraries. The front end is designed using html and CSS. The backend code reads in the csv file with the datestamps, tweet and the sentiment index. It uses the plotly library to generate graphs of the sentiment index with the time on the xaxis. Two different graphs are generated. The left panel shows the sentiment index going back 24 hours from current time and the right side panel shows the same going back one hour. For the left side panel the average of sentiment index over one hour buckets are shown. For the right side panel the average of the sentiment index over 5 minute bucket is shown. A positive sentiment index is a buy signal while a negative value is sell signal. The latest four tweets are shown below this graph. The trader can click on it and go to the webpage of the tweet or the embedded news article.
 
 The refresh rate of the front end is controlled by using meta refresh. The HTML meta element is used with <code>http-equiv</code> parameter set to *refresh* and the <code>content</code> parameter equal to 120 seconds. This is the refresh time frequency.
 
@@ -144,6 +145,8 @@ A MVP has been demonstrated.
 (8) Use SQL database rather than csv files.
 
 (9) Deploy app on cloud (AWS / Azure / Heroku).
+
+(10) In practice a trader will not rely on market sentiment alone to made a buy/sell decision. He/she would look at prediciton from a conventional model which includes various factors like correlation of tesla stock value with other stocks etc. Time series models are usually developed for this purpose. There is scope to integrate a sentiment analysis model with a conventional model. Such a combined model would generate a buy/sell signal taking into consideration all factors including sentiment.
 
 </p>
 
