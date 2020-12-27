@@ -134,6 +134,7 @@ def give_graph(dfin,tnow):
                             },
                      yaxis1={'range':[-2,2],
 							 'title' : { 'text':'Sentiment', 'font' : {'size':30} },
+							 'tickfont' : {'size' : 15},
                            },
                      yaxis2={'range':[-2,2]},					                       					  
                      margin=dict(l=20, r=20, t=20, b=20), paper_bgcolor="LightSteelBlue")
@@ -142,7 +143,6 @@ def give_graph(dfin,tnow):
     fig.update(layout_showlegend=False)
 	
     graph = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
-
 	
     return graph
 
