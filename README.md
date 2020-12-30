@@ -117,7 +117,7 @@ One of the issues is that some irrelevant tweets are included. This is because *
 </p>
 
 <p align="left">
-<img width="400" height="500" src="images/misleading_combine.png">
+<img width="500" height="400" src="images/misleading_combine.png">
 </p>
 
 
