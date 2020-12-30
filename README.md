@@ -111,13 +111,7 @@ If emoji's and url's are present these are purged from tweets. Hastags, cashtags
 One of the issues is that some irrelevant tweets are included. This is because *musk* is one of the tokens used in the criterion to filter streaming tweets. Since *musk* has a dictionary meaning apart from being Elon's last name some tweets not relevant to Tesla are included in the sentiment analysis. An example of such a tweet is shown below. A possible solution to this problem is to delete the token *musk* from the filter criterion. Another issue is the inclusion of tweets which are not directly relevant to Tesla. A substantial portion of such tweets are of personal nature directed at Elon Musk. An example of such a tweet is shown below. It was decided to drop tokens *elon* and  *musk* from the filter criteria of the streaming tweets. This eliminates frivolous tweets but at the same time also eliminates some bonafide tweets which are closely related to Tesla.
 
 <p align="left">
-<img width="400" height="500" src="images//musk_misleading.PNG">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<img width="400" height="500" src="images/irrelevant_cat.PNG">
-</p>
-
-<p align="left">
-<img width="500" height="400" src="images/misleading_combine.png">
+<img width="750" height="400" src="images/misleading_combine.png">
 </p>
 
 
