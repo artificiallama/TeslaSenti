@@ -116,6 +116,10 @@ One of the issues is that some irrelevant tweets are included. This is because *
 <img width="400" height="500" src="images/irrelevant_cat.PNG">
 </p>
 
+<p align="left">
+<img width="400" height="500" src="images/misleading_combine.png">
+</p>
+
 
 ## App
 
