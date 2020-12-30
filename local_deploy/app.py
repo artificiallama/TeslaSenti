@@ -103,13 +103,18 @@ def give_graph(dfin,tnow):
 	
     fig = sp.make_subplots(rows=1,cols=2)
 
+    longser = go.Scatter(x=dfin['dtobj'].tolist(), y=dfin['wt_senti'].to_numpy(), mode='markers', marker=dict(color='Blue'))
+	
     # Use a 60 min bucket to average sentiment index. If data is not available mean for that particular hour is NaN.
     dfavg1 = dfin.resample("60min",kind='timestamp',on='dtobj').mean()
-	
-    longser = go.Scatter(x=dfin['dtobj'].tolist(), y=dfin['wt_senti'].to_numpy(), mode='markers', marker=dict(color='Blue'))
-    longavg = go.Scatter(x=dfavg1.index.tolist(), y=dfavg1['wt_senti'].to_numpy(), mode='lines+markers', marker=dict(color='Red'))
 
+    sentiarr = dfavg1['wt_senti'].to_numpy()
+    bound_senti = np.clip(sentiarr,a_min=-1.0,a_max=1.0)
+    longavg2 = go.Scatter(x=dfavg1.index.tolist(), y=sentiarr, mode='lines+markers', marker=dict(color='green'))	
+    longavg  = go.Scatter(x=dfavg1.index.tolist(), y=bound_senti, mode='markers', marker=dict(color='Red'))
+	
     fig.add_trace(longser,row=1,col=1)
+    fig.add_trace(longavg2,row=1,col=1)
     fig.add_trace(longavg,row=1,col=1)
 	
     tminus = tm.lag_time(tnow,cvars.time_horizon2)
@@ -117,14 +122,19 @@ def give_graph(dfin,tnow):
     dfin.drop(index=dfin[~cond].index,inplace=True)	
 
     if not dfin.empty:
-    # Use a 5 min bucket to average sentiment index.
+        shortser = go.Scatter(x=dfin['dtobj'].tolist(), y=dfin['wt_senti'].to_numpy(), mode='markers', marker=dict(color='Blue'))
+        # Use a 5 min bucket to average sentiment index.
         dfavg2 = dfin.resample("5min",kind='timestamp',on='dtobj').mean()
-	
-        shortser = go.Scatter(x=dfin['dtobj'].tolist(), y=dfin['wt_senti'].to_numpy(), mode='markers', marker=dict(color='MediumPurple'))
-        shortavg = go.Scatter(x=dfavg2.index.tolist(), y=dfavg2['wt_senti'].to_numpy(), mode='lines+markers', marker=dict(color='Red'))
+		
+        sentiarr = dfavg2['wt_senti'].to_numpy()
+        bound_senti =  np.clip(sentiarr,a_min=-1.0,a_max=1.0)
+
+        shortavg2 = go.Scatter(x=dfavg2.index.tolist(), y=sentiarr, mode='lines+markers', marker=dict(color='green'))
+        shortavg = go.Scatter(x=dfavg2.index.tolist(), y=bound_senti, mode='markers', marker=dict(color='Red'))
 	
         fig.add_trace(shortser,row=1,col=2)
-        fig.add_trace(shortavg,row=1,col=2)
+        fig.add_trace(shortavg2,row=1,col=2)
+        fig.add_trace(shortavg,row=1,col=2)		
 	
     fig.update_layout(xaxis1={'type':'date','tickmode':'linear',
                              'dtick': cvars.tick_step1*60*1000,
@@ -132,11 +142,11 @@ def give_graph(dfin,tnow):
 		             xaxis2={'type':'date','tickmode':'linear',
                              'dtick': cvars.tick_step2*60*1000,
                             },
-                     yaxis1={'range':[-10,10],
+                     yaxis1={'range':[-2,2],
 							 'title' : { 'text':'Sentiment', 'font' : {'size':30} },
 							 'tickfont' : {'size' : 15},
                            },
-                     yaxis2={'range':[-10,10]},					                       					  
+                     yaxis2={'range':[-2,2]},					                       					  
                      margin=dict(l=20, r=20, t=20, b=20), paper_bgcolor="LightSteelBlue")
 	
     fig.update_layout(height=400,width=1000)
