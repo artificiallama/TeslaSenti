@@ -1,9 +1,12 @@
 
-all_cols = ['id','date','tweet','retweet_count','favorite_count',
+cols = ['id','date','tweet','retweet_count','favorite_count',
             'screen_name','name','verified','followers_count','friends_count',
             'source','user_url']
 
-cols_display = ['id', 'date', 'tweet', 'senti', 'screen_name', 'tidy_tweet']
+cols_senti = cols + ['senti', 'wt_senti', 'tidy_tweet']
+
+cols_display = ['id', 'date', 'tweet', 'senti', 'wt_senti', 'screen_name', 'tidy_tweet']
+#cols_wt = cols_display+['retweet_count','favorite_count','verified','followers_count','friends_count']
 
 # any tweets with more than cash_thresh cashtags are removed.
 cash_thresh = 10
