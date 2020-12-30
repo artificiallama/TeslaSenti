@@ -68,8 +68,8 @@ def home():
     for kk in np.arange(nrows-4,nrows):  
         #print('\n\t** kk = ',kk, df.iloc[kk]['id'])
         #print('\t** screenname = ',df.iloc[kk]['screen_name'])
-        #print('\t** tweet = ',df.iloc[kk]['tweet'])    
-        #print('\t** senti = ',df.iloc[kk]['senti'])   
+        print('\t** tweet = ',df.iloc[kk]['tweet'])    
+        print('\t** senti = ',df.iloc[kk]['senti'],df.iloc[kk]['wt_senti'])   
         htmlcode = get_tweet_embed_html(df.iloc[kk]['screen_name'],str(df.iloc[kk]['id']))
         tweet_embed.append(htmlcode)
 
@@ -106,8 +106,8 @@ def give_graph(dfin,tnow):
     # Use a 60 min bucket to average sentiment index. If data is not available mean for that particular hour is NaN.
     dfavg1 = dfin.resample("60min",kind='timestamp',on='dtobj').mean()
 	
-    longser    = go.Scatter(x=dfin['dtobj'].tolist(), y=dfin['senti'].to_numpy(), mode='markers', marker=dict(color='Blue'))
-    longavg = go.Scatter(x=dfavg1.index.tolist(), y=dfavg1['senti'].to_numpy(), mode='lines+markers', marker=dict(color='Red'))
+    longser = go.Scatter(x=dfin['dtobj'].tolist(), y=dfin['wt_senti'].to_numpy(), mode='markers', marker=dict(color='Blue'))
+    longavg = go.Scatter(x=dfavg1.index.tolist(), y=dfavg1['wt_senti'].to_numpy(), mode='lines+markers', marker=dict(color='Red'))
 
     fig.add_trace(longser,row=1,col=1)
     fig.add_trace(longavg,row=1,col=1)
@@ -120,8 +120,8 @@ def give_graph(dfin,tnow):
     # Use a 5 min bucket to average sentiment index.
         dfavg2 = dfin.resample("5min",kind='timestamp',on='dtobj').mean()
 	
-        shortser = go.Scatter(x=dfin['dtobj'].tolist(), y=dfin['senti'].to_numpy(), mode='markers', marker=dict(color='MediumPurple'))
-        shortavg = go.Scatter(x=dfavg2.index.tolist(), y=dfavg2['senti'].to_numpy(), mode='lines+markers', marker=dict(color='Red'))
+        shortser = go.Scatter(x=dfin['dtobj'].tolist(), y=dfin['wt_senti'].to_numpy(), mode='markers', marker=dict(color='MediumPurple'))
+        shortavg = go.Scatter(x=dfavg2.index.tolist(), y=dfavg2['wt_senti'].to_numpy(), mode='lines+markers', marker=dict(color='Red'))
 	
         fig.add_trace(shortser,row=1,col=2)
         fig.add_trace(shortavg,row=1,col=2)
@@ -132,11 +132,11 @@ def give_graph(dfin,tnow):
 		             xaxis2={'type':'date','tickmode':'linear',
                              'dtick': cvars.tick_step2*60*1000,
                             },
-                     yaxis1={'range':[-2,2],
+                     yaxis1={'range':[-10,10],
 							 'title' : { 'text':'Sentiment', 'font' : {'size':30} },
 							 'tickfont' : {'size' : 15},
                            },
-                     yaxis2={'range':[-2,2]},					                       					  
+                     yaxis2={'range':[-10,10]},					                       					  
                      margin=dict(l=20, r=20, t=20, b=20), paper_bgcolor="LightSteelBlue")
 	
     fig.update_layout(height=400,width=1000)
@@ -153,18 +153,18 @@ if __name__=='__main__':
 	
     print('\n\tStarting in app.py main :')
 #  print("\n\tNumber of cpus = ",mp.cpu_count())
-    app.run(debug=True)
+   # app.run(debug=True)
 #  tweets.live_stream()
 
-#    p1 = Process(target = tweets.live_stream,args=())  #fetch tweets and write to csv
-#    p1.start()
+    p1 = Process(target = tweets.live_stream,args=())  #fetch tweets and write to csv
+    p1.start()
 
-#    p2 = Process(target = tweets.sentiment_tweets,args=())  #label and write to csv
-#    p2.start()
+    p2 = Process(target = tweets.sentiment_tweets,args=())  #label and write to csv
+    p2.start()
 
-#    p3 = Process(target = app.run,args=())  #serve requests
-#    p3.start()
+    p3 = Process(target = app.run,args=())  #serve requests
+    p3.start()
   
-#    p1.join()
-#    p2.join()
-#    p3.join()
+    p1.join()
+    p2.join()
+    p3.join()
