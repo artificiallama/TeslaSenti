@@ -13,8 +13,8 @@ cash_thresh = 10
 nsecs=20
 
 # sentiment index for how many minutes before current time should be shown in the graph ?
-time_horizon1=600
-time_horizon2=60
+time_horizon1=24*60
+time_horizon2=120
 
 # Tick interval on xaxis of the plotly graph. The unit of tick_step is minutes. The unit expected by plotly
 # is milliseconds.
