@@ -118,7 +118,7 @@ A Naive Bayes model is trained to identify sentiment of financial headlines.
 
 
 <p align="left">
-<img width="400" height="400" src="images/CV_accuracy.png">
+<img width="650" height="400" src="images/CV_accuracy.png">
 </p>
 
 
