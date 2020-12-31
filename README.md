@@ -111,9 +111,8 @@ If emoji's and url's are present these are purged from tweets. Hastags, cashtags
 One of the issues is that some irrelevant tweets are included. This is because *musk* is one of the tokens used in the criterion to filter streaming tweets. Since *musk* has a dictionary meaning apart from being Elon's last name some tweets not relevant to Tesla are included in the sentiment analysis. An example of such a tweet is shown below. A possible solution to this problem is to delete the token *musk* from the filter criterion. Another issue is the inclusion of tweets which are not directly relevant to Tesla. A substantial portion of such tweets are of personal nature directed at Elon Musk. An example of such a tweet is shown below. It was decided to drop tokens *elon* and  *musk* from the filter criteria of the streaming tweets. This eliminates frivolous tweets but at the same time also eliminates some bonafide tweets which are closely related to Tesla.
 
 <p align="left">
-<img width="700" height="350" src="images/misleading_combine.png">
+<img width="600" height="300" src="images/misleading_combine.png">
 </p>
-
 A Naive Bayes model is trained to identify the sentiment of the text.  The total number of texts are divided into two groups - 67% for training and 33% for testing (hold out set). The 67% is used for K-fold cross validation. The hyperparameter *alpha* is tuned using cross validation. The GridSearchCV() function is used to identify the best value of alpha amongst (0.1, 0.5, 1.0, 3.0, 5.0, 10.0, 50.0, 1e2, 1e3, 1e4).  The mean train and test accuracies from the cross validation are shown below. The highest mean test accuracy of 0.64 is realized for alpha=1.0. The mean train accuracy is 0.76 for alpha=1.0. For alpha=0.0 the train and test accuracy is 0.81 and 0.64. Increasing the value of alpha to 1.0 decreases the overfit but further increasing alpha decreases the test accuracy. Hence the model with alpha=1.0 is saved and used for inference in the deployed model. 
 
 <p align="left">
