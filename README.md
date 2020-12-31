@@ -34,7 +34,7 @@ In this project a product which generates a buy/sell signal in near real-time fo
 
 A multiprocessing approach using three processors (p1,p2,p3) which carry out different duties is employed. Multiprocessing is required because fetching the streaming tweets, preprocessing/analysing them for sentiment and serving the requests has to be done simultaneously. Process p1 fetches the tweets and writes them (along with its features like username etc) to a csv file. Process p2 cleans the tweets, runs the sentiment predictor over each tweet and writes the sentiment index to csv file. Process p3 reads in the latest tweets and their sentiment indices, generates a graph and displays it on the the front end. It also displays latest four tweets. These are clickable. The trader/user can click and visit the respective twitter page or new portal.
 
-A Naive Bayes model is trained to identify sentiment of financial headlines. For this we used 4845 financial phrase bank Kaggle dataset and 1100 FiQA financial tweets and headlines dataset. These are labelled datasets (Negative, Neutral and Positive). We trained the Naive Bayes model on 80% of the dataset. It performed well on the test dataset (85% accuracy). The model mislabelled many positive tweets as negative and vice versa. The tweets about Tesla were about varied topics like energy, battery, cars and also politics. 
+
 
 ## Data
 
@@ -114,6 +114,7 @@ One of the issues is that some irrelevant tweets are included. This is because *
 <img width="750" height="400" src="images/misleading_combine.png">
 </p>
 
+A Naive Bayes model is trained to identify sentiment of financial headlines. 
 
 ## App
 
