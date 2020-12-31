@@ -46,11 +46,11 @@ Labelled data from various sources are combined to obtain a dataset.
 
 3) FiQA posts : Same as (2) above except that posts from blogs etc from financial domains are labelled rather than headlines (Please see fiqa reference).
 
-4) Tweets downloaded using the twitter API.
+4) Tweets related to finance/stocks downloaded using the twitter API.
 
 5) Financial headlines downloaded from tiingo.
 
-6) Tweets downloaded using the twitter API.
+6) Tweets with keyword *tesla* downloaded using the twitter API.
 
 7) Reviews of google apps : This dataset was constructed by Venelin Valkov (Please see the curiousily.com reference). It can be downloaded by,
 
