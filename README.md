@@ -105,6 +105,10 @@ Tweets with too many cashtags are dropped. We noticed that most of such tweets a
 <img width="600" height="100" src="images/too_many_cashtags_crop.png">
 </p>
 
+<p align="left">
+<img width="600" height="100" src="images/too_many_cashtags_10.png">
+</p>
+
 If emoji's and url's are present these are purged from tweets. Hastags, cashtags, mentions and embedded charts are removed. Punctuations, digits, symbols and stop word are removed and the tokens are stemmed. Finally the empty tweets are removed. It is possible that after the cleaning is done some tweets end up with zero tokens.
 
 
