@@ -145,7 +145,7 @@ A MVP has been demonstrated.
 
 (2) The probability is used as a weight. It could be rather used as threshold. For example a negative or positive tweet would pass through this filter only if the probability is > 0.8.
 
-(3) The frontend interface is very basic. There is scope to make it more attractive for a better user experience.
+(3) The frontend interface is very basic. There is scope to make it more attractive for a better user experience. The xaxis of the graphs is time in UTC. This should be made user friendly. The time zone of the user should be automatically detected. Then the relevant time zone should be displayed on the xaxis.
 
 (4) The latest four tweets are shown on the front end. It would be more informative to the trader if only impactful tweets are shown. This can be done by displaying only positive and negative tweets by users with many friends/followers. The number of retweets can also be used as in indication of impactful tweets. However, in real time the number of retweets tends to be zero. The <code>verified</code> flag can be used to identify impactful/bonafide tweets. Another approach is to make a list of most influencial users among the tesla tweeterati. This can be done offline by using the archive of tesla tweets and stock prices. The users whose tweets  on an average correlated well with the movement of tesla stock price can be short listed. The tweets from these users can be given higher weightage in the real time application. Also tweets from these users can be highlighted. This way the trader can immediately know that this tweet is from a tesla influencer.
 
