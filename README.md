@@ -102,10 +102,6 @@ The streaming tweets with either of tokens *tesla*, *tsla*, *elon* and *musk* ar
 Tweets with too many cashtags are dropped. We noticed that most of such tweets are advertisements. An example of such a tweet is shown below. It has 13 cashtags ($fb, $aapl, $amzn, etc) and is clearly an advertisement.
 
 <p align="left">
-<img width="600" height="100" src="images/too_many_cashtags_crop.png">
-</p>
-
-<p align="left">
 <img width="600" height="100" src="images/too_many_cashtags10.png">
 </p>
 
