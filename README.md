@@ -120,7 +120,7 @@ A Naive Bayes model is trained to identify the sentiment of the text.  The total
 <img width="650" height="400" src="images/CV_accuracy.png">
 </p>
 
-The saved model results in aa accuracy of 0.66 for the hold out set. The following table shows some important metrics for the hold out set.
+The saved model results in an accuracy of 0.66 for the hold out set. The following table shows some important metrics for the hold out set.
 
 | *sentiment* | *precision* |*Recall*  | *F1*   | 
 |:-----------:|:-----------:|:--------:|:-------:
