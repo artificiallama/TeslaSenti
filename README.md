@@ -116,6 +116,13 @@ One of the issues is that some irrelevant tweets are included. This is because *
 
 A Naive Bayes model is trained to identify sentiment of financial headlines. 
 
+
+| *sentiment* | *precision* |*Recall*  | *F1*   | 
+|:-----------:|:-----------:|:--------:|:-------:
+|**-1**       | 0.66        |  0.72    | 0.69   | 
+|**0**        | 0.64        |  0.60    | 0.62   | 
+|**1**        | 0.60        |  0.59    | 0.59   | 
+
 ## App
 
 Flask is used for the backend. Flask is a micro-framework. For example, it does not have database abstraction layer. This and many other features can be added as an addon using libraries. The front end is designed using html and CSS. The backend code reads in the csv file with the datestamps, tweet and the sentiment index. It uses the plotly library to generate graphs of the sentiment index with the time on the xaxis. Two different graphs are generated. The left panel shows the sentiment index going back 24 hours from current time and the right side panel shows the same going back one hour. For the left side panel the average of sentiment index over one hour buckets are shown. For the right side panel the average of the sentiment index over 5 minute bucket is shown. A positive sentiment index is a buy signal while a negative value is sell signal. The latest four tweets are shown below this graph. The trader can click on it and go to the webpage of the tweet or the embedded news article.
