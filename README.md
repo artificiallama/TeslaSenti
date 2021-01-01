@@ -107,14 +107,13 @@ Tweets with too many cashtags are dropped. We noticed that most of such tweets a
 
 If emoji's and url's are present these are purged from tweets. Hastags, cashtags, mentions and embedded charts are removed. Punctuations, digits, symbols and stop word are removed and the tokens are stemmed. Finally the empty tweets are removed. It is possible that after the cleaning is done some tweets end up with zero tokens.
 
-
 One of the issues is that some irrelevant tweets are included. This is because *musk* is one of the tokens used in the criterion to filter streaming tweets. Since *musk* has a dictionary meaning apart from being Elon's last name some tweets not relevant to Tesla are included in the sentiment analysis. An example of such a tweet is shown below. A possible solution to this problem is to delete the token *musk* from the filter criterion. Another issue is the inclusion of tweets which are not directly relevant to Tesla. A substantial portion of such tweets are of personal nature directed at Elon Musk. An example of such a tweet is shown below. It was decided to drop tokens *elon* and  *musk* from the filter criteria of the streaming tweets. This eliminates frivolous tweets but at the same time also eliminates some bonafide tweets which are closely related to Tesla.
 
 <p align="left">
 <img width="600" height="300" src="images/misleading_combine.png">
 </p>
 
-A Naive Bayes model is trained to identify the sentiment of the text.  Bag-of-words (BoW) technique is used for feature extraction.  The total number of texts are divided into two groups - 67% for training and 33% for testing (hold out set). The 67% is used for K-fold cross validation. The hyperparameter *alpha* is tuned using cross validation. The GridSearchCV() function is used to identify the best value of alpha amongst (0.1, 0.5, 1.0, 3.0, 5.0, 10.0, 50.0, 1e2, 1e3, 1e4).  *alpha* has a regularizing effect on the model. The mean train and test accuracies from the cross validation are shown in the graph below. The highest mean test accuracy of 0.64 is realized for alpha=1.0. The corresponding mean train accuracy is 0.76. For alpha=0.0 the train and test accuracy is 0.81 and 0.64. Increasing the value of alpha to 1.0 decreases the overfit but further increasing alpha decreases the accuracy. This is because higher values of alpha lead to underfitting. Hence the model with alpha=1.0 is saved and used for inference in the deployed model. 
+A Naive Bayes model is trained to identify the sentiment of the text [[8]](#8).  Bag-of-words (BoW) technique is used for feature extraction.  The total number of texts are divided into two groups - 67% for training and 33% for testing (hold out set). The 67% is used for K-fold cross validation. The hyperparameter *alpha* is tuned using cross validation. The GridSearchCV() function is used to identify the best value of alpha amongst (0.1, 0.5, 1.0, 3.0, 5.0, 10.0, 50.0, 1e2, 1e3, 1e4).  *alpha* has a regularizing effect on the model. The mean train and test accuracies from the cross validation are shown in the graph below. The highest mean test accuracy of 0.64 is realized for alpha=1.0. The corresponding mean train accuracy is 0.76. For alpha=0.0 the train and test accuracy is 0.81 and 0.64. Increasing the value of alpha to 1.0 decreases the overfit but further increasing alpha decreases the accuracy. This is because higher values of alpha lead to underfitting. Hence the model with alpha=1.0 is saved and used for inference in the deployed model. 
 
 <p align="left">
 <img width="600" height="250" src="images/CV_accuracy.png">
@@ -130,9 +129,11 @@ The saved model results in an accuracy of 0.66 for the hold out set. The followi
 
 Recall (also known as sensivity) is defined as TP/(Actual positive) = TP/(TP+FN).
 Precision (also known as positive predictive value) is defined as TP/(Predicted positives) = TP/(TP+FP).
-Consider the negative sentiment class. Out of all the actual negative tweets 75% are correctly identified as negative. Out of all the tweets labelled as negative only 67% are actually negative. Therefore 33% of tweets labeled as negative are actually positive or neutral. This means that 33% of the times the trader will incorrectly decide to sell when actually the correct decision would be to either hold or buy.
+Consider the negative sentiment class. Out of all the actual negative tweets 75% are correctly identified as negative. The precision is 0.67. Out of all the tweets labelled as negative only 67% are actually negative. Therefore 33% of tweets labeled as negative are actually positive or neutral. This means that 33% of the times the trader will incorrectly decide to sell when actually the correct decision would be to either hold or buy. Approximately, all the metrics are in 60s. There is substantial headroom to improve the model. In so far as overfitting is concerned one way to ameliorate it is to use more (in number and diversity) data. However hand labelling financial text for sentiment is an onerous task.
 
-Experiments were carried out with two more models - LinearSVC and LogisticRegression [[10]](#10). However the results obtained were similar to those obtained using Naive Bayes. 
+Experiments were carried out with two more models - LinearSVC and LogisticRegression [[10]](#10). However the results (in terms of test metrics and also overfitting) obtained were similar to those obtained using Naive Bayes. An important avenue that could be explored is using a deep learning model such as BERT [[11]](#11). However, typically deep learning models are data hungry and therefore the current size of training data might not suffice. Another approach to model improvement involves decreasing the vocabulary size by choosing the most important tokens (i.e. feature importance) by using chi2 [[10]](#10).
+
+The Naive Bayes model outputs the probability of each class given a sample. This probability can be used as a threshold to decide if the label of -1 (+1) should be accepted for decision making (buy/sell). However Naive Bayes is known to be a good classifier but bad estimator [[12]](#12). The probabilities calculated by Naive Bayes are not reliable.
 
 ## App
 
@@ -149,7 +150,7 @@ A MVP has been demonstrated.
 
 (1) A major hurdle to obtaining good quality predicitions on streaming tweets in the amount of labelled data which goes into training the model. Hand labeling tweets/headlines by sentiments is a tedious tasks. The publicly available sentiment labelled data (resturant reviews etc) is not useful because one needs text from the domain of finance/stocks to train the model. A possible approach to circumventing the need for labeling is as follows. The archive of stock price movements of Tesla and the tweets about Tesla can be downloaded. Then a model can be trained with the tweets as inputs and the stock price movement as the target. The labels in this approach are the stock price movements. These can be readily computed by subtracting (or dividing) successive prices at regular interval. The interval could be few minutes to few hours (or even days).
 
-(2) The probability is used as a weight. It could be rather used as threshold. For example a negative or positive tweet would pass through this filter only if the probability is > 0.8.
+(2) Another (better) model could be trained. Apart from improving the scores given by the Naive Bayes one would like to obtain reliable probabilities of classes. This is because these probabilities can be used to improve decision making. On way of using these probabilities  is to use these as a threshold. For example a negative (or positive tweet) would result in an action of sell (or buy) only if the probability is > 0.8. Another way is to use the probability as a weight. In this case the sentiment index will be w1*(-1)+w2*(+1) where w1 and w2 are the probabilities outputed by the model for the particular sample.
 
 (3) The frontend interface is very basic. There is scope to make it more attractive for a better user experience. The xaxis of the graphs is time in UTC. This should be made user friendly. The time zone of the user should be automatically detected. Then the relevant time zone should be displayed on the xaxis.
 
@@ -180,11 +181,20 @@ Ranco G, Aleksovski D, Caldarelli G, Grčar M, Mozetič I (2015) The Effects of 
 <a id="5">[5]</a>
 Malo, P., Sinha, A., Korhonen, P., Wallenius, J., & Takala, P. (2014). Good debt or bad debt: Detecting semantic orientations in economic texts. Journal of the Association for Information Science and Technology, 65(4), 782-796.
 
+<a id="8">[8]</a>
+https://sebastianraschka.com/Articles/2014_naive_bayes_1.html
+
 <a id="9">[9]</a>
 https://towardsdatascience.com/accuracy-precision-recall-or-f1-331fb37c5cb9
 
 <a id="10">[10]</a>
 https://towardsdatascience.com/multi-class-text-classification-with-scikit-learn-12f1e60e0a9f
+
+<a id="11">[11]</a>
+https://curiousily.com/posts/sentiment-analysis-with-bert-and-hugging-face-using-pytorch-and-python/
+
+<a id="11">[12]</a>
+https://scikit-learn.org/stable/modules/naive_bayes.html
 
 https://www.kaggle.com/ankurzing/sentiment-analysis-for-financial-news
 
@@ -192,7 +202,7 @@ https://sites.google.com/view/fiqa
 
 https://tiingo.com
 
-https://curiousily.com/posts/sentiment-analysis-with-bert-and-hugging-face-using-pytorch-and-python/
+
 
 https://towardsdatascience.com/create-dataset-for-sentiment-analysis-by-scraping-google-play-app-reviews-using-python-ceaaa0e41c1
 
