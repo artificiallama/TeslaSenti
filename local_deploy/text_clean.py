@@ -14,13 +14,15 @@ stop_words = nltk.corpus.stopwords.words('english')
 
 # these words should not be part of stop_words since these are relevant
 # for stocks.
-remove_words = ['above', 'below', 'up',  'down', 'off',  'over',
-                'under',  'few',  'more',  'most', 'own', 'against',
-                'during', 'out', 'in',
-                'no', 'nor', 'not', 'too', 'very']
+remove_words = ['above', 'below', 'up',  'down', 'off',  'over', 'under']
+more_stop_words = ['would','get','also']
+
 
 for w in remove_words:
     stop_words.remove(w)
+
+for w in more_stop_words:
+ stop_words.append(w)	
 
 p.set_options(p.OPT.EMOJI, p.OPT.SMILEY,  p.OPT.URL)
 
