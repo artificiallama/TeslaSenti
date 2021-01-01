@@ -120,7 +120,7 @@ A Naive Bayes model is trained to identify the sentiment of the text.  Bag-of-wo
 <img width="600" height="250" src="images/CV_accuracy.png">
 </p>
 
-The saved model results in an accuracy of 0.66 for the hold out set. The following table shows some important metrics for the hold out set.
+The saved model results in an accuracy of 0.66 for the hold out set. The following table shows some important metrics [[9]](#9) for the hold out set.
 
 | *sentiment* | *precision* |*Recall*  | *F1*   | 
 |:-----------:|:-----------:|:--------:|:-------:
@@ -175,6 +175,9 @@ Ranco G, Aleksovski D, Caldarelli G, Grčar M, Mozetič I (2015) The Effects of 
 
 <a id="5">[5]</a>
 Malo, P., Sinha, A., Korhonen, P., Wallenius, J., & Takala, P. (2014). Good debt or bad debt: Detecting semantic orientations in economic texts. Journal of the Association for Information Science and Technology, 65(4), 782-796.
+
+<a id="9">[9]</a>
+https://towardsdatascience.com/accuracy-precision-recall-or-f1-331fb37c5cb9
 
 <a id="10">[10]</a>
 https://towardsdatascience.com/multi-class-text-classification-with-scikit-learn-12f1e60e0a9f
