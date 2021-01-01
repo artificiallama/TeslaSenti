@@ -113,6 +113,7 @@ def sentiment_tweets():
             dftw_senti['tidy_tweet'] = dftw_senti['tidy_tweet'].apply(lambda x : tc.remove_hashtag(x))
             dftw_senti['tidy_tweet'] = dftw_senti['tidy_tweet'].apply(lambda x : tc.remove_cashtag(x))
             dftw_senti['tidy_tweet'] = dftw_senti['tidy_tweet'].apply(lambda x : tc.remove_mention(x))
+            dftw_senti['tidy_tweet'] = dftw_senti['tidy_tweet'].apply(lambda x : tc.replace_chars(x))
             dftw_senti['tidy_tweet'] = dftw_senti['tidy_tweet'].apply(lambda x : tc.normalize_doc(x))
 
             cond = dftw_senti['tidy_tweet'].apply(lambda x : tc.count_toks(x) == 0)
