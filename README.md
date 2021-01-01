@@ -128,6 +128,10 @@ The saved model results in an accuracy of 0.66 for the hold out set. The followi
 |**0**        | 0.67        |  0.62    | 0.65   | 
 |**1**        | 0.64        |  0.61    | 0.63   | 
 
+Recall (also known as sensivity) is defined as TP/(Actual positive) = TP/(TP+FN).
+Precision (also known as positive predictive value) is defined as TP/(Predicted positives) = TP/(TP+FP).
+Consider the negative sentiment class. Out of all the actual negative tweets 75% are correctly identified as negative. Out of all the tweets labelled as negative only 67% are actually negative. Therefore 33% of tweets labeled as negative are actually positive or neutral. This means that 33% of the times the trader will incorrectly decide to sell when actually the correct decision would be to either hold or buy.
+
 Experiments were carried out with two more models - LinearSVC and LogisticRegression [[10]](#10). However the results obtained were similar to those obtained using Naive Bayes. 
 
 ## App
