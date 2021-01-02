@@ -162,7 +162,7 @@ A MVP has been demonstrated.
 
 (6) A more engaging graph could be presented by allowing the respective tweet to be shown if the user hovers over a particular point on the graph.
 
-(7) The data preprocessing should include removal of tweets with expletives / profane language. It should also filter out tweets with obscene images. Another issue in preprocessing is that of stemming versus lemmatizing. Porter stemming is used. It is possible that lemmatizing instead of stemming can have a positive impact on the scores [[30]](#30), [[31]](#31).
+(7) The data preprocessing should include removal of tweets with expletives / profane language. It should also filter out tweets with obscene images. Another issue in preprocessing is that of stemming versus lemmatizing. Porter stemming is used. It is possible that lemmatizing instead of stemming can have a positive impact on the scores [[30]](#30). However a study [[31]](#31) shows that stemming versus lemmatization does not have significant impact on text classification.
 
 (8) Use SQL database rather than csv files.
 
