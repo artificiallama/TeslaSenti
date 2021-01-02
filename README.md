@@ -113,13 +113,19 @@ One of the issues is that some irrelevant tweets are included. This is because *
 <img width="600" height="300" src="images/misleading_combine.png">
 </p>
 
-A Naive Bayes model is trained to identify the sentiment of the text [[8]](#8).  Bag-of-words (BoW) technique is used for feature extraction.  The total number of texts are divided into two groups - 67% for training and 33% for testing (hold out set). The 67% is used for K-fold cross validation. The hyperparameter *alpha* is tuned using cross validation. The GridSearchCV() function is used to identify the best value of alpha amongst (0.1, 0.5, 1.0, 3.0, 5.0, 10.0, 50.0, 1e2, 1e3, 1e4).  *alpha* has a regularizing effect on the model. The mean train and test accuracies from the cross validation are shown in the graph below. The highest mean test accuracy of 0.64 is realized for alpha=1.0. The corresponding mean train accuracy is 0.76. For alpha=0.0 the train and test accuracy is 0.81 and 0.64. Increasing the value of alpha to 1.0 decreases the overfit but further increasing alpha decreases the accuracy. This is because higher values of alpha lead to underfitting. Hence the model with alpha=1.0 is saved and used for inference in the deployed model. 
+A Naive Bayes model is trained to identify the sentiment of the text [[8]](#8).  Bag-of-words (BoW) technique is used for feature extraction.  Naive Bayes model applies the Bayes theorem with the additional assumption that features are independent given the class [[9]](#9). Inspite of this assumption being violated in many application, naive Bayes model has been shown to perform very well in practice.  The quation is given by,
+
+```math
+P = P(x_{i}|C)
+```
+
+The total number of texts are divided into two groups - 67% for training and 33% for testing (hold out set). The 67% is used for K-fold cross validation. The hyperparameter *alpha* is tuned using cross validation. The GridSearchCV() function is used to identify the best value of alpha amongst (0.1, 0.5, 1.0, 3.0, 5.0, 10.0, 50.0, 1e2, 1e3, 1e4).  *alpha* has a regularizing effect on the model. The mean train and test accuracies from the cross validation are shown in the graph below. The highest mean test accuracy of 0.64 is realized for alpha=1.0. The corresponding mean train accuracy is 0.76. For alpha=0.0 the train and test accuracy is 0.81 and 0.64. Increasing the value of alpha to 1.0 decreases the overfit but further increasing alpha decreases the accuracy. This is because higher values of alpha lead to underfitting. Hence the model with alpha=1.0 is saved and used for inference in the deployed model. 
 
 <p align="left">
 <img width="600" height="250" src="images/CV_accuracy.png">
 </p>
 
-The saved model results in an accuracy of 0.66 for the hold out set. The following table shows some important metrics [[9]](#9) for the hold out set.
+The saved model results in an accuracy of 0.66 for the hold out set. The following table shows some important metrics [[10]](#10) for the hold out set.
 
 | *sentiment* | *precision* |*Recall*  | *F1*   | 
 |:-----------:|:-----------:|:--------:|:-------:
@@ -131,9 +137,9 @@ Recall (also known as sensivity) is defined as TP/(Actual positive) = TP/(TP+FN)
 Precision (also known as positive predictive value) is defined as TP/(Predicted positives) = TP/(TP+FP).
 Consider the negative sentiment class. Out of all the actual negative tweets 75% are correctly identified as negative. The precision is 0.67. Out of all the tweets labelled as negative only 67% are actually negative. Therefore 33% of tweets labeled as negative are actually positive or neutral. This means that 33% of the times the trader will incorrectly decide to sell when actually the correct decision would be to either hold or buy. Approximately, all the metrics are in 60s. There is substantial headroom to improve the model. In so far as overfitting is concerned one way to ameliorate it is to use more (in number and diversity) data. However hand labelling financial text for sentiment is an onerous task.
 
-Experiments were carried out with two more models - LinearSVC and LogisticRegression [[10]](#10). However the results (in terms of test metrics and also overfitting) obtained were similar to those obtained using Naive Bayes. An important avenue that could be explored is using a deep learning model such as BERT [[11]](#11). However, typically deep learning models are data hungry and therefore the current size of training data might not suffice. Another approach to model improvement involves decreasing the vocabulary size by choosing the most important tokens (i.e. feature importance) by using chi2 [[10]](#10).
+Experiments were carried out with two more models - LinearSVC and LogisticRegression [[11]](#11). However the results (in terms of test metrics and also overfitting) obtained were similar to those obtained using Naive Bayes. An important avenue that could be explored is using a deep learning model such as BERT [[12]](#12). However, typically deep learning models are data hungry and therefore the current size of training data might not suffice. Another approach to model improvement involves decreasing the vocabulary size by choosing the most important tokens (i.e. feature importance) by using chi2 [[11]](#11).
 
-The Naive Bayes model outputs the probability of each class given a sample. This probability can be used as a threshold to decide if the label of -1 (+1) should be accepted for decision making (buy/sell). However Naive Bayes is known to be a good classifier but bad estimator [[12]](#12). The probabilities calculated by Naive Bayes are not reliable.
+The Naive Bayes model outputs the probability of each class given a sample. This probability can be used as a threshold to decide if the label of -1 (+1) should be accepted for decision making (buy/sell). However Naive Bayes is known to be a good classifier but bad estimator [[13]](#13). The probabilities calculated by Naive Bayes are not reliable.
 
 ## App
 
@@ -185,15 +191,18 @@ Malo, P., Sinha, A., Korhonen, P., Wallenius, J., & Takala, P. (2014). Good debt
 https://sebastianraschka.com/Articles/2014_naive_bayes_1.html
 
 <a id="9">[9]</a>
-https://towardsdatascience.com/accuracy-precision-recall-or-f1-331fb37c5cb9
+https://scikit-learn.org/stable/modules/naive_bayes.html
 
 <a id="10">[10]</a>
-https://towardsdatascience.com/multi-class-text-classification-with-scikit-learn-12f1e60e0a9f
+https://towardsdatascience.com/accuracy-precision-recall-or-f1-331fb37c5cb9
 
 <a id="11">[11]</a>
+https://towardsdatascience.com/multi-class-text-classification-with-scikit-learn-12f1e60e0a9f
+
+<a id="12">[12]</a>
 https://curiousily.com/posts/sentiment-analysis-with-bert-and-hugging-face-using-pytorch-and-python/
 
-<a id="11">[12]</a>
+<a id="13">[13]</a>
 https://scikit-learn.org/stable/modules/naive_bayes.html
 
 https://www.kaggle.com/ankurzing/sentiment-analysis-for-financial-news
