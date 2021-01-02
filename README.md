@@ -116,12 +116,13 @@ One of the issues is that some irrelevant tweets are included. This is because *
 A Naive Bayes model is trained to identify the sentiment of the text [[8]](#8).  Bag-of-words (BoW) technique is used for feature extraction.  Naive Bayes model applies the Bayes theorem with the additional assumption that features are independent given the class [[9]](#9). Inspite of this assumption being violated in many application, naive Bayes model has been shown to perform very well in practice.  According to the Bayes equation the posterior probaility is given by,
 
 ```math
-P(C_{k}|\mathbf{x}) = \frac{P(x_{i}|C_{k})}{P(\mathbf{x})}
+P(C_{k}|x) = \frac{P(x|C_{k})P(C_{k})}{P(x)}
 ```
-
-where $\mathbf{x}$ is the vector of features.
-
-
+where x is the vector of features. k is the number of classes. In this case k=3. The probability of the class in the numerator is the prior probability. Since in this case the classes are balanced the prior is uniform and hence does not have an impact on classification. This is equivalent to using maximum likelihood. The term in the denominator is called evidence. This need not be calculated for the classification since it same for all the classes. The naive assumption of conditional independence allows one to write the likelihood as,
+```math
+P(x|C_{k}) = P(x_{1}|C_{k})P(x_{2}|C_{k})P(x_{3}|C_{k})...P(x_{n}|C_{k})
+```
+The conditional probabilities of individual features are calculated from training data by treating each as a multinomial distribution.
 
 The total number of texts are divided into two groups - 67% for training and 33% for testing (hold out set). The 67% is used for K-fold cross validation. The hyperparameter *alpha* is tuned using cross validation. The GridSearchCV() function is used to identify the best value of alpha amongst (0.1, 0.5, 1.0, 3.0, 5.0, 10.0, 50.0, 1e2, 1e3, 1e4).  *alpha* has a regularizing effect on the model. The mean train and test accuracies from the cross validation are shown in the graph below. The highest mean test accuracy of 0.64 is realized for alpha=1.0. The corresponding mean train accuracy is 0.76. For alpha=0.0 the train and test accuracy is 0.81 and 0.64. Increasing the value of alpha to 1.0 decreases the overfit but further increasing alpha decreases the accuracy. This is because higher values of alpha lead to underfitting. Hence the model with alpha=1.0 is saved and used for inference in the deployed model. 
 
