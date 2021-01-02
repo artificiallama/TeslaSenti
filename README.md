@@ -162,7 +162,7 @@ A MVP has been demonstrated.
 
 (6) A more engaging graph could be presented by allowing the respective tweet to be shown if the user hovers over a particular point on the graph.
 
-(7) The data preprocessing should include removal of tweets with expletives / profane language. It should also filter out tweets with obscene images.
+(7) The data preprocessing should include removal of tweets with expletives / profane language. It should also filter out tweets with obscene images. Another issue in preprocessing is that of stemming versus lemmatizing. Porter stemming is used. It is possible that lemmatizing instead of stemming can have a positive impact on the scores [[30]](#30), [[31]](#31).
 
 (8) Use SQL database rather than csv files.
 
@@ -200,6 +200,13 @@ https://curiousily.com/posts/sentiment-analysis-with-bert-and-hugging-face-using
 
 <a id="13">[13]</a>
 https://scikit-learn.org/stable/modules/naive_bayes.html
+
+
+<a id="30">[30]</a>
+https://towardsdatascience.com/stemming-lemmatization-what-ba782b7c0bd8
+
+<a id="31">[31]</a>
+M. Toman, R. Tesar, and K. Jezek, “Influence of word normalization on text classification,” Proceedings of InSciT, pp. 354–358, 2006.
 
 https://www.kaggle.com/ankurzing/sentiment-analysis-for-financial-news
 
