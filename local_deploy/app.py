@@ -68,8 +68,8 @@ def home():
     for kk in np.arange(nrows-4,nrows):  
         #print('\n\t** kk = ',kk, df.iloc[kk]['id'])
         #print('\t** screenname = ',df.iloc[kk]['screen_name'])
-        print('\t** tweet = ',df.iloc[kk]['tweet'])    
-        print('\t** senti = ',df.iloc[kk]['senti'],df.iloc[kk]['wt_senti'])   
+        #print('\t** tweet = ',df.iloc[kk]['tweet'])    
+        #print('\t** senti = ',df.iloc[kk]['senti'],df.iloc[kk]['wt_senti'])   
         htmlcode = get_tweet_embed_html(df.iloc[kk]['screen_name'],str(df.iloc[kk]['id']))
         tweet_embed.append(htmlcode)
 
@@ -77,8 +77,10 @@ def home():
     fnms='tweets_latest_subset_2020-07-13_17-14-17_to_2020-07-13_17-19-17.csv'
 
     timenow = tm.current_time()
-    tminus = tm.lag_time(timenow,cvars.time_horizon1)
-
+    tminus = pd.Series(tm.lag_time(timenow,cvars.time_horizon1)).dt.floor('60min')[0]
+    print('\n\ttimenow = ',timenow)
+    print('\ttminus  = ',tminus)
+	
     cond =  df['date'].apply(lambda x : tm.isin_window(tminus,timenow,tm.dstr_obj(x)))
     df.drop(index=df[~cond].index,inplace=True)
 
@@ -116,8 +118,12 @@ def give_graph(dfin,tnow):
     fig.add_trace(longser,row=1,col=1)
     fig.add_trace(longavg2,row=1,col=1)
     fig.add_trace(longavg,row=1,col=1)
+
+    tminus = pd.Series(tm.lag_time(tnow,cvars.time_horizon2)).dt.floor('5min')[0]
+    print('\n\ttimenow = ',tnow)
+    print('\ttminus  = ',tm.lag_time(tnow,cvars.time_horizon2))
+    print('\ttminus  = ',tminus)
 	
-    tminus = tm.lag_time(tnow,cvars.time_horizon2)
     cond =  dfin['dtobj'].apply(lambda x : tm.isin_window(tminus,tnow,x))
     dfin.drop(index=dfin[~cond].index,inplace=True)	
 
