@@ -10,11 +10,12 @@ cols_display = ['id', 'date', 'tweet', 'senti', 'wt_senti', 'screen_name', 'tidy
 
 # any tweets with more than cash_thresh cashtags are removed.
 cash_thresh = 5
+# Frequency at which the streaming database is read in by tweet processing code
 nsecs=20
 
 # sentiment index for how many minutes before current time should be shown in the graph ?
 time_horizon1=24*60
-time_horizon2=120
+time_horizon2=30
 
 # Tick interval on xaxis of the plotly graph. The unit of tick_step is minutes. The unit expected by plotly
 # is milliseconds.
