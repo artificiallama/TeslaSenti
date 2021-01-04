@@ -102,7 +102,7 @@ def give_graph(dfin,tnow):
     longavg2 = go.Scatter(x=dfavg1.index.tolist(), y=sentiarr, mode='lines+markers', marker=dict(color='green'))	
     longavg  = go.Scatter(x=dfavg1.index.tolist(), y=bound_senti, mode='markers', marker=dict(color='Red'))
 	
-    fig.add_trace(longser,row=1,col=1)
+    #fig.add_trace(longser,row=1,col=1)
     fig.add_trace(longavg2,row=1,col=1)
     fig.add_trace(longavg,row=1,col=1)
 
@@ -125,12 +125,12 @@ def give_graph(dfin,tnow):
         shortavg2 = go.Scatter(x=dfavg2.index.tolist(), y=sentiarr, mode='lines+markers', marker=dict(color='green'))
         shortavg = go.Scatter(x=dfavg2.index.tolist(), y=bound_senti, mode='markers', marker=dict(color='Red'))
 	
-        fig.add_trace(shortser,row=1,col=2)
+        #fig.add_trace(shortser,row=1,col=2)
         fig.add_trace(shortavg2,row=1,col=2)
         fig.add_trace(shortavg,row=1,col=2)		
 	
     fig.update_layout(xaxis1={'type':'date','tickmode':'linear',
-                             'dtick': cvars.tick_step1*60*1000,
+                             'dtick': cvars.tick_step1*3*60*1000,
                             },
 		             xaxis2={'type':'date','tickmode':'linear',
                              'dtick': cvars.tick_step2*60*1000,
