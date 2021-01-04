@@ -262,26 +262,26 @@ flake8 can be installed with,
 conda is an environment management system. It can be used to create a consistent enviroment across different systems. Following are some
 useful commands. To create a environment,
 
-<code>>>conda env create --file conda.yaml</code>
+<code>>> conda env create --file conda.yaml</code>
 
 To list all created environments (active are shown with asterisk),
 
-<code>>>conda env list </code>
+<code>>> conda env list </code>
 
 To activate environment named conda-tesla,
 
-<code>>>conda activate conda-tesla </code>
+<code>>> conda activate conda-tesla </code>
 
 To deactivate a currently active environment,
 
-<code>>>conda deactivate</code>
+<code>>> conda deactivate</code>
 
 To delete an environment,
 
-<code>>>conda env remove --name conda-tesla</code>
+<code>>> conda env remove --name conda-tesla</code>
 
 To list the packages loaded and their versions use,
-<code>>>pip list</code>
+<code>>> pip list</code>
 
-<code>>>pip freeze</code>
+<code>>> pip freeze</code>
 
