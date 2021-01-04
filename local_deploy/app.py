@@ -139,7 +139,7 @@ def give_graph(dfin,tnow):
 							 'title' : { 'text':'Sentiment', 'font' : {'size':30} },
 							 'tickfont' : {'size' : 15},
                            },
-                     yaxis2={'range':[-2,2]},					                       					  
+                     yaxis2={'range':[-2,2], 'tickfont' : {'size' : 15}},				  
                      margin=dict(l=20, r=20, t=20, b=20), paper_bgcolor="LightSteelBlue")
 	
     fig.update_layout(height=400,width=1000)
