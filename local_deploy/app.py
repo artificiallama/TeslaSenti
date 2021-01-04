@@ -43,7 +43,7 @@ def create_tweet_url(screen_name,id_str):
 def home():
 
     print('\n----Entered home : request.method = ',request.method)
-    params = request.args.to_dict()
+    # params = request.args.to_dict()
     # print('\tparams = ',params)
 
     while True:
@@ -56,13 +56,6 @@ def home():
     df = pd.read_csv('data_tweets/senti_tweets.csv', names = cvars.cols_display)
     nrows = df.shape[0]
   
-    if not params:
-        cc = 0
-    else:
-        cc = int(params['ccount'])
-
-    # print('\tnrows = ',nrows)
-
     tweet_embed = []
 
     for kk in np.arange(nrows-4,nrows):  
@@ -73,9 +66,6 @@ def home():
         htmlcode = get_tweet_embed_html(df.iloc[kk]['screen_name'],str(df.iloc[kk]['id']))
         tweet_embed.append(htmlcode)
 
-    cc += 1   
-    fnms='tweets_latest_subset_2020-07-13_17-14-17_to_2020-07-13_17-19-17.csv'
-
     timenow = tm.current_time()
     tminus = pd.Series(tm.lag_time(timenow,cvars.time_horizon1)).dt.floor('60min')[0]
     # print('\n\ttimenow = ',timenow)
@@ -84,16 +74,13 @@ def home():
     cond =  df['date'].apply(lambda x : tm.isin_window(tminus,timenow,tm.dstr_obj(x)))
     df.drop(index=df[~cond].index,inplace=True)
 
-    # print('\n\tdf.shape = ',df.shape)
-
     if not df.empty:
         df['dtobj'] = df['date'].apply(lambda x : tm.dstr_obj(x))
         graphJSON = give_graph(df,timenow)
     else:
         graphJSON = {} 
-
 		
-    return render_template('home.html',plot=graphJSON,embed_tweet1 = tweet_embed[0], embed_tweet2 = tweet_embed[1], embed_tweet3 = tweet_embed[2], embed_tweet4 = tweet_embed[3],mycc=cc,dtgtime=fnms[26:45],utc=tm.current_time().strftime('%Y-%m-%d %H:%M:%S')+' UTC')
+    return render_template('home.html',plot=graphJSON,embed_tweet1 = tweet_embed[0], embed_tweet2 = tweet_embed[1], embed_tweet3 = tweet_embed[2], embed_tweet4 = tweet_embed[3],utc=tm.current_time().strftime('%Y-%m-%d %H:%M:%S')+' UTC')
 
 
  
