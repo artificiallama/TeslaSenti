@@ -13,6 +13,7 @@ Languages/packages used :
 * flask
 * unittest
 * flake8
+* conda
 
 # Table of contents
 1. [Introduction](#Introduction)
@@ -257,4 +258,26 @@ PEP8 compliance can be checked with,
 flake8 can be installed with,
 
 <code>>> sudo apt install flake8</code>
+
+conda is an environment management system. It can be used to create a consistent enviroment across different systems. Following are some
+useful commands. To create a environment,
+
+<code>>>conda env create --file conda.yaml</code>
+
+To list all created environments (active are shown with asterisk),
+
+<code>>>conda env list </code>
+
+To activate environment named conda-tesla,
+
+<code>>>conda activate conda-tesla </code>
+
+To deactivate a currently active environment,
+
+<code>>>conda deactivate</code>
+
+To delete an environment,
+
+<code>>>conda env remove --name conda-tesla</code>
+
 
