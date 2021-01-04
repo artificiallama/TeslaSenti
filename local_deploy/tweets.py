@@ -76,10 +76,11 @@ def sentiment_tweets():
 
     print('\n\t\tEntered sentiment_tweets : ')
 
+    # Deserialize the model
     with open('data/bayes_fit.pkl', 'rb') as f:
         count_vect, model = pickle.load(f)
 
-    skiprows = 0
+    # On entry (very first time the app is launched), make sure the file exists
     while True:
         if os.path.exists('data_tweets/streaming_tweets_save.csv'):
             break
@@ -87,50 +88,51 @@ def sentiment_tweets():
             print('\t\tsentiment_tweets() : Sleeping')
             time.sleep(20)
 
-    print('\t\tlatest_tweets() : streaming tweets file exists')
   
-    dftw_senti = pd.DataFrame(columns=cvars.cols_senti)
-  
+    dftw = pd.DataFrame(columns=cvars.cols_senti)
+
+    skiprows = 0	
     while True:
+        # Empty out dataframe, to be sure
+        dftw.drop(dftw.index, inplace=True)
+
 		# Read in only the latest tweets (Within last nsecs) using skiprows.
         dftw = pd.read_csv('data_tweets/streaming_tweets_save.csv', names=cvars.cols , skiprows=skiprows)
 
         shp = dftw.shape
 		
         cond_cash =  dftw['tweet'].apply(lambda x : tc.count_cashtags(x) > cvars.cash_thresh)
-        #print('\n\tcond_cash.value_counts = ',cond_cash.value_counts())
         dftw.drop(index=dftw[cond_cash].index,inplace=True)
 	
-        print('\n\tskiprows = ',skiprows)  
-        if dftw.shape[0] != 0:
-            # print('\n\tdftw.shape = ',shp)
-			# Empty out dataframe
-            dftw_senti.drop(dftw_senti.index, inplace=True)
+        print('\n\t^^ skiprows = ',skiprows)
+        print('\n^^ shape = ',dftw.shape)
 
-            dftw_senti[cvars.cols] =  dftw[cvars.cols].copy()
-           			
-            dftw_senti['tidy_tweet'] = dftw['tweet'].apply(lambda x : tc.clean_emoji_url(x))
-            dftw_senti['tidy_tweet'] = dftw_senti['tidy_tweet'].apply(lambda x : tc.remove_hashtag(x))
-            dftw_senti['tidy_tweet'] = dftw_senti['tidy_tweet'].apply(lambda x : tc.remove_cashtag(x))
-            dftw_senti['tidy_tweet'] = dftw_senti['tidy_tweet'].apply(lambda x : tc.remove_mention(x))
-            dftw_senti['tidy_tweet'] = dftw_senti['tidy_tweet'].apply(lambda x : tc.replace_chars(x))
-            dftw_senti['tidy_tweet'] = dftw_senti['tidy_tweet'].apply(lambda x : tc.normalize_doc(x))
+        if not dftw.empty:
+            print('\n\tIN dftw.shape = ',shp)
 
-            cond = dftw_senti['tidy_tweet'].apply(lambda x : tc.count_toks(x) == 0)
-            #print('\n\tcond.value_counts = ',cond.value_counts())
-            dftw_senti.drop(index=dftw_senti[cond].index,inplace=True)
-            print('\n')
+            dftw['tidy_tweet'] = dftw['tweet'].apply(lambda x : tc.clean_emoji_url(x))
+            dftw['tidy_tweet'] = dftw['tidy_tweet'].apply(lambda x : tc.remove_hashtag(x))
+            dftw['tidy_tweet'] = dftw['tidy_tweet'].apply(lambda x : tc.remove_cashtag(x))
+            dftw['tidy_tweet'] = dftw['tidy_tweet'].apply(lambda x : tc.remove_mention(x))
+            dftw['tidy_tweet'] = dftw['tidy_tweet'].apply(lambda x : tc.replace_chars(x))
+            dftw['tidy_tweet'] = dftw['tidy_tweet'].apply(lambda x : tc.normalize_doc(x))
+
+            cond = dftw['tidy_tweet'].apply(lambda x : tc.count_toks(x) == 0)
+            dftw.drop(index = dftw[cond].index,inplace=True)
+            print('\t^^ ',dftw.shape)
 			
-            for indx,row in dftw_senti.iterrows():
-                #print('\n\ttweet : {} |  senti  = {} '.format(row['tweet'], senti_index))
-                #print('\ttidytweet : {} '.format(row['tidy_tweet']))
-                #print('\t', dftw_senti.loc[indx,'retweet_count'],dftw_senti.loc[indx,'favorite_count'],dftw_senti.loc[indx,'verified'],dftw_senti.loc[indx,'followers_count'],dftw_senti.loc[indx,'friends_count'] )
-                dftw_senti.loc[indx,'senti'] =  model.predict(count_vect.transform([row['tidy_tweet']]))
-            dftw_senti['wt_senti'] = dftw_senti.apply(lambda x : weighted_senti(x['senti'],x['retweet_count']+x['favorite_count'],x['verified'],x['followers_count']+x['friends_count']), axis=1)	
-            dftw_senti[cvars.cols_display].to_csv('data_tweets/senti_tweets.csv', mode='a', header=False, index=False)
-    
+            if not dftw.empty:
+                print('\t** ',dftw.shape)
+                for indx,row in dftw.iterrows():
+                    dftw.loc[indx,'senti'] =  model.predict(count_vect.transform([row['tidy_tweet']]))
+                dftw['wt_senti'] = dftw.apply(lambda x : weighted_senti(x['senti'],x['retweet_count']+x['favorite_count'],x['verified'],x['followers_count']+x['friends_count']), axis=1)	
+                dftw[cvars.cols_display].to_csv('data_tweets/senti_tweets.csv', mode='a', header=False, index=False)
+
+        print('\t!! ',dftw.shape)
         skiprows += shp[0]
         time.sleep(cvars.nsecs)
+        # wait for the streaming to bring in new tweets.
+		# skiprows defines the boundary between old and new tweets.
 
 		
 # Neutral tweets are unaffected.
@@ -144,7 +146,7 @@ def weighted_senti(wt_senti,fav_retweet,verifyuser,foll_friend):
  if foll_friend > 10 :
   wt_senti = wt_senti * np.log10(foll_friend)
 
- # Double the index for verified users. 
+ # Double the impact for verified users. 
  if verifyuser:
   wt_senti = wt_senti * 2
 
