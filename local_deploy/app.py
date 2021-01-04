@@ -61,7 +61,7 @@ def home():
     else:
         cc = int(params['ccount'])
 
-    print('\tnrows = ',nrows)
+    # print('\tnrows = ',nrows)
 
     tweet_embed = []
 
@@ -78,13 +78,13 @@ def home():
 
     timenow = tm.current_time()
     tminus = pd.Series(tm.lag_time(timenow,cvars.time_horizon1)).dt.floor('60min')[0]
-    print('\n\ttimenow = ',timenow)
-    print('\ttminus  = ',tminus)
+    # print('\n\ttimenow = ',timenow)
+    # print('\ttminus  = ',tminus)
 	
     cond =  df['date'].apply(lambda x : tm.isin_window(tminus,timenow,tm.dstr_obj(x)))
     df.drop(index=df[~cond].index,inplace=True)
 
-    print('\n\tdf.shape = ',df.shape)
+    # print('\n\tdf.shape = ',df.shape)
 
     if not df.empty:
         df['dtobj'] = df['date'].apply(lambda x : tm.dstr_obj(x))
@@ -120,9 +120,9 @@ def give_graph(dfin,tnow):
     fig.add_trace(longavg,row=1,col=1)
 
     tminus = pd.Series(tm.lag_time(tnow,cvars.time_horizon2)).dt.floor('5min')[0]
-    print('\n\ttimenow = ',tnow)
-    print('\ttminus  = ',tm.lag_time(tnow,cvars.time_horizon2))
-    print('\ttminus  = ',tminus)
+    # print('\n\ttimenow = ',tnow)
+    # print('\ttminus  = ',tm.lag_time(tnow,cvars.time_horizon2))
+    # print('\ttminus  = ',tminus)
 	
     cond =  dfin['dtobj'].apply(lambda x : tm.isin_window(tminus,tnow,x))
     dfin.drop(index=dfin[~cond].index,inplace=True)	
