@@ -280,4 +280,8 @@ To delete an environment,
 
 <code>>>conda env remove --name conda-tesla</code>
 
+To list the packages loaded and their versions use,
+<code>>>pip list</code>
+
+<code>>>pip freeze</code>
 
