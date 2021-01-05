@@ -21,7 +21,7 @@ class StdOutListener(StreamListener):
 
         if 'retweeted_status' not in data:
             decoded = json.loads(data)
-            if (not decoded['is_quote_status'])  and (decoded['in_reply_to_status_id'] is None):
+            if (not decoded['is_quote_status']) and (decoded['in_reply_to_status_id'] is None):
                 if 'extended_tweet' in data:
                     write_txt = p.clean(decoded['extended_tweet']['full_text'])
                 else:
@@ -30,9 +30,11 @@ class StdOutListener(StreamListener):
                 with open('data_tweets/streaming_tweets_save.csv', 'a', encoding='utf-8', newline='') as file:
                     csvwriter = csv.writer(file)
                     csvwriter.writerow([decoded['id'], decoded['created_at'], write_txt,
-                        decoded['retweet_count'], decoded['favorite_count'], decoded['user']['screen_name'],
-                        decoded['user']['name'], decoded['user']['verified'], decoded['user']['followers_count'],
-                        decoded['user']['friends_count'], decoded['source'], decoded['user']['url']])
+                                        decoded['retweet_count'], decoded['favorite_count'],
+                                        decoded['user']['screen_name'], decoded['user']['name'],
+                                        decoded['user']['verified'], decoded['user']['followers_count'],
+                                        decoded['user']['friends_count'], decoded['source'],
+                                        decoded['user']['url']])
 
         # print('\nDone writing : on_data')
         return True
@@ -64,8 +66,8 @@ def live_stream():
     auth = tw.OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)
 
-    l = StdOutListener()
-    stream = tw.Stream(auth, l)
+    listener = StdOutListener()
+    stream = tw.Stream(auth, listener)
     print('\n\tCalled stream.filter')
     stream.filter(track=['tesla', 'tsla'], languages=['en'])
 
@@ -88,68 +90,70 @@ def sentiment_tweets():
             print('\t\tsentiment_tweets() : Sleeping')
             time.sleep(20)
 
-  
     dftw = pd.DataFrame(columns=cvars.cols_senti)
 
-    skiprows = 0	
+    skiprows = 0
     while True:
         # Empty out dataframe, to be sure
         dftw.drop(dftw.index, inplace=True)
 
-		# Read in only the latest tweets (Within last nsecs) using skiprows.
-        dftw = pd.read_csv('data_tweets/streaming_tweets_save.csv', names=cvars.cols , skiprows=skiprows)
+        # Read in only the latest tweets (Within last nsecs) using skiprows.
+        dftw = pd.read_csv('data_tweets/streaming_tweets_save.csv', names=cvars.cols,
+                           skiprows=skiprows)
 
         shp = dftw.shape
-		
-        cond_cash =  dftw['tweet'].apply(lambda x : tc.count_cashtags(x) > cvars.cash_thresh)
-        dftw.drop(index=dftw[cond_cash].index,inplace=True)
-	
-        print('\n\t^^ skiprows = ',skiprows)
-        print('\n^^ shape = ',dftw.shape)
+
+        cond_cash = dftw['tweet'].apply(lambda x: tc.count_cashtags(x) > cvars.cash_thresh)
+        dftw.drop(index=dftw[cond_cash].index, inplace=True)
+
+        # print('\n\t^^ skiprows = ',skiprows)
+        # print('\n^^ shape = ',dftw.shape)
 
         if not dftw.empty:
-            print('\n\tIN dftw.shape = ',shp)
 
-            dftw['tidy_tweet'] = dftw['tweet'].apply(lambda x : tc.clean_emoji_url(x))
-            dftw['tidy_tweet'] = dftw['tidy_tweet'].apply(lambda x : tc.remove_hashtag(x))
-            dftw['tidy_tweet'] = dftw['tidy_tweet'].apply(lambda x : tc.remove_cashtag(x))
-            dftw['tidy_tweet'] = dftw['tidy_tweet'].apply(lambda x : tc.remove_mention(x))
-            dftw['tidy_tweet'] = dftw['tidy_tweet'].apply(lambda x : tc.replace_chars(x))
-            dftw['tidy_tweet'] = dftw['tidy_tweet'].apply(lambda x : tc.normalize_doc(x))
+            dftw['tidy_tweet'] = dftw['tweet'].apply(lambda x: tc.clean_emoji_url(x))
+            dftw['tidy_tweet'] = dftw['tidy_tweet'].apply(lambda x: tc.remove_hashtag(x))
+            dftw['tidy_tweet'] = dftw['tidy_tweet'].apply(lambda x: tc.remove_cashtag(x))
+            dftw['tidy_tweet'] = dftw['tidy_tweet'].apply(lambda x: tc.remove_mention(x))
+            dftw['tidy_tweet'] = dftw['tidy_tweet'].apply(lambda x: tc.replace_chars(x))
+            dftw['tidy_tweet'] = dftw['tidy_tweet'].apply(lambda x: tc.normalize_doc(x))
 
-            cond = dftw['tidy_tweet'].apply(lambda x : tc.count_toks(x) == 0)
-            dftw.drop(index = dftw[cond].index,inplace=True)
-            print('\t^^ ',dftw.shape)
-			
+            cond = dftw['tidy_tweet'].apply(lambda x: tc.count_toks(x) == 0)
+            dftw.drop(index=dftw[cond].index, inplace=True)
+
             if not dftw.empty:
-                print('\t** ',dftw.shape)
-                for indx,row in dftw.iterrows():
-                    dftw.loc[indx,'senti'] =  model.predict(count_vect.transform([row['tidy_tweet']]))
-                dftw['wt_senti'] = dftw.apply(lambda x : weighted_senti(x['senti'],x['retweet_count']+x['favorite_count'],x['verified'],x['followers_count']+x['friends_count']), axis=1)	
-                dftw[cvars.cols_display].to_csv('data_tweets/senti_tweets.csv', mode='a', header=False, index=False)
+                for indx, row in dftw.iterrows():
+                    dftw.loc[indx, 'senti'] = model.predict(count_vect.transform([row['tidy_tweet']]))
+                dftw['wt_senti'] = dftw.apply(lambda x:
+                                              weighted_senti(x['senti'],
+                                              x['retweet_count']
+                                              + x['favorite_count'],
+                                              x['verified'],
+                                              x['followers_count']
+                                              + x['friends_count']),
+                                              axis=1)
+                dftw[cvars.cols_display].to_csv('data_tweets/senti_tweets.csv',
+                                          mode='a', header=False, index=False)
 
-        print('\t!! ',dftw.shape)
         skiprows += shp[0]
         time.sleep(cvars.nsecs)
         # wait for the streaming to bring in new tweets.
-		# skiprows defines the boundary between old and new tweets.
+        # skiprows defines the boundary between old and new tweets.
 
-		
+
 # Neutral tweets are unaffected.
-def weighted_senti(wt_senti,fav_retweet,verifyuser,foll_friend):
+def weighted_senti(wt_senti, fav_retweet, verifyuser, foll_friend):
 
- # In real-time it is unusual to find a favorited or retweeted tweet.	
- if fav_retweet > 0 :
-  wt_senti = wt_senti * 5.0 * fav_retweet
+    # In real-time it is unusual to find a favorited or retweeted tweet.
+    if fav_retweet > 0:
+        wt_senti = wt_senti * 5.0 * fav_retweet
 
- # foll_friend can be a huge number for some users. 
- if foll_friend > 10 :
-  wt_senti = wt_senti * np.log10(foll_friend)
+    # foll_friend can be a huge number for some users.
+    if foll_friend > 10:
+        wt_senti = wt_senti * np.log10(foll_friend)
 
- # Double the impact for verified users. 
- if verifyuser:
-  wt_senti = wt_senti * 2
+    # Double the impact for verified users.
+    if verifyuser:
+        wt_senti = wt_senti * 2
 
- return wt_senti 
-	
-	
+    return wt_senti
