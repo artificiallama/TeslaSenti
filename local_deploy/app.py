@@ -26,11 +26,16 @@ def get_tweet_embed_html(screenname, id_str):
                 "url": create_tweet_url(screenname, id_str),
             },
         ).json()['html']
-    except:
-        print('\trequests.get failed : ', screenname, id_str)
+    except requests.exceptions.RequestException as e:
+        print('\trequests.get failed : ', screenname, id_str, getrequest.status_code)
+        print('\t',e)
         getrequest = "tweet page not found"
-        pass
-
+        # pass
+    except json.decoder.JSONDecodeError as e:
+        print('\tJSON requests.get failed : ', screenname, id_str, getrequest.status_code)
+        print('\t',e)		
+        raise e
+		
     return getrequest
 
  
@@ -42,7 +47,7 @@ def create_tweet_url(screen_name,id_str):
 @app.route('/',methods=['GET'])
 def home():
 
-    print('\n----Entered home : request.method = ',request.method)
+    #print('\n----Entered home : request.method = ',request.method)
     # params = request.args.to_dict()
     # print('\tparams = ',params)
 
@@ -73,6 +78,7 @@ def home():
 	
     cond =  df['date'].apply(lambda x : tm.isin_window(tminus,timenow,tm.dstr_obj(x)))
     df.drop(index=df[~cond].index,inplace=True)
+    print('\n\t',df.shape)
 
     if not df.empty:
         df['dtobj'] = df['date'].apply(lambda x : tm.dstr_obj(x))
@@ -99,10 +105,10 @@ def give_graph(dfin,tnow):
 
     sentiarr = dfavg1['wt_senti'].to_numpy()
     bound_senti = np.clip(sentiarr,a_min=-1.0,a_max=1.0)
-    longavg2 = go.Scatter(x=dfavg1.index.tolist(), y=sentiarr, mode='lines+markers', marker=dict(color='green'))	
-    longavg  = go.Scatter(x=dfavg1.index.tolist(), y=bound_senti, mode='markers', marker=dict(color='Red'))
+    longavg2 = go.Scatter(x=dfavg1.index.tolist(), y=sentiarr, mode='lines+markers', marker=dict(color='Red'))	
+    longavg  = go.Scatter(x=dfavg1.index.tolist(), y=bound_senti, mode='markers', marker=dict(color='green'))
 	
-    #fig.add_trace(longser,row=1,col=1)
+    fig.add_trace(longser,row=1,col=1)
     fig.add_trace(longavg2,row=1,col=1)
     fig.add_trace(longavg,row=1,col=1)
 
@@ -122,10 +128,10 @@ def give_graph(dfin,tnow):
         sentiarr = dfavg2['wt_senti'].to_numpy()
         bound_senti =  np.clip(sentiarr,a_min=-1.0,a_max=1.0)
 
-        shortavg2 = go.Scatter(x=dfavg2.index.tolist(), y=sentiarr, mode='lines+markers', marker=dict(color='green'))
-        shortavg = go.Scatter(x=dfavg2.index.tolist(), y=bound_senti, mode='markers', marker=dict(color='Red'))
+        shortavg2 = go.Scatter(x=dfavg2.index.tolist(), y=sentiarr, mode='markers+lines', marker=dict(color='Red'))
+        shortavg = go.Scatter(x=dfavg2.index.tolist(), y=bound_senti, mode='markers', marker=dict(color='green'))
 	
-        #fig.add_trace(shortser,row=1,col=2)
+        fig.add_trace(shortser,row=1,col=2)
         fig.add_trace(shortavg2,row=1,col=2)
         fig.add_trace(shortavg,row=1,col=2)		
 	
