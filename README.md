@@ -64,7 +64,7 @@ Labelled data from various sources are combined to obtain a dataset.
 The combined dataset is balanced.
 
 <p align="left">
-<img width="400" height="300" src="images/all_17844_sentiment.png">
+<img width="600" height="300" src="images/word_cloud_hist.png">
 </p>
 
 
