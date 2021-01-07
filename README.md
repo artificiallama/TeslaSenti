@@ -61,7 +61,7 @@ Labelled data from various sources are combined to obtain a dataset.
 
 8) Financial tweets from stocktwits.
 
-The combined dataset is balanced as shown by the histogram below. The bottom left shows top few words correlated with the negative sentiment. These are identified using the *chi2* test [[11]](#11). The bottom right shows those correlated with the positive sentiment class.
+The combined dataset is balanced as shown by the histogram below. The bottom left shows top few words correlated with the negative sentiment. These are identified using the *chi2* test [[3]](#3), [[4]](#4), [[11]](#11). The bottom right shows those correlated with the positive sentiment class.
 
 <p align="left">
 <img width="700" height="350" src="images/word_cloud_hist.png">
@@ -176,8 +176,14 @@ A MVP has been demonstrated. The heart of this product is the sentiment predicti
 <a id="1">[1]</a>
 Bartov, E., Faurel, L., & Mohanram, P. S. (2018). Can twitter help predict firm-level earnings and stock returns? Accounting Review, 93(3), 25-57. https://doi.org/10.2308/accr-51865
 
-<a id="1">[2]</a>
+<a id="2">[2]</a>
 Ranco G, Aleksovski D, Caldarelli G, Grčar M, Mozetič I (2015) The Effects of Twitter Sentiment on Stock Price Returns. PLoS ONE 10(9): e0138441. https://doi.org/10.1371/journal.pone.0138441
+
+<a id="3">[3]</a>
+http://ethen8181.github.io/machine-learning/text_classification/chisquare.html
+
+<a id="4">[4]</a>
+http://blog.datumbox.com/using-feature-selection-methods-in-text-classification/
 
 <a id="5">[5]</a>
 Malo, P., Sinha, A., Korhonen, P., Wallenius, J., & Takala, P. (2014). Good debt or bad debt: Detecting semantic orientations in economic texts. Journal of the Association for Information Science and Technology, 65(4), 782-796.
