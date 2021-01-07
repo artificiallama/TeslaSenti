@@ -61,7 +61,7 @@ Labelled data from various sources are combined to obtain a dataset.
 
 8) Financial tweets from stocktwits.
 
-The combined dataset is balanced as shown by the histogram below. The bottom left shows top few words correlated with the negative sentiment. These are identified using the *chi2* test [[3]](#3), [[4]](#4), [[11]](#11). The bottom right shows those correlated with the positive sentiment class.
+The combined dataset is balanced as shown by the histogram in the middle panel. The left panel shows top few words correlated with the negative sentiment. These are identified using the *chi2* test [[3]](#3), [[4]](#4), [[11]](#11). The right panel shows those correlated with the positive sentiment class.
 
 <p align="left">
 <img width="1000" height="300" src="images/word_cloud_horizontal_crop.png">
