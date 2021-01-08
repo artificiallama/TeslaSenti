@@ -137,7 +137,7 @@ Consider the negative sentiment class. Out of all the actual negative tweets 75%
 
 Experiments were carried out with two more models - LinearSVC and LogisticRegression [[12]](#12). However the results (in terms of test metrics and also overfitting) obtained were similar to those obtained using Naive Bayes. An important avenue that could be explored is using a deep learning model such as BERT [[20]](#20). However, typically deep learning models are data hungry and therefore the current size of training data might not suffice. Another approach to model improvement involves decreasing the vocabulary size by choosing the most important tokens (i.e. feature importance) by using chi2 [[12]](#12).
 
-The Naive Bayes model outputs the probability of each class given a sample. This probability can be used as a threshold to decide if the label of -1 (+1) should be accepted for decision making (buy/sell). However Naive Bayes is known to be a good classifier but bad estimator [[13]](#13). The probabilities calculated by Naive Bayes are not reliable.
+The Naive Bayes model outputs the probability of each class given a sample. This probability can be used as a threshold to decide if the label of -1 (+1) should be accepted for decision making (buy/sell). However Naive Bayes is known to be a good classifier but bad estimator [[18]](#18). The probabilities calculated by Naive Bayes are not reliable.
 
 ## App
 
