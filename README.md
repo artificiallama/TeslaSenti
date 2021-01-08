@@ -70,7 +70,8 @@ The combined dataset is balanced as shown by the histogram in the middle panel. 
 
 
 ## Anatomy of a tweet
-The tweet JSON object has a very rich payload. It contains information ranging from username, date and time, location, profile bio, number of friends and followers, whether the tweet is a  retweet, whether the tweet is a reply etc.
+The twitter streaming API ([[13]](#13), [[14]](#14)) is used in the application.
+The tweet JSON object has a very rich payload [[15]](#15) [[16]](#16)). It contains information ranging from username, date and time, location, profile bio, number of friends and followers, whether the tweet is a  retweet, whether the tweet is a reply etc.
 
 The existence of the <code>retweeted_status</code> token in json string indicates that the tweet is a retweet. A reply to a tweet has <code>in_reply_to_status_id</code> value not null. The <code>is_quote_status</code> field is true for tweets which quoted tweets. Retweets, replies and quoted tweets are eliminated at the top level (i.e. they are not written to file). The retweet count is used as a weight for the sentiment index and hence retweets should not be (double) counted. Replies and quoted tweets have context and are hence hard to analyse for sentiment.
 
@@ -209,6 +210,20 @@ http://blog.datumbox.com/using-feature-selection-methods-in-text-classification/
 <a id="12">[12]</a>
 https://towardsdatascience.com/multi-class-text-classification-with-scikit-learn-12f1e60e0a9f
 
+<a id="13">[13]</a>
+https://stackabuse.com/accessing-the-twitter-api-with-python/
+
+<a id="14">[14]</a>
+http://adilmoujahid.com/posts/2014/07/twitter-analytics/
+
+<a id="15">[15]</a>
+https://developer.twitter.com/en/docs/twitter-api/v1/data-dictionary/overview/intro-to-tweet-json
+
+<a id="16">[16]</a>
+http://docs.tweepy.org/en/latest/extended_tweets.html
+
+
+
 
 
 https://curiousily.com/posts/sentiment-analysis-with-bert-and-hugging-face-using-pytorch-and-python/
@@ -239,15 +254,11 @@ M. Toman, R. Tesar, and K. Jezek, “Influence of word normalization on text cla
 
 
 
-https://stackabuse.com/accessing-the-twitter-api-with-python/
 
-http://adilmoujahid.com/posts/2014/07/twitter-analytics/
 
-https://developer.twitter.com/en/docs/twitter-api/v1/data-dictionary/overview/intro-to-tweet-json
 
-https://developer.twitter.com/en/docs/twitter-api/v1/tweets/filter-realtime/api-reference/post-statuses-filter
 
-http://docs.tweepy.org/en/latest/extended_tweets.html
+
 
 https://www.tweetbinder.com/blog/twitter-impressions/
 
