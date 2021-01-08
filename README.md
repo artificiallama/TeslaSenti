@@ -251,9 +251,10 @@ M. Toman, R. Tesar, and K. Jezek, “Influence of word normalization on text cla
 
 
 ## Appendex
-Command to display csv file on linux/ubuntu command line :
-
+Command to display csv file on linux/ubuntu command line : <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <code>>> cat streaming_tweets_save.csv | column -t -s, | less -S </code>
+ 
+ $~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~$<code>>> cat streaming_tweets_save.csv | column -t -s, | less -S </code>
 
 Another convenient utility is csvtool. This can be installed in ubuntu with,
 
