@@ -39,7 +39,7 @@ A multiprocessing approach using three processors (p1,p2,p3) which carry out dif
 
 ## Data
 
-Labelled data from various sources are combined to obtain a dataset.
+Data from following sources are combined to obtain a dataset. Some of these are hand labelled.
 
 1) Financial news headlines (FinancialPhraseBank)  [[3]](#3), [[4]](#4).
 
