@@ -41,25 +41,25 @@ A multiprocessing approach using three processors (p1,p2,p3) which carry out dif
 
 Labelled data from various sources are combined to obtain a dataset.
 
-1) Financial news headlines (Please see the Kaggle reference)  [[3]](#3).
+1) Financial news headlines (FinancialPhraseBank)  [[3]](#3), [[4]](#4).
 
-2) FiQA headlines : This dataset is a part of an open challenge posed in 2018. The training dataset contains headlines from the finance domain which are annotated by a sentiment score. This labeling is done by domain experts. The sentiment score is a continuous value between -1 and 1. A threshold of 0.15 is chosen to discretize this sentiment score. Headlines with sentiment scores between -1 and -0.15 are labeled as negative sentiment, those between -0.15 and 0.15 are labelled as neutral and those between 0.15 and 1.0 are labeled as positive sentiment (Please see fiqa reference).
+2) FiQA headlines : This dataset [[5]](#5),  is a part of an open challenge posed in 2018. The training dataset contains headlines from the finance domain which are annotated by a sentiment score. This labeling is done by domain experts. The sentiment score is a continuous value between -1 and 1. A threshold of 0.15 is chosen to discretize this sentiment score. Headlines with sentiment scores between -1 and -0.15 are labeled as negative sentiment, those between -0.15 and 0.15 are labelled as neutral and those between 0.15 and 1.0 are labeled as positive sentiment.
 
-3) FiQA posts : Same as (2) above except that posts from blogs etc from financial domains are labelled rather than headlines (Please see fiqa reference).
+3) FiQA posts : Same as (2) above except that posts from blogs etc from financial domains are labelled rather than headlines.
 
-4) Tweets related to finance/stocks downloaded using the twitter API.
+4) Tweets related to finance/stocks downloaded using the twitter API [[6]](#6).
 
-5) Financial headlines downloaded from tiingo.
+5) Financial headlines downloaded from tiingo [[7]](#7).
 
-6) Tweets with keyword *tesla* downloaded using the twitter API.
+6) Tweets with keyword *tesla* downloaded using the twitter API [[6]](#6).
 
-7) Reviews of google apps : This dataset was constructed by Venelin Valkov (Please see the curiousily.com reference). It can be downloaded by,
+7) Reviews of google apps : This dataset was constructed by Venelin Valkov [[8]](#8). It can be downloaded by,
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code> !gdown --id 1S6qMioqPJjyBLpLVz4gmRTnJHnjitnuV </code>
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code> !gdown --id 1zdmewp7ayS4js4VtrJEHzAheSW-5NBZv </code>
 
-8) Financial tweets from stocktwits.
+8) Financial tweets from stocktwits  [[9]](#9).
 
 The combined dataset is balanced as shown by the histogram in the middle panel. The left panel shows top few words correlated with the negative sentiment. These are identified using the *chi2* test [[3]](#3), [[4]](#4), [[11]](#11). The right panel shows those correlated with the positive sentiment class.
 
@@ -182,6 +182,31 @@ Ranco G, Aleksovski D, Caldarelli G, Grčar M, Mozetič I (2015) The Effects of 
 <a id="3">[3]</a>
 Malo, P., Sinha, A., Korhonen, P., Wallenius, J., & Takala, P. (2014). Good debt or bad debt: Detecting semantic orientations in economic texts. Journal of the Association for Information Science and Technology, 65(4), 782-796.
 
+<a id="4">[4]</a>
+https://www.kaggle.com/ankurzing/sentiment-analysis-for-financial-news
+
+<a id="5">[5]</a>
+https://sites.google.com/view/fiqa
+
+<a id="6">[6]</a>
+https://developer.twitter.com/en/docs/twitter-api
+
+<a id="7">[7]</a>
+https://tiingo.com
+
+<a id="8">[8]</a>
+https://curiousily.com/posts/sentiment-analysis-with-bert-and-hugging-face-using-pytorch-and-python/
+
+<a id="9">[9]</a>
+https://stocktwits.com
+
+
+
+
+
+
+
+
 <a id="3">[3]</a>
 http://ethen8181.github.io/machine-learning/text_classification/chisquare.html
 
@@ -202,8 +227,7 @@ https://towardsdatascience.com/accuracy-precision-recall-or-f1-331fb37c5cb9
 <a id="11">[11]</a>
 https://towardsdatascience.com/multi-class-text-classification-with-scikit-learn-12f1e60e0a9f
 
-<a id="12">[12]</a>
-https://curiousily.com/posts/sentiment-analysis-with-bert-and-hugging-face-using-pytorch-and-python/
+
 
 <a id="13">[13]</a>
 https://scikit-learn.org/stable/modules/naive_bayes.html
@@ -215,17 +239,16 @@ https://towardsdatascience.com/stemming-lemmatization-what-ba782b7c0bd8
 <a id="31">[31]</a>
 M. Toman, R. Tesar, and K. Jezek, “Influence of word normalization on text classification,” Proceedings of InSciT, pp. 354–358, 2006.
 
-https://www.kaggle.com/ankurzing/sentiment-analysis-for-financial-news
 
-https://sites.google.com/view/fiqa
 
-https://tiingo.com
+
+
 
 
 
 https://towardsdatascience.com/create-dataset-for-sentiment-analysis-by-scraping-google-play-app-reviews-using-python-ceaaa0e41c1
 
-https://stocktwits.com
+
 
 https://stackabuse.com/accessing-the-twitter-api-with-python/
 
