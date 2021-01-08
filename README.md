@@ -259,7 +259,7 @@ Another convenient utility is csvtool. This can be installed in ubuntu with,
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <code>>> sudo apt-get install -y csvtool </code>
 
-A few selecetd columns can be displayed with,
+A few selected columns can be displayed with,
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <code>>> csvtool col 1,2,7 streaming_tweets_save.csv </code>
 
