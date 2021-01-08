@@ -145,7 +145,7 @@ Flask is used for the backend. Flask is a micro-framework. For example, it does 
 
 The refresh rate of the front end is controlled by using meta refresh. The HTML meta element is used with <code>http-equiv</code> parameter set to *refresh* and the <code>content</code> parameter equal to 120 seconds. This is the refresh time frequency.
 
-As stated above a multiprocessing strategy is employed. Processor p2 reads in the latest tweets (since the last read), cleans the tweets and runs the sentiment model which labels each tweet as negative (-1), neutral (0) or positive (+1). This sentiment index is multiplied by a weight which depends on the <code>verified</code> user status, <code>retweet_count</code>, <code>favorite_count</code>, <code>followers_count</code> and <code>friends_count</code>. These weights quantify the reach/impact/engagement of the particular tweet. Since the tweets are streaming for most tweets both <code>retweet_count</code> and <code>favorite_count</code> are zero. A factor of (5 x number of retweet+favs) is used as a weight. The number of friends/followers can be large for some users. Therefore log10(followers+friends) is used as weight if the number is more than 10. A dataset of streaming tweets is explored. It is found that only 152 out of 7258 have a verified account ! It is rare for a user to be a verified one. In such a case a factor of 2 is used to amplify the sentiment index. The weighted sentiment index so obtained is used in the graphs plotted and displayed by the app.
+As stated above a multiprocessing strategy is employed. Processor p2 reads in the latest tweets (since the last read), cleans the tweets and runs the sentiment model which labels each tweet as negative (-1), neutral (0) or positive (+1). This sentiment index is multiplied by a weight which depends on the <code>verified</code> user status, <code>retweet_count</code>, <code>favorite_count</code>, <code>followers_count</code> and <code>friends_count</code>. These weights quantify the reach/impact/engagement ([[21]](#21)) of the particular tweet. Since the tweets are streaming for most tweets both <code>retweet_count</code> and <code>favorite_count</code> are zero. A factor of (5 x number of retweet+favs) is used as a weight. The number of friends/followers can be large for some users. Therefore log10(followers+friends) is used as weight if the number is more than 10. A dataset of streaming tweets is explored. It is found that only 152 out of 7258 have a verified account ! It is rare for a user to be a verified one. In such a case a factor of 2 is used to amplify the sentiment index. The weighted sentiment index so obtained is used in the graphs plotted and displayed by the app.
 
 ## Future work
 
@@ -162,7 +162,7 @@ A MVP has been demonstrated. The heart of this product is the sentiment predicti
 
 (5) A more engaging graph could be presented by allowing the respective tweet to be shown if the user hovers over a particular point on the graph.
 
-(6) The data preprocessing should include removal of tweets with expletives / profane language. It should also filter out tweets with obscene images. Another issue in preprocessing is that of stemming versus lemmatizing. Porter stemming is used. It is possible that lemmatizing instead of stemming can have a positive impact on the scores [[30]](#30). However a study [[31]](#31) shows that stemming versus lemmatization does not have significant impact on text classification.
+(6) The data preprocessing should include removal of tweets with expletives / profane language. It should also filter out tweets with obscene images. Another issue in preprocessing is that of stemming versus lemmatizing. Porter stemming is used. It is possible that lemmatizing instead of stemming can have a positive impact on the scores [[22]](#22). However a study [[23]](#23) shows that stemming versus lemmatization does not have significant impact on text classification.
 
 (7) Use SQL database rather than csv files.
 
@@ -234,23 +234,16 @@ https://towardsdatascience.com/accuracy-precision-recall-or-f1-331fb37c5cb9
 <a id="20">[20]</a>
 https://curiousily.com/posts/sentiment-analysis-with-bert-and-hugging-face-using-pytorch-and-python/
 
-
-
-
-
-
-
-
-<a id="30">[30]</a>
-https://towardsdatascience.com/stemming-lemmatization-what-ba782b7c0bd8
-
-<a id="31">[31]</a>
-M. Toman, R. Tesar, and K. Jezek, “Influence of word normalization on text classification,” Proceedings of InSciT, pp. 354–358, 2006.
-
-
+<a id="21">[21]</a>
 https://www.tweetbinder.com/blog/twitter-impressions/
 
-https://www.python.org/dev/peps/pep-0008/
+<a id="22">[22]</a>
+https://towardsdatascience.com/stemming-lemmatization-what-ba782b7c0bd8
+
+<a id="23">[23]</a>
+M. Toman, R. Tesar, and K. Jezek, “Influence of word normalization on text classification,” Proceedings of InSciT, pp. 354–358, 2006.
+
+<!--  https://www.python.org/dev/peps/pep-0008/ -->
 
 <!--  https://towardsdatascience.com/apply-and-lambda-usage-in-pandas-b13a1ea037f7 -->
 
