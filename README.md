@@ -61,7 +61,7 @@ Data from following sources are combined to obtain a dataset. Some of these are 
 
 8) Financial tweets from stocktwits  [[9]](#9).
 
-The combined dataset is balanced as shown by the histogram in the middle panel. The left panel shows top few words (strongly) related with the negative sentiment. These are identified using the *chi2* test [[3]](#3), [[4]](#4), [[11]](#11). The right panel shows those  (strongly) related with the positive sentiment class.
+The combined dataset is balanced as shown by the histogram in the middle panel. The left panel shows top few words (strongly) related with the negative sentiment. These are identified using the *chi2* test [[10]](#10), [[11]](#11), [[12]](#12). The right panel shows those  (strongly) related with the positive sentiment class.
 
 <p align="left">
 <img width="1000" height="300" src="images/word_cloud_horizontal_crop.png">
@@ -200,18 +200,17 @@ https://curiousily.com/posts/sentiment-analysis-with-bert-and-hugging-face-using
 <a id="9">[9]</a>
 https://stocktwits.com
 
-
-
-
-
-
-
-
-<a id="3">[3]</a>
+<a id="10">[10]</a>
 http://ethen8181.github.io/machine-learning/text_classification/chisquare.html
 
-<a id="4">[4]</a>
+<a id="11">[11]</a>
 http://blog.datumbox.com/using-feature-selection-methods-in-text-classification/
+
+<a id="12">[12]</a>
+https://towardsdatascience.com/multi-class-text-classification-with-scikit-learn-12f1e60e0a9f
+
+
+
 
 
 
@@ -224,9 +223,6 @@ https://scikit-learn.org/stable/modules/naive_bayes.html
 <a id="10">[10]</a>
 https://towardsdatascience.com/accuracy-precision-recall-or-f1-331fb37c5cb9
 
-<a id="11">[11]</a>
-https://towardsdatascience.com/multi-class-text-classification-with-scikit-learn-12f1e60e0a9f
-
 
 
 <a id="13">[13]</a>
@@ -238,12 +234,6 @@ https://towardsdatascience.com/stemming-lemmatization-what-ba782b7c0bd8
 
 <a id="31">[31]</a>
 M. Toman, R. Tesar, and K. Jezek, “Influence of word normalization on text classification,” Proceedings of InSciT, pp. 354–358, 2006.
-
-
-
-
-
-
 
 
 https://towardsdatascience.com/create-dataset-for-sentiment-analysis-by-scraping-google-play-app-reviews-using-python-ceaaa0e41c1
