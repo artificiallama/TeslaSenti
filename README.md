@@ -195,7 +195,7 @@ https://developer.twitter.com/en/docs/twitter-api
 https://tiingo.com
 
 <a id="8">[8]</a>
-https://curiousily.com/posts/sentiment-analysis-with-bert-and-hugging-face-using-pytorch-and-python/
+https://towardsdatascience.com/create-dataset-for-sentiment-analysis-by-scraping-google-play-app-reviews-using-python-ceaaa0e41c1
 
 <a id="9">[9]</a>
 https://stocktwits.com
@@ -211,7 +211,7 @@ https://towardsdatascience.com/multi-class-text-classification-with-scikit-learn
 
 
 
-
+https://curiousily.com/posts/sentiment-analysis-with-bert-and-hugging-face-using-pytorch-and-python/
 
 
 <a id="8">[8]</a>
@@ -236,7 +236,6 @@ https://towardsdatascience.com/stemming-lemmatization-what-ba782b7c0bd8
 M. Toman, R. Tesar, and K. Jezek, “Influence of word normalization on text classification,” Proceedings of InSciT, pp. 354–358, 2006.
 
 
-https://towardsdatascience.com/create-dataset-for-sentiment-analysis-by-scraping-google-play-app-reviews-using-python-ceaaa0e41c1
 
 
 
