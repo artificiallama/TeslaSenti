@@ -253,47 +253,48 @@ M. Toman, R. Tesar, and K. Jezek, “Influence of word normalization on text cla
 ## Appendex
 Command to display csv file on linux/ubuntu command line :
 
-<code>>> cat streaming_tweets_save.csv | column -t -s, | less -S </code>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <code>>> cat streaming_tweets_save.csv | column -t -s, | less -S </code>
 
 Another convenient utility is csvtool. This can be installed in ubuntu with,
 
-<code>>> sudo apt-get install -y csvtool </code>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <code>>> sudo apt-get install -y csvtool </code>
 
 A few selecetd columns can be displayed with,
 
-<code>>> csvtool col 1,2,7 streaming_tweets_save.csv </code>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <code>>> csvtool col 1,2,7 streaming_tweets_save.csv </code>
 
 PEP8 compliance can be checked with,
 
-<code>>> flake8 yourcode.py </code>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <code>>> flake8 yourcode.py </code>
 
 flake8 can be installed with,
 
-<code>>> sudo apt install flake8</code>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <code>>> sudo apt install flake8</code>
 
 conda is an environment management system. It can be used to create a consistent enviroment across different systems. Following are some
 useful commands. To create a environment,
 
-<code>>> conda env create --file conda.yaml</code>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <code>>> conda env create --file conda.yaml</code>
 
 To list all created environments (active are shown with asterisk),
 
-<code>>> conda env list </code>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <code>>> conda env list </code>
 
 To activate environment named conda-tesla,
 
-<code>>> conda activate conda-tesla </code>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <code>>> conda activate conda-tesla </code>
 
 To deactivate a currently active environment,
 
-<code>>> conda deactivate</code>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <code>>> conda deactivate</code>
 
 To delete an environment,
 
-<code>>> conda env remove --name conda-tesla</code>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <code>>> conda env remove --name conda-tesla</code>
 
 To list the packages loaded and their versions use,
-<code>>> pip list</code>
 
-<code>>> pip freeze</code>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <code>>> pip list</code>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <code>>> pip freeze</code>
 
