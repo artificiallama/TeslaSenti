@@ -99,9 +99,9 @@ In case the <code>extended_tweet</code> is available the <code>full_text</code> 
 
 ## Preprocessing of data and training
 
-The streaming tweets with either of tokens *tesla*, *tsla*, *elon* and *musk* are collected. The same cleaning process is applied to  headlines, reviews, posts and tweets though most of the cleaning operations apply to tweets. Also it is important to ensure that the same preprocessing is applied to the data during training of the model and to the streaming tweets in the live app (model inference). 
+The same preprocessing is applied to the data during training of the model and to the streaming tweets in the live app (before model inference). During training, the same cleaning process is applied to the headlines, reviews, posts and tweets though most of the cleaning operations are important only for tweets. For example emojis and urls are never present in newspaper headlines. The streaming tweets with either of tokens *tesla*, *tsla*, *elon* and *musk* are collected for the live app. 
 
-Tweets with too many cashtags are dropped. It is noticed that most of such tweets are advertisements. An example of such a tweet is shown below. It has 13 cashtags ($fb, $aapl, $amzn, etc) and is clearly an advertisement.
+Firstly, tweets with too many cashtags are dropped. It is noticed that most of such tweets are advertisements. An example of such a tweet is shown below. It has 13 cashtags ($fb, $aapl, $amzn, etc) and is clearly an advertisement.
 
 <p align="left">
 <img width="600" height="100" src="images/too_many_cashtags10.png">
