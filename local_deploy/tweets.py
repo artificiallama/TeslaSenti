@@ -98,8 +98,8 @@ def sentiment_tweets():
         dftw.drop(dftw.index, inplace=True)
 
         # Read in only the latest tweets (Within last nsecs) using skiprows.
-        dftw = pd.read_csv('data_tweets/streaming_tweets_save.csv', names=cvars.cols,
-                           skiprows=skiprows)
+        dftw = pd.read_csv('data_tweets/streaming_tweets_save.csv',
+                          names=cvars.cols, skiprows=skiprows)
 
         shp = dftw.shape
 
@@ -122,16 +122,17 @@ def sentiment_tweets():
             dftw.drop(index=dftw[cond].index, inplace=True)
 
             if not dftw.empty:
+                # iterrows is inefficient. However the number of rows being
+                # processed is small.
                 for indx, row in dftw.iterrows():
                     dftw.loc[indx, 'senti'] = model.predict(count_vect.transform([row['tidy_tweet']]))
-                dftw['wt_senti'] = dftw.apply(lambda x:
-                                              weighted_senti(x['senti'],
-                                              x['retweet_count']
-                                              + x['favorite_count'],
-                                              x['verified'],
-                                              x['followers_count']
-                                              + x['friends_count']),
-                                              axis=1)
+                dftw['wt_senti'] = dftw.apply(
+                                   lambda x:
+                                   weighted_senti(x['senti'],
+                                   x['retweet_count'] + x['favorite_count'],
+                                   x['verified'],
+								   x['followers_count'] + x['friends_count']),
+                                   axis=1)
                 dftw[cvars.cols_display].to_csv('data_tweets/senti_tweets.csv',
                                           mode='a', header=False, index=False)
 
