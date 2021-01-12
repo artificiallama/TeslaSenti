@@ -131,7 +131,7 @@ def sentiment_tweets():
                                    weighted_senti(x['senti'],
                                    x['retweet_count'] + x['favorite_count'],
                                    x['verified'],
-								   x['followers_count'] + x['friends_count']),
+                                   x['followers_count'] + x['friends_count']),
                                    axis=1)
                 dftw[cvars.cols_display].to_csv('data_tweets/senti_tweets.csv',
                                           mode='a', header=False, index=False)
