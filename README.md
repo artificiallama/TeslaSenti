@@ -147,6 +147,14 @@ The refresh rate of the front end is controlled by using meta refresh. The HTML 
 
 As stated above a multiprocessing strategy is employed. Processor p2 reads in the latest tweets (since the last read), cleans the tweets and runs the sentiment model which labels each tweet as negative (-1), neutral (0) or positive (+1). This sentiment index is multiplied by a weight which depends on the <code>verified</code> user status, <code>retweet_count</code>, <code>favorite_count</code>, <code>followers_count</code> and <code>friends_count</code>. These weights quantify the reach/impact/engagement ([[21]](#21)) of the particular tweet. Since the tweets are streaming for most tweets both <code>retweet_count</code> and <code>favorite_count</code> are zero. A factor of (5 x number of retweet+favs) is used as a weight. The number of friends/followers can be large for some users. Therefore log10(followers+friends) is used as weight if the number is more than 10. A dataset of streaming tweets is explored. It is found that only 152 out of 7258 have a verified account ! It is rare for a user to be a verified one. In such a case a factor of 2 is used to amplify the sentiment index. The weighted sentiment index so obtained is used in the graphs plotted and displayed by the app.
 
+<p align="left">
+<img width="1000" height="500" src="images/frontend_full_crop.png">
+</p>
+
+<p align="left">
+<img width="1000" height="500" src="images/frontend_half_crop.png">
+</p>
+
 ## Future work
 
 <p align="justify">
