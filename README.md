@@ -107,7 +107,7 @@ Firstly, tweets with too many cashtags are dropped. It is noticed that most of s
 <img width="600" height="100" src="images/too_many_cashtags10.png">
 </p>
 
-If emoji's and url's are present these are purged from tweets. Hastags, cashtags, mentions and embedded charts are removed. Punctuations, digits, symbols and stop word are removed and the tokens are stemmed. Finally the empty tweets are removed. It is possible that after the cleaning is done some tweets end up with zero tokens.
+If emoji's and url's are present these are purged from tweets. Hastags, cashtags, mentions and embedded charts are removed. Punctuations, digits, symbols and stop word are removed and the tokens are stemmed. Finally the empty tweets are removed. It is possible that after the cleaning is done some tweets end up with zero tokens. These are purged.
 
 One of the issues is that some irrelevant tweets are included. This is because *musk* is one of the tokens used in the criterion to filter streaming tweets. Since *musk* has a dictionary meaning apart from being Elon's last name some tweets not relevant to Tesla are included in the sentiment analysis. An example of such a tweet is shown below. A possible solution to this problem is to delete the token *musk* from the filter criterion. Another issue is the inclusion of tweets which are not directly relevant to Tesla. A substantial portion of such tweets are of personal nature directed at Elon Musk. An example of such a tweet is shown below. It was decided to drop tokens *elon* and  *musk* from the filter criteria of the streaming tweets. This eliminates frivolous tweets but at the same time also eliminates some bonafide tweets which are closely related to Tesla.
 
@@ -166,7 +166,7 @@ A MVP has been demonstrated. The heart of this product is the sentiment predicti
 
 (5) A more engaging graph could be presented by allowing the respective tweet to be shown if the user hovers over a particular point on the graph.
 
-(6) The data preprocessing should include removal of tweets with expletives / profane language. It should also filter out tweets with obscene images. Another issue in preprocessing is that of stemming versus lemmatizing. Porter stemming is used. It is possible that lemmatizing instead of stemming can have a positive impact on the scores [[22]](#22). However a study [[23]](#23) shows that stemming versus lemmatization does not have significant impact on text classification.
+(6) The data preprocessing should include removal of tweets with expletives / profane language. It should also filter out tweets with obscene images. It is noticed that some tweets which are advertisements are making through the preprocessing filters. One could improve the filtering by eliminating tweets with keywords like *signup*, *free*, etc. Another issue in preprocessing is that of stemming versus lemmatizing. Porter stemming is used. It is possible that lemmatizing instead of stemming can have a positive impact on the scores [[22]](#22). However a study [[23]](#23) shows that stemming versus lemmatization does not have significant impact on text classification.
 
 (7) Use SQL database rather than csv files.
 
