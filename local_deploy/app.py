@@ -25,6 +25,7 @@ def get_tweet_embed_html(screenname, id_str):
             params={
                 "url": create_tweet_url(screenname, id_str),
             },
+            timeout=1.0
         )
     except requests.exceptions.RequestException as e:
         print('\trequests.get failed : ', screenname, id_str)
