@@ -64,7 +64,7 @@ Data from following sources are combined to obtain a dataset. Some of these are 
 The combined dataset is balanced as shown by the histogram in the middle panel. The left panel shows top few words (strongly) related with the negative sentiment. These are identified using the *chi2* test [[10]](#10), [[11]](#11), [[12]](#12). The right panel shows those  (strongly) related with the positive sentiment class.
 
 <p align="left">
-<img width="1000" height="300" src="images/word_cloud_horizontal_crop.png">
+<img width="1000" height="250" src="images/word_cloud_horizontal_crop.png">
 </p>
 
 
