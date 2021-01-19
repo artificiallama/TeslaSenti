@@ -1,7 +1,7 @@
 # TeslaSenti
 Near real time sentiment analysis of streaming Tesla tweets with application to stock trading.
 
-This started as a capstone project for a 5-week workshop conducted by Aggregate Intellect's workshop in June, 2020, with two team members. The objective of this project is to fetch tweets about TESLA in real time, analyse them for sentiment and generate a buy/sell signal in near real-time. This sentiment index is displayed (and refreshed in near real time) on the front end in the form of a graph. This app is deployed locally.
+<!-- This started as a capstone project for a 5-week workshop conducted by Aggregate Intellect's workshop in June, 2020, with two team members. --> The objective of this project is to fetch tweets about TESLA in real time, analyse them for sentiment and generate a buy/sell signal in near real-time. This sentiment index is displayed (and refreshed in near real time) on the front end in the form of a graph. This app is deployed locally.
 
 Languages/packages used :
 * Tweepy
