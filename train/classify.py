@@ -10,6 +10,13 @@ import ML_methods as ML
 # import matplotlib.pyplot as plt
 
 if __name__ == '__main__':
+    """Train a classifier to label tweets with sentiments.
+
+    The labelled tweets are first cleaned, then features
+    are extracted using BOW and then a naive Bayes model
+    is fit. The best value of Laplace smoothing parameter
+    is identified using grid search. The best model is saved.
+    """
 
     fname = 'train_data/all_tweets_headlines_17844.csv'
 
@@ -17,30 +24,22 @@ if __name__ == '__main__':
 
     print('\n\tdf.shape = ', df.shape)
 
-    # print(df.head())
-
     df.dropna(axis=0, how='any', inplace=True)
 
-    # print(df.head())
     print('\n\tdf.shape = ', df.shape)
 
-    # non-unique indices messes up the drop indices call below.
+    # Non-unique indices messes up the drop indices call below.
     print('\n\tAre indices unique ? ', df.index.is_unique)
 
     if not df.index.is_unique:
         df.reset_index(drop=True, inplace=True)
 
-    # print('\nAre indices unique ? ', df.index.is_unique)
-
     # print(df[df.index.duplicated(keep=False)])
-
-    # print('\n\tdf.dtypes = ', df.dtypes)
 
     df['senti'] = df['senti'].astype('category')
 
-    # print('\n\tdf.dtypes = ', df.dtypes)
+    # --------Clean text-----------
 
-    # Clean text
     # Delete tweets with more than 10 cashtags
     cond10 = df['text'].apply(lambda x:
                               tc.count_cashtags(x) > cvars.cash_thresh)
@@ -53,8 +52,6 @@ if __name__ == '__main__':
     df['tidy_text'] = df['tidy_text'].apply(lambda x: tc.remove_mention(x))
     df['tidy_text'] = df['tidy_text'].apply(lambda x: tc.replace_chars(x))
     df['tidy_text'] = df['tidy_text'].apply(lambda x: tc.normalize_doc(x))
-
-    # print(df.head())
 
     # Drop rows with empty tidy_text. After cleaning it is possible that all
     # the tokens in tidy_text get deleted. For example, the following tweet
@@ -69,39 +66,34 @@ if __name__ == '__main__':
     df.drop(index=df[cond].index, inplace=True)
 
     print('\n\t', df['senti'].value_counts())
-    nrows = df.shape[0]
-    print('\n\tnrows = ', nrows)
+    print('\n\tnrows = ', df.shape[0])
 
-    print('\n\t----Start training\n')
     x_train, x_test, y_train, y_test = model_selection.train_test_split(
                        df['tidy_text'], df['senti'], test_size=0.33,
                        random_state=123, stratify=df['senti'])
 
-    # print('\n',isinstance(train_x,list))
     print('\n\tshape = ', np.shape(x_train), np.shape(x_test))
     print('\tshape = ', np.shape(y_train), np.shape(y_test))
 
     # print('\n\t', x_train.iloc[0], y_train.iloc[0])
     # print('\n\t', x_test.iloc[3], y_test.iloc[3])
 
+    # Extract features
     count_vect = CountVectorizer()
     count_vect.fit(x_train)
 
     xtrain_count = count_vect.transform(x_train)
     xtest_count = count_vect.transform(x_test)
 
-    check_params = {'alpha': [0.1, 0.5, 1.0, 3.0, 5.0, 10.0, 50.0, 1e2, 1e3, 1e4]}
-    # check_params = { 'C': [0.1, 0.5, 1.0, 3.0, 5.0, 10.0] ,
-    #				 'penalty' : ['l1',{'l2'] }
-    # check_params = { 'solver' : ['newton-cg', 'lbfgs', 'sag', 'saga'],
-    # 	               'penalty' : {'l1','l2','elasticnet'}  }
+    check_params = {'alpha': [0.1, 0.5, 1.0, 3.0, 5.0,
+                              10.0, 50.0, 1e2, 1e3, 1e4]}
 
     refit_score = 'accuracy_score'
 
-    # linear_model.LogisticRegression(max_iter=1000)
-    # svm.LinearSVC(max_iter=10000)
+    # Identify best value of alpha
     bestmodel, res = ML.grid_search_wrapper(naive_bayes.MultinomialNB(),
-                     xtrain_count, y_train, check_params, refit_score)
+                                            xtrain_count, y_train,
+                                            check_params, refit_score)
 
     print(res[['mean_test_score', 'mean_train_score', 'std_test_score',
                'std_train_score']])
@@ -119,9 +111,9 @@ if __name__ == '__main__':
     print('\n\tClassification report = \n')
     print(metrics.classification_report(y_test, predictions))
 
+    """
     arr = list(*check_params.values())
 
-    """
     hd = []
     plt.figure(1)
     h1,=plt.plot(arr, res[['mean_train_score']], 'b-o'); hd.append(h1)
@@ -134,8 +126,10 @@ if __name__ == '__main__':
 
     hd=[]
     plt.figure(2)
-    h1,=plt.plot(arr[0:6], res.loc['0':'5','mean_test_score'],  'r-o'); hd.append(h1)
-    h1,=plt.plot(arr[0:6], res.loc['0':'5','mean_train_score'], 'b-o'); hd.append(h1)
+    h1,=plt.plot(arr[0:6], res.loc['0':'5','mean_test_score'],  'r-o');
+    hd.append(h1)
+    h1,=plt.plot(arr[0:6], res.loc['0':'5','mean_train_score'], 'b-o');
+    hd.append(h1)
     plt.legend(hd,['train','test'],fontsize=15)
     plt.xlabel('Laplace smoothing parameter')
     plt.title('Mean accuracy K-fold crossvalidation (only showing alpha<=10)')
@@ -144,7 +138,7 @@ if __name__ == '__main__':
     plt.show()
     """
 
-    # with open('save_model/bayes_fit.pkl', 'wb') as fout:
-    #    pickle.dump((count_vect, model), fout)
+    with open('save_model/bayes_fit.pkl', 'wb') as fout:
+        pickle.dump((count_vect, bestmodel), fout)
 
     print('')
