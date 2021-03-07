@@ -35,7 +35,7 @@ def grid_search_wrapper(model, x_train, y_train, check_params, refit_score):
 
     res = pd.DataFrame(clf.cv_results_)
 
-    print('\n\tBest performer :')
+    print('\n\tBest performer : ')
 
     print('\tbest_params_ = ', clf.best_params_)
     print('\tbest_index_ = ', clf.best_index_)
