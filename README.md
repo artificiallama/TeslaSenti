@@ -176,6 +176,8 @@ A MVP has been demonstrated. The heart of this product is the sentiment predicti
 
 (9) In practice a trader will not rely on market sentiment alone to make a buy/sell decision. He/she would look at prediciton from a conventional model which includes various factors like correlation of tesla stock value with other stocks etc. Time series models are usually developed for this purpose. There is scope to integrate a sentiment analysis model with a conventional model. Such a combined model would generate a buy/sell signal taking into consideration all factors including sentiment.
 
+(10) Documentation using Sphinx [[24]](#24).
+
 </p>
 
 ## References 
@@ -248,6 +250,10 @@ https://towardsdatascience.com/stemming-lemmatization-what-ba782b7c0bd8
 
 <a id="23">[23]</a>
 M. Toman, R. Tesar, and K. Jezek, “Influence of word normalization on text classification,” Proceedings of InSciT, pp. 354–358, 2006.
+
+<a id="24">[24]</a>
+https://sphinx-rtd-tutorial.readthedocs.io/en/latest/docstrings.html
+
 
 <!--  https://www.python.org/dev/peps/pep-0008/ -->
 
