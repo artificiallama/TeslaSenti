@@ -20,10 +20,11 @@ Languages/packages used :
 2. [Data](#Data)
 3. [Anatomy of a tweet](#Anatomy-of-a-tweet)
 4. [Preprocessing of data and training](#Preprocessing-of-data-and-training)
-5. [App](#App)
-6. [Future work](#Future-work)
-7. [References](#References)
-8. [Appendex](#Appendex)
+5. [Feature selection](#Feature selection)
+6. [App](#App)
+7. [Future work](#Future-work)
+8. [References](#References)
+9. [Appendex](#Appendex)
 
 ## Introduction
 
@@ -142,7 +143,7 @@ The Naive Bayes model outputs the probability of each class given a sample. This
 ## Feature selection
 
 <p align="left">
-<img width="600" height="250" src="images/RF_featureselect.png">
+<img width="600" height="250" src="images/RF_featureselect_laplace.png">
 </p>
 
 ## App
