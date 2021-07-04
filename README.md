@@ -143,7 +143,7 @@ The Naive Bayes model outputs the probability of each class given a sample. This
 ## Feature selection
 
 <p align="left">
-<img width="600" height="250" src="images/RF_featureselect_laplace.png">
+<img width="500" height="250" src="images/RF_featureselect_laplace.png">
 </p>
 
 ## App
