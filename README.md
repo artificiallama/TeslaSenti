@@ -20,7 +20,7 @@ Languages/packages used :
 2. [Data](#Data)
 3. [Anatomy of a tweet](#Anatomy-of-a-tweet)
 4. [Preprocessing of data and training](#Preprocessing-of-data-and-training)
-5. [Feature selection](#Feature selection)
+5. [Feature selection](#Feature-selection)
 6. [App](#App)
 7. [Future work](#Future-work)
 8. [References](#References)
