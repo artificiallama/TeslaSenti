@@ -142,9 +142,14 @@ The Naive Bayes model outputs the probability of each class given a sample. This
 
 ## Feature selection
 
+The feature selection is done using Random forest feature importances. The features are ordered in the increasing order of importance. A 10-fold cross-validation is run for different values of Laplace parameter for different values of top N features. The figure below shows the result in which the solid lines are train accuracies and dotted lines are test accuracies. Each color is a different value of top N features used. The black curves use all the features.
+
 <p align="left">
-<img width="500" height="250" src="images/RF_featureselect_laplace.png">
+<img width="450" height="250" src="images/RF_featureselect_laplace.png">
 </p>
+
+From the above figure it is clear that the test accuracy for all values of top N are not very sensitive to the Laplace parameter. Using only the top 100 features results in a low train/test accuracy of about 0.53. The bias error is high because very few features are used. The test errors for all other values of top N features lie between 0.62 and 0.65. The overfitting is quantified by the gap between training and test accuracy for a given value of top N and Laplace parameter. The overfitting is least for topN = 2000. The overfitting is highest when all the features are used. Given an value of top N, the test accuracy is highest for smoothing parameter=1. 
+
 
 ## App
 
