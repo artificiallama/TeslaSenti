@@ -142,6 +142,10 @@ The Naive Bayes model outputs the probability of each class given a sample. This
 
 ## Feature selection
 
+For a given problem, all features (i.e. predictors) may not be equally important. It is possible to identify a subset of most important features and use them for model building rather than use all the available features. This decreases the noise leading to decrease in overfitting and also decreases the computational burden. While using cross-validation it is important to implement the feature selection within the folds of crossvalidation. It is incorrect to carry out feature selection using all the data and then use the most important subset of features to do the hyperparameter tuning using CV ([[25]](#25), [[26]](#26)). This is because information is leaked from the training to the testing data set since feature selection is based on all the data. The correct procedure is to include feature selection in the cross-validation. In 5-fold CV, feature selection is done using only 4/5 th of the (training) data for any given fold.
+
+The *pipeline* of transforms ([[27]](#27)) is used to combine feature selection with the identification of the best value of Laplace smoothing parameter within cross-validation. The feature selection is done using Chi2.
+
 The feature selection is done using Random forest feature importances. The features are ordered in the increasing order of importance. A 10-fold cross-validation is run for different values of Laplace parameter for different values of top N features. The figure below shows the result in which the solid lines are train accuracies and dotted lines are test accuracies. Each color is a different value of top N features used. The black curves use all the features.
 
 <p align="left">
