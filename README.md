@@ -274,6 +274,15 @@ M. Toman, R. Tesar, and K. Jezek, “Influence of word normalization on text cla
 <a id="24">[24]</a>
 https://sphinx-rtd-tutorial.readthedocs.io/en/latest/docstrings.html
 
+<a id="25">[25]</a>
+https://www.nodalpoint.com/not-perform-feature-selection/
+
+<a id="26">[26]</a>
+T. Hatie, R. Tibshirani, and J. Friedman, “Elements of Statistical Learning” Second edition, Section 7.10.2, pp. 245, 2008.
+
+<a id="27">[27]</a>
+https://medium.com/data-science-reporter/feature-selection-via-grid-search-in-supervised-models-4dc0c43d7ab1
+
 
 <!--  https://www.python.org/dev/peps/pep-0008/ -->
 
