@@ -154,6 +154,11 @@ From the above figure it is clear that the test accuracy for all values of top N
 <img width="450" height="250" src="images/chi2_featureselect_laplace.png">
 </p>
 
+<p align="left">
+<img  width="400" height="300" src="images/chi2_featureselect_laplace.png">
+
+<img  width="400" height="300" src="images/chi2_featureselect_laplace_few.png">
+</p>
 
 ## App
 
