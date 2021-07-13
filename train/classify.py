@@ -7,7 +7,7 @@ from sklearn import naive_bayes, metrics
 import pickle
 import cvars
 import ML_methods as ML
-# import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 
 if __name__ == '__main__':
     """Train a classifier to label tweets with sentiments.
@@ -111,7 +111,7 @@ if __name__ == '__main__':
     print('\n\tClassification report = \n')
     print(metrics.classification_report(y_test, predictions))
 
-    """
+
     arr = list(*check_params.values())
 
     hd = []
@@ -136,7 +136,7 @@ if __name__ == '__main__':
     plt.grid(True)
     #plt.savefig('figs/CV_accuracy_laplace_10.png', bbox_inches = 'tight')
     plt.show()
-    """
+
 
     with open('save_model/bayes_fit.pkl', 'wb') as fout:
         pickle.dump((count_vect, bestmodel), fout)
