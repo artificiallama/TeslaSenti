@@ -192,6 +192,7 @@ A MVP has been demonstrated. The heart of this product is the sentiment predicti
 
 (10) Documentation using Sphinx [[24]](#24).
 
+(11) Python does not check type hints at run time. Use software such as mypy to check type hinting in ML_methods.py.
 </p>
 
 ## References 
