@@ -1,8 +1,14 @@
+from sklearn import naive_bayes
 from sklearn.model_selection import GridSearchCV, StratifiedKFold
 import pandas as pd
+import numpy as np
+from typing import Dict, List, Tuple
 
 
-def grid_search_wrapper(model, x_train, y_train, check_params, refit_score):
+def grid_search_wrapper(
+    model: naive_bayes.MultinomialNB, x_train: np.ndarray,
+    y_train: pd.Series(dtype=float), check_params: Dict[str, List[float]],
+    refit_score: str) -> Tuple[naive_bayes.MultinomialNB, pd.DataFrame]:
     """Identify best parameters amongst check_params for fitting the model.
 
     The model is fitted using every combination of parameter values found
