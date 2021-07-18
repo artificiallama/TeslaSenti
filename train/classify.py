@@ -111,32 +111,32 @@ if __name__ == '__main__':
     print('\n\tClassification report = \n')
     print(metrics.classification_report(y_test, predictions))
 
-
     arr = list(*check_params.values())
 
     hd = []
     plt.figure(1)
-    h1,=plt.plot(arr, res[['mean_train_score']], 'b-o'); hd.append(h1)
-    h1,=plt.plot(arr, res[['mean_test_score']],  'r-o'); hd.append(h1)
-    plt.legend(hd,['train','test'],fontsize=15)
+    h1, = plt.plot(arr, res[['mean_train_score']], 'b-o')
+    hd.append(h1)
+    h1, = plt.plot(arr, res[['mean_test_score']],  'r-o')
+    hd.append(h1)
+    plt.legend(hd, ['train', 'test'], fontsize=15)
     plt.grid(True)
-    plt.title('Mean accuracy K-fold crossvalidation',fontsize=15)
+    plt.title('Mean accuracy K-fold crossvalidation', fontsize=15)
     plt.xlabel('Laplace smoothing parameter')
-    #plt.savefig('figs/CV_accuracy_laplace.png', bbox_inches = 'tight')
+    plt.savefig('figs/CV_accuracy_laplace.png', bbox_inches='tight')
 
-    hd=[]
+    hd = []
     plt.figure(2)
-    h1,=plt.plot(arr[0:6], res.loc['0':'5','mean_test_score'],  'r-o');
+    h1, = plt.plot(arr[0:6], res.loc['0':'5', 'mean_train_score'], 'b-o')
     hd.append(h1)
-    h1,=plt.plot(arr[0:6], res.loc['0':'5','mean_train_score'], 'b-o');
+    h1, = plt.plot(arr[0:6], res.loc['0':'5', 'mean_test_score'],  'r-o')
     hd.append(h1)
-    plt.legend(hd,['train','test'],fontsize=15)
+    plt.legend(hd, ['train', 'test'], fontsize=15)
     plt.xlabel('Laplace smoothing parameter')
     plt.title('Mean accuracy K-fold crossvalidation (only showing alpha<=10)')
     plt.grid(True)
-    #plt.savefig('figs/CV_accuracy_laplace_10.png', bbox_inches = 'tight')
+    plt.savefig('figs/CV_accuracy_laplace_10.png', bbox_inches='tight')
     plt.show()
-
 
     with open('save_model/bayes_fit.pkl', 'wb') as fout:
         pickle.dump((count_vect, bestmodel), fout)
