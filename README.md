@@ -122,13 +122,9 @@ A Naive Bayes (NB) model is trained to identify the sentiment of the text [[17]]
 The total number of texts are divided into two groups - 67% for training and 33% for testing (hold out set). The 67% is used for K-fold cross-validation (CV). The hyperparameter *alpha* is tuned using CV. The GridSearchCV() function is used to identify the best value of alpha amongst (0.1, 0.5, 1.0, 3.0, 5.0, 10.0, 50.0, 1e2, 1e3, 1e4).  The mean train and test accuracies from the CV are shown in the graph below. The highest mean test accuracy of 0.647 is realized for alpha=1.0. The corresponding mean train accuracy is 0.76. For alpha=0.0 the train and test accuracy is 0.81 and 0.64. Increasing the value of alpha to 1.0 decreases the overfit but further increasing alpha decreases the accuracy. This is because higher values of alpha lead to underfitting. Hence the model with alpha=1.0 is saved and used for inference in the deployed model. 
 
 <p align="left">
-<img width="600" height="250" src="images/CV_accuracy.png">
-</p>
+<img  width="350" height="250" src="images/CV_accuracy_laplace.png">
 
-<p align="left">
-<img  width="450" height="250" src="images/CV_accuracy_laplace.png">
-
-<img  width="450" height="250" src="images/CV_accuracy_laplace_10.png">
+<img  width="350" height="250" src="images/CV_accuracy_laplace_10.png">
 </p>
 
 The saved model results in an accuracy of 0.66 for the hold out set. The following table shows some important scores [[19]](#19) for the hold out set.
