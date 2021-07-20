@@ -125,6 +125,12 @@ The total number of texts are divided into two groups - 67% for training and 33%
 <img width="600" height="250" src="images/CV_accuracy.png">
 </p>
 
+<p align="left">
+<img  width="450" height="250" src="images/CV_accuracy_laplace.png">
+
+<img  width="450" height="250" src="images/CV_accuracy_laplace_10.png">
+</p>
+
 The saved model results in an accuracy of 0.66 for the hold out set. The following table shows some important scores [[19]](#19) for the hold out set.
 
 | *sentiment* | *precision* |*Recall*  | *F1*   | 
